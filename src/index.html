@@ -1,13 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa-IR" class="bg-gray-100 dark:bg-neutral-900">
+
 <head>
   <meta charset="utf-8">
-  <title>BerozkalaFrontend</title>
+  <title>Beroz Kala</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
-  <app-root></app-root>
+
+<body dir="rtl">
+  <app-root>
+    <section class="flex justify-center items-center h-screen">
+      <div
+        class="animate-spin inline-block size-8 border-3 border-current border-t-transparent text-black rounded-full dark:text-white"
+        role="status" aria-label="loading">
+        <span class="sr-only">لطفا منتظر بمانید...</span>
+      </div>
+    </section>
+  </app-root>
 </body>
+
 </html>

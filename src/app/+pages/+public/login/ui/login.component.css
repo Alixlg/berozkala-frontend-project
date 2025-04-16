@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &:where(.dark, .dark *) {
+    background-color: rgb(32, 32, 32);
+      /* oklch(20.5% 0 0) = #171717 */
+    ;
+  }
+}

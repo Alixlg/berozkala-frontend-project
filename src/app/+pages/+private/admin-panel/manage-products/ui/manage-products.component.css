@@ -1,0 +1,133 @@
+/* :host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+* {
+  border-radius: 0.3em;
+}
+
+input {
+  border: 0.2em solid gray;
+}
+
+.forms {
+  border: solid 0.1em gray;
+  width: 34em;
+  margin: 1em;
+  padding: 0.5em;
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin: 1em;
+      border: none;
+      padding: 1em;
+    }
+  }
+
+  .addProductForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+      direction: rtl;
+      width: 25em;
+      margin: 0.5em;
+      padding: 0.5em;
+    }
+
+    button {
+      border: none;
+      padding: 0.6em;
+      margin: 0.3em;
+      background-color: rgb(210, 255, 142);
+    }
+  }
+
+  .delProductsList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    caption {
+      margin: 0.5em;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border-radius: 0;
+      border-bottom: 0.1em solid rgb(44, 44, 44);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgb(223, 223, 223);
+    }
+
+    td {
+      text-align: center;
+      max-width: 6.2em;
+      padding: 0.1em 0.5em;
+      overflow: hidden;
+
+      img {
+        margin-top: 0.5em;
+        border-radius: 0;
+        width: 2.5em;
+        height: 2.5em;
+      }
+    }
+
+    button {
+      border: none;
+      padding: 0.4em;
+      margin: 0.3em;
+      background-color: rgb(255, 139, 139);
+    }
+
+    .empty {
+      padding: 1em;
+      margin: 0.3em;
+      border-radius: 0.7em;
+      background-color: rgb(248, 164, 164);
+    }
+  }
+
+  .editProductsBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    input {
+      direction: rtl;
+      width: 20em;
+      margin: 0.5em;
+      padding: 0.5em;
+    }
+
+    button {
+      border: none;
+      padding: 0.6em;
+      margin: 0.3em;
+      background-color: rgb(216, 255, 77);
+    }
+
+    img {
+      position: absolute;
+      left: 1em;
+      bottom: 6em;
+      max-width: 6em;
+      max-height: 6em;
+      filter: drop-shadow(0 0 8px gray);
+    }
+  }
+} */

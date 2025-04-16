@@ -1,0 +1,115 @@
+<div class="mt-5">
+  <!-- Form -->
+
+  <form (ngSubmit)="sendVerifyCode()">
+    <div class="grid gap-y-4">
+
+      <!-- Form Group -->
+      <div>
+        <div class="flex flex-wrap justify-between gap-2">
+          <label for="phoneNumber" class="block text-sm mb-3 dark:text-white">شماره موبایل</label>
+          @if (isCodeSended) {
+          <button
+            class="inline-flex gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500 cursor-pointer"
+            (click)="isCodeSended = false">ارسال دوباره کد تایید</button>
+          }
+        </div>
+        <div class="relative">
+          <div class="relative">
+
+            <input
+              class="peer border py-2.5 text-neutral-700 sm:py-3 px-4 ps-11 block w-full bg-gray-100 rounded-lg sm:text-sm focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              placeholder="شماره موبایل خود را وارد کنید" type="text" id="phoneNumber" name="phoneNumber"
+              [required]="true" [(ngModel)]="phoneNumber" [class.border-red-500]="isErrorStyle"
+              [disabled]="isCodeSended" [class.border-transparent]="!isErrorStyle">
+            <div
+              class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
+              @if (!isErrorStyle) {
+              <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="m3.855 7.286 1.067-.534a1 1 0 0 0 .542-1.046l-.44-2.858A1 1 0 0 0 4.036 2H3a1 1 0 0 0-1 1v2c0 .709.082 1.4.238 2.062a9.012 9.012 0 0 0 6.7 6.7A9.024 9.024 0 0 0 11 14h2a1 1 0 0 0 1-1v-1.036a1 1 0 0 0-.848-.988l-2.858-.44a1 1 0 0 0-1.046.542l-.534 1.067a7.52 7.52 0 0 1-4.86-4.859Z"
+                  clip-rule="evenodd" />
+              </svg>
+              }
+              @else {
+              <svg class="shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" x2="12" y1="8" y2="12"></line>
+                <line x1="12" x2="12.01" y1="16" y2="16"></line>
+              </svg>
+              }
+            </div>
+          </div>
+        </div>
+        @if (isErrorStyle) {
+        <p class="text-sm mb-0.5 text-red-600 mt-2" id="hs-validation-name-error-helper">لطفا یک شماره موبایل معتبر
+          وارد
+          کنید.</p>
+        }
+      </div>
+      <!-- End Form Group -->
+
+      @if (!isCodeSended) {
+      <button [disabled]="phoneNumber.length < 10" type="submit"
+        class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
+        @if (!isBussy) {
+        ورود
+        }
+        @else {
+        <span
+          class="animate-spin inline-block size-4 border-3 border-current border-t-transparent text-neutral-50 rounded-full"
+          role="status" aria-label="loading">
+        </span>
+        }
+      </button>
+      }
+
+      <!-- Form Group -->
+
+      @if (isCodeSended) {
+      <form (ngSubmit)="validateCode()">
+
+        <div dir="ltr" class="p-1 overflow-y-auto">
+          <div class="flex justify-center gap-x-3" data-hs-pin-input='{
+            "availableCharsRE": "^[0-9]+$"
+          }'>
+            <input type="tel"
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              autocomplete="one-time-code" placeholder="⚬" data-hs-pin-input-item="">
+            <input type="tel"
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              placeholder="⚬" data-hs-pin-input-item="">
+            <input type="tel"
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              placeholder="⚬" data-hs-pin-input-item="">
+            <input type="tel"
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              placeholder="⚬" data-hs-pin-input-item="">
+            <input type="tel"
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              placeholder="⚬" data-hs-pin-input-item="">
+          </div>
+        </div>
+
+        <button [disabled]="" type="submit"
+          class="mt-4 w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
+          تایید کد و ورود
+        </button>
+      </form>
+      }
+
+      <!-- End Form Group -->
+
+      <div class="flex flex-wrap justify-between gap-2">
+        <a class="inline-flex gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500"
+          routerLink="/login/with-password">ورود با نام کاربری و ایمیل</a>
+      </div>
+
+    </div>
+  </form>
+
+  <!-- End Form -->
+</div>

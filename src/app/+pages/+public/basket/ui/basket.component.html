@@ -1,0 +1,14 @@
+<header>سبد خرید</header>
+
+<section class="basket">
+
+  @for (item of basketProductsObj.basket; track $index) {
+  <app-product-preview (onRemove)="remove($event)" [product]="item" [isBasket]="true"
+    [isRemoveDisable]="item.isRemoveDisable"></app-product-preview>
+  }@empty {
+  <div class="emptyBasket">
+    شما هیچ محصولی در سبد خود اضافه نکردید
+  </div>
+  }
+
+</section>
