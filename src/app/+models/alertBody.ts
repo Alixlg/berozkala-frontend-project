@@ -3,6 +3,7 @@ import { Alert } from "../+components/alert-system/models/alert";
 
 export class AlertBody implements Alert {
   alertContent = '';
+  isVisible = true;
   isSuccess = true;
   isWarning = false;
   isError = false;

@@ -9,15 +9,17 @@ export class ProductBody implements Product {
   pic = '';
   discountPercent = '';
   count = 1;
+  scoreRank = 1;
   isAddDisable = false;
   isRemoveDisable = false;
 
-  constructor(brand: string, title: string, price: string, pic: string, discountPercent: string = '0') {
+  constructor(brand: string, title: string, price: string, pic: string, scoreRank: number, discountPercent: string = '0') {
     this.id = ProductBody._id++;
     this.brand = brand;
     this.title = title;
     this.price = price;
     this.pic = pic;
     this.discountPercent = discountPercent;
+    this.scoreRank = scoreRank;
   }
 }

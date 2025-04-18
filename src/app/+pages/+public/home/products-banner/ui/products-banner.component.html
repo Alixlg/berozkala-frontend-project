@@ -3,7 +3,7 @@
   <div data-hs-carousel='{
   "loadingClasses": "opacity-0"
 }' class="relative w-full">
-    <div class="hs-carousel relative overflow-hidden w-full min-h-96 rounded-lg">
+    <div class="hs-carousel relative overflow-hidden w-full min-h-96 rounded-lg shadow-2xs">
       <div
         class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
 
@@ -12,7 +12,7 @@
           <div class="flex justify-center h-full bg-white p-6 dark:bg-neutral-800">
 
             <div dir="rtl"
-              class="border border-gray-200 rounded-xl shadow-2xs sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+              class="border border-gray-100 rounded-xl shadow-2xs sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
 
               <div
                 class="bg-gray-100 border sm:w-full h-full border-gray-200 rounded-xl shadow-2xs sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
@@ -80,9 +80,11 @@
 
   <div class="pl-8 hidden sm:flex">
     <a dir="rtl"
-      class="flex flex-col bg-gray-200 border border-gray-200 shadow-2xs rounded-xl hover:shadow-lg focus:outline-hidden focus:shadow-lg transition dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
+      class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-lg focus:outline-hidden focus:shadow-lg transition dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
       routerLink="">
-      <img class="w-full h-67 rounded-t-xl" [src]="discountProductPreview()?.pic" alt="Card Image">
+      <div class="w-full h-67 flex justify-center items-center">
+        <img class="w-50 h-50 rounded-t-xl rounded-2xl" [src]="discountProductPreview()?.pic" alt="Card Image">
+      </div>
       <div class="p-4 md:p-5 md:pl-0">
         <h3 class="text-lg font-bold text-gray-800 dark:text-white pb-3">
           تخفیف برای شما به مدت محدود !

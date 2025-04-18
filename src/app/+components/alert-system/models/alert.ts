@@ -1,4 +1,5 @@
 export interface Alert {
+  isVisible: boolean;
   alertContent: string;
   isSuccess: boolean;
   isWarning: boolean;

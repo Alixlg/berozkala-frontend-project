@@ -44,7 +44,7 @@ export class ManageProductsComponent {
     }
 
     this.productsObj.products.push(
-      new ProductBody(this.productBrand, this.productTitle, this.productPrice, this.productPic)
+      new ProductBody(this.productBrand, this.productTitle, this.productPrice, this.productPic, 5)
     );
     this.addProductVisible = !this.addProductVisible;
 

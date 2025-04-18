@@ -6,6 +6,7 @@ export interface Product {
   discountPercent: string;
   pic: string;
   count: number;
+  scoreRank: number;
   isAddDisable: boolean;
   isRemoveDisable: boolean;
 }

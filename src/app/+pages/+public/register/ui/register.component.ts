@@ -11,37 +11,58 @@ import { Register } from '../models/register';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
   router = inject(Router);
   alertObj = inject(AlertService);
 
-  registerModel: Register = { username: '', password: '', email: '', phone: '', appRules: false };
-  
+  registerModel: Register = { username: '', password: '', phone: '', appRules: false };
+
   isUsernameValid = true;
   isPasswordValid = true;
-  isEmailValid = true;
   isPhoneValid = true;
 
-  isbussy = false;
+  isBussy = false;
+  isCodeSended = false;
 
-  singUp() {
-    // if (this.emailorPhone.includes('@gmail.com') || this.emailorPhone.includes('gmail@.com')) {
-    //   this.alertObj.newAlert("شما با موفقیت ثبت نام کردید ! در حال انتقال . . ", 2000, false, false, true);
-    //   this.registerModel.email = this.emailorPhone;
+  register() {
 
-    //   setTimeout(() => {
-    //     this.router.navigateByUrl('/pr/user-panel');
-    //   }, 1500);
-    // }
-    // else if (Number(this.emailorPhone) && this.emailorPhone.includes('09')) {
-    //   this.alertObj.newAlert("شما با موفقیت ثبت نام کردید ! در حال انتقال . . ", 2000, false, false, true);
-    //   this.registerModel.phone = this.emailorPhone;
+    if (this.registerModel.username == '') {
+      this.isUsernameValid = false;
+      this.isBussy = false;
+    }
 
-    //   setTimeout(() => {
-    //     this.router.navigateByUrl('/pr/user-panel');
-    //   }, 1500);
-    // }
-    // else {
-    //   this.alertObj.newAlert("لطفا مقادیر خواسته شده را به درستی وارد کنید", 2000, false, true);
-    // }
+    if (this.registerModel.password == '') {
+      this.isPasswordValid = false;
+      this.isBussy = false;
+    }
+
+    if (!Number(this.registerModel.phone) || !this.registerModel.phone.includes('09') || this.registerModel.phone.length <= 10) {
+      this.isPhoneValid = false;
+      this.isBussy = false;
+    }
+
+    if (this.registerModel.appRules == false) {
+      this.alertObj.newAlert("لطفا تیک گزینه قوانین را بزنید", 2000, false, true);
+      this.isBussy = false;
+    }
+
+
+    if (Number(this.registerModel.phone) && this.registerModel.phone.includes('09') && this.registerModel.username != '' && this.registerModel.password != '' && this.registerModel.appRules == true) {
+      this.isBussy = true;
+      this.isUsernameValid = true;
+      this.isPasswordValid = true;
+      this.isPhoneValid = true;
+
+      setTimeout(() => {
+        this.alertObj.newAlert("اطلاعات شما صحیح است و کد برای شما ارسال شد", 2000);
+        this.isCodeSended = true;
+        this.isBussy = false;
+      }, 2500);
+    }
+  }
+
+  validateCode() {
+    this.alertObj.newAlert("شما با موفقیت ثبت نام کردید ! در حال انتقال . . ", 2000, false, false, true);
+    this.router.navigateByUrl('/pr/user-panel');
   }
 }
