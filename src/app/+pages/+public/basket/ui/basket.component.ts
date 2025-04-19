@@ -1,49 +1,24 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { ProductBody } from '../../../../+models/product';
-import { BasketService } from '../../../../+services/basket.service';
-import { AlertService } from '../../../../+services/alert.service';
-import { ProductPreviewComponent } from '../../products/ui/product-preview/ui/product-preview.component';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-basket',
-  imports: [ProductPreviewComponent],
+  imports: [RouterOutlet],
   templateUrl: './basket.component.html',
   styleUrl: './basket.component.css'
 })
-export class BasketComponent implements OnInit {
-  @Input() basketProductsObj = inject(BasketService);
-  alertSystemObj = inject(AlertService);
+export class BasketComponent{
 
-  remove($event: ProductBody) {
-    if ($event.count == 1) {
-      this.basketProductsObj.basket = this.basketProductsObj.basket.filter(p => p.id != $event.id);
+  route = inject(Router);
+  index = 1;
 
-      this.alertSystemObj.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت از سبد حذف شد`, 2000);
-
-      $event.isRemoveDisable = true;
-      setTimeout(() => {
-        $event.isRemoveDisable = false;
-      }, 2000);
+  navigate() {
+    if (this.index == 1) {
+      this.route.navigateByUrl('/pb/basket/manage-basket');
+    } else if (this.index == 2) {
+      this.route.navigateByUrl('/pb/basket/checkout');
+    } else if (this.index == 3) {
+      this.route.navigateByUrl('/pb/basket/payment');
     }
-    else {
-      let product = this.basketProductsObj.basket.find(p => p.id == $event.id);
-      this.basketProductsObj.basket = this.basketProductsObj.basket.filter(p => p.id != $event.id);
-      if (product) {
-        product.count -= 1;
-        this.basketProductsObj.basket.push(product);
-        this.basketProductsObj.basket.sort((a, b) => b.id - a.id);
-
-        this.alertSystemObj.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت از سبد حذف شد`, 2000);
-
-        $event.isRemoveDisable = true;
-        setTimeout(() => {
-          $event.isRemoveDisable = false;
-        }, 2000);
-      }
-    }
-  }
-
-  ngOnInit(): void {
-    this.basketProductsObj.basket.sort((a, b) => b.id - a.id);
   }
 }

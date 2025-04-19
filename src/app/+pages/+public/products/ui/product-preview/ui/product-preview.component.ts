@@ -13,17 +13,10 @@ import { RouterLink } from '@angular/router';
 export class ProductPreviewComponent implements OnInit {
   @Input() product!: ProductBody;
   @Output() onBuy = new EventEmitter<ProductBody>;
-  @Output() onRemove = new EventEmitter<ProductBody>;
-  @Input() isBasket: boolean = false;
   @Input() isAddDisable = false;
-  @Input() isRemoveDisable = false;
 
   productAlertObj = inject(AlertService);
   scores: number[] = [];
-
-  countPriceUpdater() {
-    return this.isBasket ? Number(this.product.price) * this.product.count : this.product.price;
-  }
 
   ngOnInit() {
     for (let index = 0; index < this.product.scoreRank; index++) {

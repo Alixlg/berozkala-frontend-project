@@ -16,6 +16,9 @@ import { RegisterComponent } from './+pages/+public/register/ui/register.compone
 import { WithPasswordComponent } from './+pages/+public/login/with-password/ui/with-password.component';
 import { WithVerifyCodeComponent } from './+pages/+public/login/with-verify-code/ui/with-verify-code.component';
 import { ForgetPasswordComponent } from './+pages/+public/login/forget-password/ui/forget-password.component';
+import { ManageBasketComponent } from './+pages/+public/basket/manage-basket/ui/manage-basket.component';
+import { CheckoutComponent } from './+pages/+public/basket/checkout/ui/checkout.component';
+import { PaymentComponent } from './+pages/+public/basket/payment/ui/payment.component';
 
 export const routes: Routes = [
   {
@@ -24,7 +27,14 @@ export const routes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'support', component: SupportComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'basket', component: BasketComponent },
+      {
+        path: 'basket', component: BasketComponent, children: [
+          { path: 'manage-basket', component: ManageBasketComponent },
+          { path: 'checkout', component: CheckoutComponent },
+          { path: 'payment', component: PaymentComponent },
+          { path: '', redirectTo: 'manage-basket', pathMatch: 'prefix' }
+        ]
+      },
       { path: 'videos', component: VideosComponent },
       { path: '', redirectTo: 'home', pathMatch: 'prefix' }
     ]

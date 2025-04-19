@@ -305,7 +305,7 @@
                 <div class="relative">
 
                   <input
-                    class="peer border py-2.5 text-neutral-700 sm:py-3 px-4 ps-11 block w-full bg-gray-100 rounded-lg sm:text-sm focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    class="peer border py-2.5 text-neutral-700 sm:py-3 px-4 ps-11 block w-full bg-gray-100 rounded-lg sm:text-sm focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" [maxlength]="11"
                     placeholder="شماره موبایل خود را وارد کنید" type="text" id="phoneNumber" name="phoneNumber"
                     [required]="true" [(ngModel)]="registerModel.phone" [class.border-red-500]="!isPhoneValid"
                     [class.border-transparent]="isPhoneValid">

@@ -1,14 +1,107 @@
-<header>سبد خرید</header>
+<section class="m-5">
 
-<section class="basket">
+  <div>
 
-  @for (item of basketProductsObj.basket; track $index) {
-  <app-product-preview (onRemove)="remove($event)" [product]="item" [isBasket]="true"
-    [isRemoveDisable]="item.isRemoveDisable"></app-product-preview>
-  }@empty {
-  <div class="emptyBasket">
-    شما هیچ محصولی در سبد خود اضافه نکردید
+    <header class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+
+      <ul class="relative flex items-center flex-row gap-x-2">
+
+        <li class="flex items-center gap-x-2 shrink basis-0 flex-1 group active">
+          <span
+            class="min-w-7 min-h-7 group inline-flex items-center text-xs align-middle focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
+            <span
+              class="size-7 flex justify-center bg-green-500 dark:bg-green-600 text-white items-center shrink-0 font-medium rounded-full group-focus:bg-gray-200 hs-stepper-active:text-white hs-stepper-success:bg-green-600 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600 dark:text-white dark:group-focus:bg-gray-600">
+              <span>1</span>
+              <svg class="hidden shrink-0 size-3 hs-stepper-success:block" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+            <span
+              class="ms-2 text-sm font-medium text-green-500 group-focus:text-gray-500 dark:group-focus:text-gray-400">
+              سبد خرید
+            </span>
+          </span>
+          <div
+            class="w-full h-px flex-1 {{index >= 2 ? 'bg-green-500 dark:bg-green-600' : 'bg-gray-200 dark:bg-neutral-700'}}">
+          </div>
+        </li>
+
+        <li class="flex items-center gap-x-2 shrink basis-0 flex-1 group active">
+          <span
+            class="min-w-7 min-h-7 group inline-flex items-center text-xs align-middle focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
+            <span
+              class="size-7 flex justify-center {{index >= 2 ? 'bg-green-500 dark:bg-green-600 text-white' : 'bg-gray-200 text-black dark:text-white dark:bg-neutral-700'}} items-center shrink-0 font-medium rounded-full dark:group-focus:bg-gray-600">
+              <span>2</span>
+              <svg class="hidden shrink-0 size-3 hs-stepper-success:block" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+            <span
+              class="{{index >= 2 ? 'text-green-600' : 'dark:text-white text-gray-800'}} ms-2 text-sm font-medium group-focus:text-gray-500 dark:group-focus:text-gray-400">
+              جزئیات ارسال
+            </span>
+          </span>
+          <div
+            class="w-full h-px flex-1 {{index >= 3 ? 'bg-green-500 dark:bg-green-600' : 'bg-gray-200 dark:bg-neutral-700'}}">
+          </div>
+        </li>
+
+        <li class="flex items-center gap-x-2 shrink basis-0 group active">
+          <span
+            class="min-w-7 min-h-7 group inline-flex items-center text-xs align-middle focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
+            <span
+              class="size-7 flex justify-center {{index >= 3 ? 'bg-green-500 dark:bg-green-600 text-white' : 'bg-gray-200 text-black dark:text-white dark:bg-neutral-700'}} items-center shrink-0 font-medium rounded-full dark:group-focus:bg-gray-600">
+              <span>3</span>
+              <svg class="hidden shrink-0 size-3 hs-stepper-success:block" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+            <span
+            class="{{index >= 3 ? 'text-green-600' : 'dark:text-white text-gray-800'}} ms-2 text-sm font-medium group-focus:text-gray-500 dark:group-focus:text-gray-400">
+              پرداخت
+            </span>
+          </span>
+        </li>
+
+      </ul>
+
+    </header>
+
+    <section class="mt-5 sm:mt-8">
+
+      <router-outlet></router-outlet>
+
+    </section>
+
+    <div class="mt-10 flex justify-between items-center gap-x-2">
+
+      <button type="button"
+        class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+        (click)="index > 1 ? index = index - 1 : index" (click)="navigate()" [disabled]="index == 1">
+        <svg rtl class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+        برگشت به مرحله قبلی
+      </button>
+      <button type="button"
+        class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none"
+        (click)="index >= 3 ? index : index = index + 1" (click)="navigate()" [disabled]="index == 3">
+        ادامه
+        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+
+    </div>
+
   </div>
-  }
 
 </section>
