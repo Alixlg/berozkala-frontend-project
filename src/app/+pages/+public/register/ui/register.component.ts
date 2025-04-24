@@ -63,6 +63,6 @@ export class RegisterComponent {
 
   validateCode() {
     this.alertObj.newAlert("شما با موفقیت ثبت نام کردید ! در حال انتقال . . ", 2000, false, false, true);
-    this.router.navigateByUrl('/pr/user-panel');
+    this.router.navigateByUrl('/user-panel');
   }
 }

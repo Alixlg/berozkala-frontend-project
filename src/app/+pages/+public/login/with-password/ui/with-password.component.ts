@@ -27,7 +27,7 @@ export class WithPasswordComponent {
         this.isErrorStyle = false;
 
         setTimeout(() => {
-          this.router.navigateByUrl('/pr/admin-panel');
+          this.router.navigateByUrl('/admin-panel');
           this.isBussy = false;
         }, 2500);
       }
@@ -36,7 +36,7 @@ export class WithPasswordComponent {
         this.isErrorStyle = false;
 
         setTimeout(() => {
-          this.router.navigateByUrl('/pr/user-panel');
+          this.router.navigateByUrl('/user-panel');
           this.isBussy = false;
         }, 2500);
       }

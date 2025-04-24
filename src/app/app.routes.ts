@@ -1,16 +1,11 @@
 import { Routes } from '@angular/router';
 import { PublicNavigationsComponent } from './+navigations/public-navigations/ui/public-navigations.component';
-import { PrivateNavigationsComponent } from './+navigations/private-navigations/ui/private-navigations.component';
 import { ProductsComponent } from './+pages/+public/products/ui/products.component';
 import { BasketComponent } from './+pages/+public/basket/ui/basket.component';
 import { LoginComponent } from './+pages/+public/login/ui/login.component';
-import { ManageProductsComponent } from './+pages/+private/admin-panel/manage-products/ui/manage-products.component';
-import { ManageMembersComponent } from './+pages/+private/admin-panel/manage-members/ui/manage-members.component';
 import { AboutComponent } from './+pages/+public/about/ui/about.component';
 import { SupportComponent } from './+pages/+public/support/ui/support.component';
 import { HomeComponent } from './+pages/+public/home/ui/home.component';
-import { AdminPanelComponent } from './+pages/+private/admin-panel/ui/admin-panel.component';
-import { UserPanelComponent } from './+pages/+private/user-panel/ui/user-panel.component';
 import { VideosComponent } from './+pages/+public/videos/ui/videos.component';
 import { RegisterComponent } from './+pages/+public/register/ui/register.component';
 import { WithPasswordComponent } from './+pages/+public/login/with-password/ui/with-password.component';
@@ -19,6 +14,12 @@ import { ForgetPasswordComponent } from './+pages/+public/login/forget-password/
 import { ManageBasketComponent } from './+pages/+public/basket/manage-basket/ui/manage-basket.component';
 import { CheckoutComponent } from './+pages/+public/basket/checkout/ui/checkout.component';
 import { PaymentComponent } from './+pages/+public/basket/payment/ui/payment.component';
+import { AdminPanelNavigationsComponent } from './+navigations/admin-panel-navigations/ui/admin-panel-navigations.component';
+import { UserPanelNavigationsComponent } from './+navigations/user-panel-navigations/ui/user-panel-navigations.component';
+import { AddProductComponent } from './+pages/+private/+admin-panel/manage-products/add-product/ui/add-product.component';
+import { EditProductComponent } from './+pages/+private/+admin-panel/manage-products/edit-product/ui/edit-product.component';
+import { RemoveProductComponent } from './+pages/+private/+admin-panel/manage-products/remove-product/ui/remove-product.component';
+import { AdminDashboardComponent } from './+pages/+private/+admin-panel/admin-dashboard/ui/admin-dashboard.component';
 
 export const routes: Routes = [
   {
@@ -40,16 +41,17 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'pr', component: PrivateNavigationsComponent, children: [
-      {
-        path: 'admin-panel', component: AdminPanelComponent, children: [
-          { path: 'manage-products', component: ManageProductsComponent },
-          { path: 'manage-members', component: ManageMembersComponent },
-          { path: '', redirectTo: 'manage-products', pathMatch: 'prefix' }
-        ]
-      },
-      { path: 'user-panel', component: UserPanelComponent, children: [] },
-      { path: '', redirectTo: '/login', pathMatch: 'full' }
+    path: 'admin-panel', component: AdminPanelNavigationsComponent, children: [
+      { path: 'dashboard', component: AdminDashboardComponent },
+      { path: 'add-product', component: AddProductComponent },
+      { path: 'remove-product', component: RemoveProductComponent },
+      { path: 'edit-product', component: EditProductComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' }
+    ]
+  },
+  {
+    path: 'user-panel', component: UserPanelNavigationsComponent, children: [
+
     ]
   },
   {
