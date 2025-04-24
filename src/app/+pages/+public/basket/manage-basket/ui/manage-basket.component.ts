@@ -4,16 +4,19 @@ import { AlertService } from '../../../../../+services/alert.service';
 import { ProductBody } from '../../../../../+models/product';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { DiscountCode } from '../models/manageBasket';
 
 @Component({
   selector: 'app-manage-basket',
-  imports: [DecimalPipe, RouterLink],
+  imports: [DecimalPipe, RouterLink, FormsModule],
   templateUrl: './manage-basket.component.html',
   styleUrl: './manage-basket.component.css'
 })
 export class ManageBasketComponent implements OnInit {
   basketProductsObj = inject(BasketService);
   alertSystemObj = inject(AlertService);
+  discountCode: DiscountCode = { code: '' };
 
   remove($event: ProductBody) {
     if ($event.count == 1) {
@@ -72,6 +75,20 @@ export class ManageBasketComponent implements OnInit {
 
   countPriceUpdater(price: string, count: number) {
     return Number(price) * count;
+  }
+
+  checkDiscountCode() {
+    throw new Error('Method not implemented.');
+  }
+
+  basketPrice() {
+    let price = 0;
+
+    this.basketProductsObj.basket.forEach(x => {
+      price += Number(x.price) * x.count;
+    });
+    
+    return price;
   }
 
   ngOnInit() {

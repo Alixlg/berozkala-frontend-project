@@ -114,3 +114,65 @@
   </div>
 
 </section>
+
+<section class="sm:inline-flex w-full mt-5">
+
+  <section
+    class="flex sm:mt-5 mt-10 sm:w-3/9 h-46 flex-col bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+
+    <form (ngSubmit)="checkDiscountCode()">
+
+      <label for="DiscountCode" class="block text-md mb-3 dark:text-white">کد تخفیف </label>
+      <div class="relative mt-3 mb-5">
+        <input type="text" id="DiscountCode" name="DiscountCode" [(ngModel)]="discountCode.code"
+          class="peer py-2.5 sm:py-3 px-4 ps-11 block w-full text-gray-500 bg-gray-100 border-transparent rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+          [maxLength]="20" placeholder="اگر کد تخفیف دارید وارد کنید">
+        <div
+          class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
+          <svg class="shrink-0 size-5 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+          </svg>
+        </div>
+      </div>
+
+      <button type="submit"
+        class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+        اعمال کوپن
+      </button>
+
+    </form>
+
+  </section>
+
+  <section
+    class="flex mt-5 sm:mr-5 sm:w-6/9  flex-col bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+
+    <label class="block text-md mb-3 dark:text-white"> جمع کل سبد خرید</label>
+    <div class="inline-flex">
+      <ul class="flex flex-col mb-5 sm:w-3/6 w-6/6">
+        <li class="p-3 text-sm text-black dark:text-white"> جمع سبدخرید </li>
+        <li class="p-3 text-sm text-black dark:text-white"> تخفیف شما از این خرید </li>
+        <li class="p-3 text-sm text-black dark:text-white"> هزینه نهایی سبد </li>
+      </ul>
+
+      <ul class="flex flex-col mb-5 sm:w-full w-4/6">
+        <li
+          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white border border-transparent text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:odd:bg-neutral-800 dark:bg-neutral-900 dark:text-white">
+          {{basketPrice() |number}} تومان
+        </li>
+        <li
+          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white border border-transparent text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:odd:bg-neutral-800 dark:bg-neutral-900 dark:text-white">
+          0 تومان
+        </li>
+        <li
+          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white border border-transparent text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:odd:bg-neutral-800 dark:bg-neutral-900 dark:text-white">
+          {{basketPrice() |number}} تومان
+        </li>
+      </ul>
+    </div>
+
+  </section>
+
+</section>

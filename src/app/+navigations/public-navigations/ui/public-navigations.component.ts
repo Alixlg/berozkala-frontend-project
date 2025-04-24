@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BasketService } from '../../../+services/basket.service';
 import { FooterComponent } from '../../../+components/footer/ui/footer.component';
 
@@ -11,6 +11,7 @@ import { FooterComponent } from '../../../+components/footer/ui/footer.component
 })
 export class PublicNavigationsComponent {
   basketObj = inject(BasketService);
+  route = inject(Router);
 
   basketCount() {
     let count = 0;
@@ -19,5 +20,9 @@ export class PublicNavigationsComponent {
     });
 
     return count;
+  }
+
+  checkRoute(route: string) {
+    return this.route.url.includes(route);
   }
 }

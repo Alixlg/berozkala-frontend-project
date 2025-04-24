@@ -4,8 +4,8 @@ import { BasketService } from '../../../../+services/basket.service';
 import { ProductService } from '../../../../+services/product.service';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../../+services/alert.service';
-import { ProductPreviewComponent } from './product-preview/ui/product-preview.component';
 import { SearchProductComponent } from '../../../../+components/search-product/ui/search-product.component';
+import { ProductPreviewComponent } from '../product-preview/ui/product-preview.component';
 
 @Component({
   selector: 'app-products',

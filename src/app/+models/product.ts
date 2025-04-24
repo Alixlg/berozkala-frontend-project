@@ -1,4 +1,4 @@
-import { Product } from "../+pages/+public/products/ui/product-preview/models/product";
+import { Product } from "../+pages/+public/products/product-preview/models/product";
 
 export class ProductBody implements Product {
   private static _id = 1001;

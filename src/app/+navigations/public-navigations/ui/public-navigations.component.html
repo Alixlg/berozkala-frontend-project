@@ -1,4 +1,5 @@
-<header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-3 dark:bg-neutral-800 shadow-2xs">
+<header
+  class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-3 dark:bg-neutral-800 shadow-2xs">
   <nav class="w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between">
 
     <a class="sm:order-1 flex-none text-xl font-semibold dark:text-white focus:outline-hidden focus:opacity-80"
@@ -87,7 +88,6 @@
 
       </button>
 
-
       <button routerLink="/login" type="button"
         class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
         ورود / ثبت نام
@@ -103,19 +103,19 @@
 
         <li><a class="font-medium text-green-500" routerLink="home">خانه</a></li>
         <li><a
-            class="font-medium text-gray-600 hover:text-green-500 focus:outline-hidden focus:text-green-500 dark:text-neutral-400 dark:hover:text-green-500 dark:focus:text-green-500"
+            class="font-medium {{checkRoute('/pb/products') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="products">محصولات</a></li>
         <li><a
-            class="font-medium text-gray-600 hover:text-green-500 focus:outline-hidden focus:text-green-500 dark:text-neutral-400 dark:hover:text-green-500 dark:focus:text-green-500"
+            class="font-medium {{checkRoute('/pb/support') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="support">پشتیبانی</a></li>
         <li><a
-            class="font-medium text-gray-600 hover:text-green-500 focus:outline-hidden focus:text-green-500 dark:text-neutral-400 dark:hover:text-green-500 dark:focus:text-green-500"
+            class="font-medium {{checkRoute('/pb/about') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="about">درباره ما</a></li>
         <li><a
-            class="font-medium text-gray-600 hover:text-green-500 focus:outline-hidden focus:text-green-500 dark:text-neutral-400 dark:hover:text-green-500 dark:focus:text-green-500"
+            class="font-medium {{checkRoute('/pb/videos') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="videos">ویدیو ها</a></li>
         <li><a
-            class="font-medium text-gray-600 hover:text-green-500 focus:outline-hidden focus:text-green-500 dark:text-neutral-400 dark:hover:text-green-500 dark:focus:text-green-500"
+            class="font-medium {{checkRoute('/pb/basket') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="basket">سبد خرید</a></li>
 
       </ul>
