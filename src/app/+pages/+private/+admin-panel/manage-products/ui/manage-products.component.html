@@ -1,0 +1,94 @@
+<section class="forms">
+
+  <div class="buttons">
+    <button (click)="addProductVisible =! addProductVisible">اضافه کردن محصول</button>
+  </div>
+
+  @if (addProductVisible) {
+  <form class="addProductForm" action="">
+
+    <input [(ngModel)]="productBrand" type="text" name="brand" placeholder="برند محصول">
+    <input [(ngModel)]="productPrice" type="number" name="price" placeholder="قیمت محصول">
+    <input [(ngModel)]="productTitle" type="text" name="title" placeholder="نام نمایشی محصول">
+    <input [(ngModel)]="productPic" type="url" name="pic" placeholder="لینک عکس محصول">
+    <button (click)="addProduct()">ثبت</button>
+
+  </form>
+  }
+
+  <div class="buttons">
+    <button (click)="delProductVisible =! delProductVisible">حذف محصول</button>
+  </div>
+
+  @if (delProductVisible) {
+  <div class="delProductsList">
+
+    <table>
+
+      <caption>لیست محصولات</caption>
+      <tr>
+        <th>شناسه</th>
+        <th>نام</th>
+        <th>برند</th>
+        <th>قیمت</th>
+        <th>عکس</th>
+        <th>رویداد</th>
+      </tr>
+
+      @for (p of productsObj.products; track $index) {
+      <tr>
+        <td>{{p.id}}</td>
+        <td>{{p.title}}</td>
+        <td>{{p.brand}}</td>
+        <td>{{p.price | number}}</td>
+        <td><img [src]="p.pic" alt=""></td>
+        <td><button (click)="delProduct(p)">حذف</button></td>
+      </tr>
+      }
+
+    </table>
+
+    @if(productsObj.products.length == 0) {
+    <div class="empty">
+      هیچ محصولی وجود ندارد
+    </div>
+    }
+
+  </div>
+  }
+
+  <div class="buttons">
+    <button (click)="searchProductVisible =! searchProductVisible;editProductVisible = false">ویرایش محصول</button>
+  </div>
+
+  @if (searchProductVisible) {
+  <form class="editProductsBox">
+
+    <input type="number" [(ngModel)]="searchId" name="searchId"
+      placeholder="لطفا شناسه محصول را وارد کنید و اینتر بزنید">
+
+    <button (click)="searchProduct()">جست و جو</button>
+
+  </form>
+  }
+
+  @if (editProductVisible) {
+  <form class="editProductsBox">
+
+    <span>لطفا مقادیر جدید را وارد کنید</span>
+    <input [(ngModel)]="productBrand" type="text" name="brand"
+      placeholder="برند : {{searchedProduct?.brand??'یافت نشد'}}">
+    <input [(ngModel)]="productPrice" type="text" name="price"
+      placeholder="قیمت : {{searchedProduct?.price??'یافت نشد'}}">
+    <input [(ngModel)]="productTitle" type="text" name="title"
+      placeholder="نام نمایشی : {{searchedProduct?.title??'یافت نشد'}}">
+    <input [(ngModel)]="productPic" type="text" name="pic"
+      placeholder="لینک عکس : {{searchedProduct?.pic??'یافت نشد'}}">
+    <img [src]="searchedProduct?.pic" alt="">
+
+    <button (click)="editProduct()">ثبت</button>
+
+  </form>
+  }
+
+</section>
