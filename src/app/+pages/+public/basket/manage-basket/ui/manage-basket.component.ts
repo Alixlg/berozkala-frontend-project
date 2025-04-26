@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { BasketService } from '../../../../../+services/basket.service';
 import { AlertService } from '../../../../../+services/alert.service';
-import { ProductBody } from '../../../../../+models/product';
+import { ProductPreview } from '../../../products/product-preview/models/productPreview';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,7 @@ export class ManageBasketComponent implements OnInit {
   alertSystemObj = inject(AlertService);
   discountCode: DiscountCode = { code: '' };
 
-  remove($event: ProductBody) {
+  remove($event: ProductPreview) {
     if ($event.count == 1) {
       this.basketProductsObj.basket = this.basketProductsObj.basket.filter(p => p.id != $event.id);
 
@@ -47,7 +47,7 @@ export class ManageBasketComponent implements OnInit {
     }
   }
 
-  upCount(product: ProductBody) {
+  upCount(product: ProductPreview) {
     this.alertSystemObj.newAlert(`محصول ${product.title} ${product.brand} با موفقیت به سبد اضافه شد`, 2000);
 
     product.count++;
@@ -57,7 +57,7 @@ export class ManageBasketComponent implements OnInit {
     }, 2000);
   }
 
-  downCount(product: ProductBody) {
+  downCount(product: ProductPreview) {
     this.alertSystemObj.newAlert(`محصول ${product.title} ${product.brand} با موفقیت از سبد کم شد`, 2000);
 
     product.count--;
@@ -67,7 +67,7 @@ export class ManageBasketComponent implements OnInit {
     }, 2000);
   }
 
-  removeProduct(product: ProductBody) {
+  removeProduct(product: ProductPreview) {
     product.count = 1;
     this.basketProductsObj.basket = this.basketProductsObj.basket.filter(p => p != product);
     this.alertSystemObj.newAlert(`محصول ${product.title} ${product.brand} با موفقیت از سبد حذف شد`, 2000);
@@ -87,7 +87,7 @@ export class ManageBasketComponent implements OnInit {
     this.basketProductsObj.basket.forEach(x => {
       price += Number(x.price) * x.count;
     });
-    
+
     return price;
   }
 

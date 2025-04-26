@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ProductBody } from '../+models/product';
+import { ProductPreview } from '../+pages/+public/products/product-preview/models/productPreview';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
-  basket: ProductBody[] = [];
+  basket: ProductPreview[] = [];
 }

@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ProductBody } from '../../../../../+models/product';
 import { BasketService } from '../../../../../+services/basket.service';
 import { ProductService } from '../../../../../+services/product.service';
 import { DecimalPipe } from '@angular/common';
 import { AlertService } from '../../../../../+services/alert.service';
+import { ProductPreview } from '../../../../+public/products/product-preview/models/productPreview';
 
 @Component({
   selector: 'app-manage-products',
@@ -27,7 +27,7 @@ export class ManageProductsComponent {
   productPrice: string = '';
   productPic: string = '';
 
-  searchedProduct?: ProductBody;
+  searchedProduct?: ProductPreview;
   searchId: string = '';
 
   addProduct() {
@@ -43,8 +43,8 @@ export class ManageProductsComponent {
       return;
     }
 
-    this.productsObj.products.push(
-      new ProductBody(this.productBrand, this.productTitle, this.productPrice, this.productPic, 5)
+    this.productsObj.productsPreview.push(
+      // new ProductPreview(this.productBrand, this.productTitle, this.productPrice, this.productPic, 5)
     );
     this.addProductVisible = !this.addProductVisible;
 
@@ -56,8 +56,8 @@ export class ManageProductsComponent {
     this.alertObj.newAlert('محصول شما با موفقیت ثبت شد', 2200);
   }
 
-  delProduct(product: ProductBody) {
-    this.productsObj.products = this.productsObj.products.filter(p => p.id != product.id);
+  delProduct(product: ProductPreview) {
+    this.productsObj.productsPreview = this.productsObj.productsPreview.filter(p => p.id != product.id);
     this.basketObj.basket = this.basketObj.basket.filter(p => p.id != product.id);
     this.alertObj.newAlert('محصول شما با موفقیت حذف شد', 2200);
   }
@@ -75,7 +75,7 @@ export class ManageProductsComponent {
       return;
     }
 
-    let product = this.productsObj.products.find(x => x.id == Number(this.searchId));
+    let product = this.productsObj.productsPreview.find(x => x.id == Number(this.searchId));
 
     if (product) {
       this.searchedProduct = product;
@@ -112,9 +112,9 @@ export class ManageProductsComponent {
       this.searchedProduct.title = this.productTitle;
       this.searchedProduct.pic = this.productPic;
 
-      this.productsObj.products = this.productsObj.products.filter(x => x.id != this.searchedProduct?.id);
+      this.productsObj.productsPreview = this.productsObj.productsPreview.filter(x => x.id != this.searchedProduct?.id);
       this.basketObj.basket = this.basketObj.basket.filter(x => x.id != this.searchedProduct?.id);
-      this.productsObj.products.push(this.searchedProduct);
+      this.productsObj.productsPreview.push(this.searchedProduct);
 
       this.productBrand = '';
       this.productTitle = '';

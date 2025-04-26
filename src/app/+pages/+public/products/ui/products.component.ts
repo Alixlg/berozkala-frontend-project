@@ -1,11 +1,11 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { ProductBody } from '../../../../+models/product';
 import { BasketService } from '../../../../+services/basket.service';
 import { ProductService } from '../../../../+services/product.service';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../../+services/alert.service';
 import { SearchProductComponent } from '../../../../+components/search-product/ui/search-product.component';
 import { ProductPreviewComponent } from '../product-preview/ui/product-preview.component';
+import { ProductPreview } from '../product-preview/models/productPreview';
 
 @Component({
   selector: 'app-products',
@@ -18,12 +18,12 @@ export class ProductsComponent {
   productsObj = inject(ProductService);
   basketProductsObj = inject(BasketService);
 
-  searchedProducts: ProductBody[] = [];
+  searchedProducts: ProductPreview[] = [];
   isSearchBoxEmpty = true;
 
   productsFiltered = '';
 
-  buy($event: ProductBody) {
+  buy($event: ProductPreview) {
     if (this.basketProductsObj.basket.every(p => p.id != $event.id)) {
       this.basketProductsObj.basket.push($event);
 
@@ -51,7 +51,7 @@ export class ProductsComponent {
     }
   }
 
-  search($event: ProductBody[]) {
+  search($event: ProductPreview[]) {
     this.searchedProducts = $event;
 
     if (this.isSearchBoxEmpty) {
@@ -65,21 +65,21 @@ export class ProductsComponent {
   filterBy() {
     switch (this.productsFiltered) {
       case 'price-up':
-        return this.productsObj.products.sort((a, b) => Number(b.price) - Number(a.price));
+        return this.productsObj.productsPreview.sort((a, b) => Number(b.price) - Number(a.price));
 
       case 'price-down':
-        return this.productsObj.products.sort((a, b) => Number(a.price) - Number(b.price));
+        return this.productsObj.productsPreview.sort((a, b) => Number(a.price) - Number(b.price));
 
       case 'new-products':
-        return this.productsObj.products.sort((a, b) => b.id - a.id);
+        return this.productsObj.productsPreview.sort((a, b) => b.id - a.id);
 
       case 'old-products':
-        return this.productsObj.products.sort((a, b) => a.id - b.id);
+        return this.productsObj.productsPreview.sort((a, b) => a.id - b.id);
 
       case 'search':
         return this.searchedProducts;
 
-      default: return this.productsObj.products;
+      default: return this.productsObj.productsPreview;
     }
   }
 

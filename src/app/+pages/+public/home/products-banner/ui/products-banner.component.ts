@@ -13,12 +13,12 @@ export class ProductsBannerComponent {
   productBanners = inject(ProductService);
 
   discountProductPreview() {
-    let p = this.productBanners.products.find(x => x.discountPercent != '0');
+    let p = this.productBanners.productsPreview.find(x => x.discountPercent != '0');
     return p;
   }
 
   discountPriceProduct() {
-    let p = this.productBanners.products.find(x => x.discountPercent != '0');
+    let p = this.productBanners.productsPreview.find(x => x.discountPercent != '0');
     let discountPercent = Number(p?.price) - (Number(p?.price) * Number(p?.discountPercent) / 100);
     return discountPercent;
   }

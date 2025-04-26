@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ProductBody } from '../../../+models/product';
+import { ProductPreview } from '../../../+pages/+public/products/product-preview/models/productPreview';
 
 @Component({
   selector: 'app-search-product',
@@ -9,12 +9,12 @@ import { ProductBody } from '../../../+models/product';
   styleUrl: './search-product.component.css'
 })
 export class SearchProductComponent {
-  @Input() products: ProductBody[] = [];
-  @Output() onDone = new EventEmitter<ProductBody[]>;
+  @Input() products: ProductPreview[] = [];
+  @Output() onDone = new EventEmitter<ProductPreview[]>;
   @Output() onVisible = new EventEmitter<boolean>;
 
   searchValue = '';
-  searchedProducts: ProductBody[] = [];
+  searchedProducts: ProductPreview[] = [];
 
   search() {
     if (this.searchValue != '') {
