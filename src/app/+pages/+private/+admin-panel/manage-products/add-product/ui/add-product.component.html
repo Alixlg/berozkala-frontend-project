@@ -2,7 +2,8 @@
   class="flex flex-col items-center justify-center bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
 
   <!-- Card -->
-  <div class="bg-white rounded-xl p-4 sm:p-7 lg:w-6/8 dark:bg-neutral-900 border shadow dark:shadow-neutral-600 border-neutral-200 dark:border-neutral-700">
+  <div
+    class="bg-white rounded-xl p-4 sm:p-7 lg:max-w-280 dark:bg-neutral-900 border shadow dark:shadow-neutral-600 border-neutral-200 dark:border-neutral-700">
     <form>
       <div class="sm:col-span-12">
         <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
@@ -151,7 +152,7 @@
         <!-- Input -->
         <div class="sm:flex sm:justify-center sm:items-center">
 
-          <div class="sm:col-span-3">
+          <div class="sm:col-span-3 sm:w-15">
             <label for="form-isAvailable"
               class="inline-block sm:ml-5 text-sm font-medium text-gray-500 sm:mt-0 mt-2.5 dark:text-neutral-500 {{productModel.isAvailable ? 'text-teal-700 dark:text-teal-500' :'' }}">
               {{productModel.isAvailable ? 'موجود' : 'ناموجود'}}
@@ -259,7 +260,7 @@
           <div class="sm:flex sm:w-15">
             <input type="text" id="form-discountPercent" placeholder="0%" name="form-discountPercent"
               [(ngModel)]="productModel.discountPercent" maxlength="3"
-              class="peer sm:mt-0 py-2.5 shadow-2xs text-center shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-3 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-2.5">
+              class="peer sm:mt-0 py-1.5 shadow-2xs text-center shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-2 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-2.5">
           </div>
 
         </div>
@@ -277,7 +278,7 @@
           <div class="sm:flex sm:w-28">
             <input type="text" id="form-maxCount" name="form-maxCount" [(ngModel)]="productModel.maxCount"
               maxlength="10"
-              class="peer sm:mt-0 py-2.5 shadow-2xs text-center shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-3 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-2.5">
+              class="peer sm:mt-0 py-1.5 shadow-2xs text-center shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-2 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-2.5">
           </div>
 
         </div>
@@ -320,6 +321,7 @@
       <!-- Section -->
       <div
         class="grid sm:m-5 sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+
         <div class="sm:col-span-12">
           <h2 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
             مشخصات محصول
@@ -327,58 +329,122 @@
         </div>
         <!-- End Col -->
 
-        <div class="sm:col-span-3">
-          <label for="af-submit-application-linkedin-url"
-            class="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500">
-            نام بخش دسته بندی مشخصات
-          </label>
-        </div>
-        <!-- End Col -->
+        @for (specifications of productModel.attributes; track $index; let firstIdx = $index) {
+        <section
+          class="sm:col-span-12 rounded-lg p-4 dark:border-neutral-700 border-2 border-dashed border-gray-200 pb-12">
 
-        <div class="sm:col-span-9">
-          <input id="af-submit-application-linkedin-url" type="text"
-            class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-        </div>
-        <!-- End Col -->
+          <div class="grid sm:grid-cols-12 gap-2 sm:gap-4 sm:justify-center sm:items-center ">
+            <div class="sm:col-span-3">
+              <label for="form-titleName-0"
+                class="inline-block items-center sm:ml-5 sm:flex text-sm font-medium text-gray-500 dark:text-neutral-500">
+                نام گروه ویژگی ها
+              </label>
+            </div>
 
-        <div class="sm:col-start-4 sm:col-span-8">
-          <a class="inline-flex items-center gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500"
-            href="../docs/index.html">
+            <div class="sm:col-span-9">
+              <input id="form-titleName-{{firstIdx}}" type="text" name="form-titleName-{{firstIdx}}"
+                [(ngModel)]="specifications.titleName" [maxLength]="70"
+                placeholder="مشخصات فنی یا  مشخصات فيزيکي و . . ."
+                class="peer sm:mt-0 py-1.5 shadow-2xs shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-2 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-1">
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-12 gap-2 sm:gap-4 sm:justify-center mt-4 sm:mr-20 mr-0 sm:ml-0 ml-10">
+            <div class="sm:col-span-3 sm:pt-2.5">
+              <label for="form-subsetName-0"
+                class="inline-block items-center sm:justify-center sm:ml-5 sm:flex text-sm font-medium text-gray-500 dark:text-neutral-500">
+                ویژگی ها
+              </label>
+            </div>
+
+            <div class="sm:col-span-9 w-full">
+
+              @for (subset of specifications.subset; track $index; let secondIdx = $index) {
+              <div class="sm:flex mb-2.5">
+                <input id="form-subsetName-{{firstIdx}}-{{secondIdx}}" name="form-subsetName-{{firstIdx}}-{{secondIdx}}" type="text"
+                  [(ngModel)]="subset.subsetName" placeholder="نام ویژگی"
+                  class="dark:bg-neutral-800 w-full border-gray-300 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 bg-gray-100 sm:border-l sm:text-sm shadow-2xs shadow-gray-200 dark:shadow-neutral-600 text-neutral-700 py-1.5 sm:py-2 px-3 block sm:w-1/3 -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg relative focus:z-10 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700"
+                  [maxLength]="45">
+                <input type="text" name="form-subsetValue-{{firstIdx}}-{{secondIdx}}" [(ngModel)]="subset.subsetValue"
+                  placeholder="مقدار یا توضیح ویژگی"
+                  class="dark:bg-neutral-800 border-t sm:border-t-0 sm:border-r border-gray-400 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 bg-gray-100 sm:text-sm shadow-2xs shadow-gray-200 dark:shadow-neutral-600 text-neutral-700 py-1.5 sm:py-2 px-3 block w-full -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg relative focus:z-10 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700">
+              </div>
+
+              @if ($last) {
+              <div class="sm:col-span-12 absolute mt-0.5">
+                <button (click)="addSubset(specifications.subset)"
+                  class="inline-flex items-center gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12h8" />
+                    <path d="M12 8v8" />
+                  </svg>
+                  اضافه کردن ویژگی
+                </button>
+              </div>
+              }
+              }
+
+            </div>
+
+          </div>
+
+        </section>
+        }
+
+        <div class="sm:col-span-12">
+          <button (click)="addSpecifications()"
+            class="inline-flex items-center gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500">
             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10" />
               <path d="M8 12h8" />
               <path d="M12 8v8" />
             </svg>
-            Add URL
-          </a>
+            اضافه کردن گروه ویژگی ها
+          </button>
         </div>
 
-        <div class="sm:col-span-3">
-          <label for="af-submit-application-twitter-url"
-            class="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500">
+        <div class="sm:col-span-12">
+          <h2 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
             گارانتی
+          </h2>
+        </div>
+
+        @for (g of productModel.garranty; track $index) {
+        @if ($first) {
+        <div class="sm:col-span-3">
+          <label for="form-garranty-0"
+            class="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500">
+            نام گارانتی
           </label>
         </div>
-        <!-- End Col -->
+        } @else {
+        <div class="sm:col-span-3"></div>
+        }
 
         <div class="sm:col-span-9">
-          <input id="af-submit-application-other-website" type="text"
-            class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+          <div class="sm:col-span-9">
+            <input id="form-garranty-{{$index}}" type="text" name="form-garranty-{{$index}}"
+              [(ngModel)]="productModel.garranty[$index]" placeholder="6 ماه ضمانت شرکتی"
+              class="peer sm:mt-0 py-1.5 shadow-2xs shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-2 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-1">
+          </div>
         </div>
-        <!-- End Col -->
+        }
 
         <div class="sm:col-start-4 sm:col-span-8">
-          <a class="inline-flex items-center gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500"
-            href="../docs/index.html">
+          <button (click)="productModel.garranty.push('')"
+            class="inline-flex items-center gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500">
             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10" />
               <path d="M8 12h8" />
               <path d="M12 8v8" />
             </svg>
-            Add URL
-          </a>
+            اضافه کردن گارانتی
+          </button>
         </div>
       </div>
       <!-- End Section -->
@@ -483,7 +549,7 @@
       </div>
       <!-- End Section -->
 
-      <button type="button"
+      <button type="submit" (click)="addProduct()"
         class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
         ثبت محصول
       </button>

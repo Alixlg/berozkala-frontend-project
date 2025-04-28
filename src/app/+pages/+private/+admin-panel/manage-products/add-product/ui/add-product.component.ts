@@ -11,18 +11,32 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-product.component.css'
 })
 export class AddProductComponent {
-  productModel: Product = new Product(true, '', '', '', '', '', [], [], 0, [], 1, '');
   products = inject(ProductService);
+  productModel: Product = new Product(true, '', '', '', '', '', [''], [''], 5, [
+    {
+      titleName: '',
+      subset: [
+        { subsetName: '', subsetValue: '' }
+      ]
+    }
+  ], 1, '');
 
-  setNumber(maxNum: number, minNum: number, num: number) {
-    if (num <= maxNum && num >= minNum) {
-      return num;
-    }
-    else if (num > maxNum) {
-      return maxNum;
-    }
-    else {
-      return minNum;
-    }
+  addSpecifications() {
+    this.productModel.attributes.push(
+      {
+        titleName: '',
+        subset: [
+          { subsetName: '', subsetValue: '' }
+        ]
+      }
+    );
+  }
+
+  addSubset(subset: any[]) {
+    subset.push({ subsetName: '', subsetValue: '' });
+  }
+
+  addProduct() {
+    console.log(this.productModel);
   }
 }

@@ -12,7 +12,7 @@ export interface IProduct {
   count: number;
   maxCount: number;
   scoreRank: number;
-  specifications: {
+  attributes: {
     titleName: string,
     subset: { subsetName: string, subsetValue: string }[]
   }[];
@@ -33,7 +33,7 @@ export class Product implements IProduct {
   count: number = 1;
   maxCount: number;
   scoreRank: number;
-  specifications: { titleName: string; subset: { subsetName: string; subsetValue: string; }[]; }[];
+  attributes: { titleName: string; subset: { subsetName: string; subsetValue: string; }[]; }[];
 
   constructor (
     isAvailable: boolean,
@@ -62,7 +62,7 @@ export class Product implements IProduct {
     this.imagesUrl = imagesUrl;
     this.garranty = garranty;
     this.maxCount = maxCount;
-    this.specifications = specifications;
+    this.attributes = specifications;
     this.scoreRank = scoreRank;
     this.discountPercent = discountPercent;
   }
