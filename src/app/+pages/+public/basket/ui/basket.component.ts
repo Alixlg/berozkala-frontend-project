@@ -24,16 +24,12 @@ export class BasketComponent implements OnInit {
     }
   }
 
-  checkRoute(route: string) {
-    return this.route.url.includes(route) ? true : false;
-  }
-
   ngOnInit() {
-    if (this.route.url.includes('manage-basket')) {
+    if (this.route.isActive('/pb/basket/manage-basket', true)) {
       this.index = 1;
-    } else if (this.route.url.includes('checkout')) {
+    } else if (this.route.isActive('/pb/basket/checkout', true)) {
       this.index = 2;
-    } else if (this.route.url.includes('payment')) {
+    } else if (this.route.isActive('/pb/basket/payment', true)) {
       this.index = 3;
     }
   }

@@ -21,8 +21,4 @@ export class PublicNavigationsComponent {
 
     return count;
   }
-
-  checkRoute(route: string) {
-    return this.route.url.includes(route);
-  }
 }

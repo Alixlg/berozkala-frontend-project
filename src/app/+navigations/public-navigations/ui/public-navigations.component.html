@@ -103,19 +103,19 @@
 
         <li><a class="font-medium text-green-500" routerLink="home">خانه</a></li>
         <li><a
-            class="font-medium {{checkRoute('/pb/products') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
+            class="font-medium {{route.isActive('/pb/products',true) ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="products">محصولات</a></li>
         <li><a
-            class="font-medium {{checkRoute('/pb/support') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
+            class="font-medium {{route.isActive('/pb/support',true) ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="support">پشتیبانی</a></li>
         <li><a
-            class="font-medium {{checkRoute('/pb/about') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
+            class="font-medium {{route.isActive('/pb/about',true) ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="about">درباره ما</a></li>
         <li><a
-            class="font-medium {{checkRoute('/pb/videos') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
+            class="font-medium {{route.isActive('/pb/videos',true) ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="videos">ویدیو ها</a></li>
         <li><a
-            class="font-medium {{checkRoute('/pb/basket') ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
+            class="font-medium {{route.isActive('/pb/basket',true) ? 'text-green-500 dark:text-green-500' : 'dark:text-neutral-400'}} text-gray-600 hover:text-green-500 focus:outline-hidden dark:hover:text-green-500"
             routerLink="basket">سبد خرید</a></li>
 
       </ul>
