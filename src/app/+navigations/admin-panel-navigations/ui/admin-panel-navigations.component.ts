@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../../../+components/footer/ui/footer.component';
 import { FormsModule } from '@angular/forms';
+import { TimeService } from '../../../+services/time.service';
 
 @Component({
   selector: 'app-admin-component',
@@ -11,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class AdminPanelNavigationsComponent {
   router = inject(Router);
+  timeService = inject(TimeService);
   singOutModal = false;
-  currentDate = new Date;
 
   singOut() {
     this.singOutModal = false;
