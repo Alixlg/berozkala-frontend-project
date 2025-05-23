@@ -6,7 +6,7 @@ import { ProductPreview } from '../ui/product-preview/models/productPreview.mode
   providedIn: 'root'
 })
 export class ProductService {
-  product: Product[] = [
+  private product: Product[] = [
     new Product(
       true,
       'کیبورد',
@@ -332,7 +332,7 @@ export class ProductService {
     )
   ];
 
-  productsPreview: ProductPreview[] = [
+  private productsPreview: ProductPreview[] = [
     new ProductPreview(this.product[0]),
     new ProductPreview(this.product[1]),
     new ProductPreview(this.product[2]),
@@ -342,4 +342,8 @@ export class ProductService {
     new ProductPreview(this.product[6]),
     new ProductPreview(this.product[7])
   ]
+
+  getProductPreviews(){
+    return this.productsPreview;
+  }
 }

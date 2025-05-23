@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { BasketService } from '../../../+pages/+public/basket/service/basket.service';
 import { FooterComponent } from '../../../+components/footer/ui/footer.component';
+import { BasketService } from '../../../+pages/+public/basket/service/basket.service';
 
 @Component({
   selector: 'app-public-navigations',
@@ -10,12 +10,12 @@ import { FooterComponent } from '../../../+components/footer/ui/footer.component
   styleUrl: './public-navigations.component.css'
 })
 export class PublicNavigationsComponent {
-  basketObj = inject(BasketService);
+  basketService = inject(BasketService);
   route = inject(Router);
 
   basketCount() {
     let count = 0;
-    this.basketObj.basket.forEach(x => {
+    this.basketService.getBasketItems().forEach(x => {
       count += x.count;
     });
 

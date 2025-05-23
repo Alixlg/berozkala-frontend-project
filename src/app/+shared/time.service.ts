@@ -16,6 +16,6 @@ export class TimeService {
   }
 
   constructor() {
-    setInterval(() => this.updateTime(), 1000);
+    setInterval(() => this.updateTime(), 500);
   }
 }

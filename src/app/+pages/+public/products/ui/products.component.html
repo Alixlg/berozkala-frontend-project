@@ -1,6 +1,6 @@
 <section class="relative" action="">
 
-  <app-search-product [products]="productsObj.productsPreview" (onDone)="search($event)"
+  <app-search-product [products]="productsObj.getProductPreviews()" (onDone)="search($event)"
     (onVisible)="isSearchBoxEmpty = $event"></app-search-product>
 
   <div class="m-auto mb-5 left-0 top-0 md:inline-flex md:absolute hs-dropdown md:w-1/7 ml-8 mr-8">
@@ -66,9 +66,9 @@
 <section>
 
   <!-- Card Blog -->
-  <div class="max-w-[100rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <div class="max-w-[70rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
       @for (item of filterBy(); track $index) {
       <app-product-preview (onBuy)="buy($event)" [product]="item"

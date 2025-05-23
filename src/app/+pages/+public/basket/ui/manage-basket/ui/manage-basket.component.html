@@ -30,7 +30,7 @@
 
             <tbody>
 
-              @for (item of basketProductsObj.basket; track $index) {
+              @for (item of basketService.sortById(); track $index) {
               <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-neutral-900 dark:even:bg-neutral-800">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
                   <img class="w-22 max-h-22 rounded-2xl" [src]="item.pic" alt="basket image">
@@ -96,7 +96,7 @@
             </tbody>
           </table>
 
-          @if (basketProductsObj.basket.length == 0) {
+          @if (basketService.getBasketItems().length == 0) {
           <div
             class="m-5 bg-yellow-100 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4 dark:bg-yellow-800/10 dark:border-yellow-900 dark:text-yellow-500"
             role="alert">

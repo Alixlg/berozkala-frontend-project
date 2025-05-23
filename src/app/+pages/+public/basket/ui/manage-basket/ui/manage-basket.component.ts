@@ -13,14 +13,14 @@ import { ProductPreview } from '../../../../products/ui/product-preview/models/p
   templateUrl: './manage-basket.component.html',
   styleUrl: './manage-basket.component.css'
 })
-export class ManageBasketComponent implements OnInit {
-  basketProductsObj = inject(BasketService);
+export class ManageBasketComponent {
+  basketService = inject(BasketService);
   alertSystemObj = inject(AlertService);
   discountCode: DiscountCode = { code: '' };
 
   remove($event: ProductPreview) {
     if ($event.count == 1) {
-      this.basketProductsObj.basket = this.basketProductsObj.basket.filter(p => p.id != $event.id);
+      this.basketService.removeItem($event);
 
       this.alertSystemObj.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت از سبد حذف شد`, 2000);
 
@@ -30,12 +30,12 @@ export class ManageBasketComponent implements OnInit {
       }, 2000);
     }
     else {
-      let product = this.basketProductsObj.basket.find(p => p.id == $event.id);
-      this.basketProductsObj.basket = this.basketProductsObj.basket.filter(p => p.id != $event.id);
+      let product = this.basketService.getBasketItems().find(p => p.id == $event.id);
+      this.basketService.removeItem($event);
+
       if (product) {
         product.count -= 1;
-        this.basketProductsObj.basket.push(product);
-        this.basketProductsObj.basket.sort((a, b) => b.id - a.id);
+        this.basketService.addItem(product);
 
         this.alertSystemObj.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت از سبد حذف شد`, 2000);
 
@@ -69,7 +69,7 @@ export class ManageBasketComponent implements OnInit {
 
   removeProduct(product: ProductPreview) {
     product.count = 1;
-    this.basketProductsObj.basket = this.basketProductsObj.basket.filter(p => p != product);
+    this.basketService.removeItem(product);
     this.alertSystemObj.newAlert(`محصول ${product.title} ${product.brand} با موفقیت از سبد حذف شد`, 2000);
   }
 
@@ -84,14 +84,10 @@ export class ManageBasketComponent implements OnInit {
   basketPrice() {
     let price = 0;
 
-    this.basketProductsObj.basket.forEach(x => {
+    this.basketService.getBasketItems().forEach(x => {
       price += Number(x.price) * x.count;
     });
 
     return price;
-  }
-
-  ngOnInit() {
-    this.basketProductsObj.basket.sort((a, b) => b.id - a.id);
   }
 }

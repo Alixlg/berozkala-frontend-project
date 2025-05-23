@@ -11,9 +11,6 @@ import { RegisterComponent } from './+pages/+public/register/ui/register.compone
 import { AdminPanelNavigationsComponent } from './+navigations/admin-panel-navigations/ui/admin-panel-navigations.component';
 import { UserPanelNavigationsComponent } from './+navigations/user-panel-navigations/ui/user-panel-navigations.component';
 import { AdminDashboardComponent } from './+pages/+private/+admin-panel/admin-dashboard/ui/admin-dashboard.component';
-import { ManageBasketComponent } from './+pages/+public/basket/ui/manage-basket/ui/manage-basket.component';
-import { CheckoutComponent } from './+pages/+public/basket/ui/checkout/ui/checkout.component';
-import { PaymentComponent } from './+pages/+public/basket/ui/payment/ui/payment.component';
 import { AddProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/add-product/ui/add-product.component';
 import { RemoveProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/remove-product/ui/remove-product.component';
 import { EditProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/edit-product/ui/edit-product.component';
@@ -28,14 +25,7 @@ export const routes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'support', component: SupportComponent },
       { path: 'about', component: AboutComponent },
-      {
-        path: 'basket', component: BasketComponent, children: [
-          { path: 'manage-basket', component: ManageBasketComponent },
-          { path: 'checkout', component: CheckoutComponent },
-          { path: 'payment', component: PaymentComponent },
-          { path: '', redirectTo: 'manage-basket', pathMatch: 'prefix' }
-        ]
-      },
+      { path: 'basket', component: BasketComponent },
       { path: 'videos', component: VideosComponent },
       { path: '', redirectTo: 'home', pathMatch: 'prefix' }
     ]

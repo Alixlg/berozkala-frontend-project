@@ -29,7 +29,7 @@ export class WithPasswordComponent {
 
       let result = this.loginAuth.checkUser(this.loginModel.username, this.loginModel.password);
 
-      result.subscribe(r => {
+      result.subscribe(r => { //yaani har vaght javab result omad in code ejra mishavad va ta un moghe baghie code be kar khod edame mide !
         if (r) {
           this.isErrorStyle = false;
 

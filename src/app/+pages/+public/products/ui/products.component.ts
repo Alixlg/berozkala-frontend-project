@@ -16,7 +16,7 @@ import { AlertService } from '../../../../+components/alert-system/service/alert
 export class ProductsComponent {
   alertSystemObj = inject(AlertService);
   productsObj = inject(ProductService);
-  basketProductsObj = inject(BasketService);
+  basketObj = inject(BasketService);
 
   searchedProducts: ProductPreview[] = [];
   isSearchBoxEmpty = true;
@@ -24,8 +24,10 @@ export class ProductsComponent {
   productsFiltered = '';
 
   buy($event: ProductPreview) {
-    if (this.basketProductsObj.basket.every(p => p.id != $event.id)) {
-      this.basketProductsObj.basket.push($event);
+    let basket = this.basketObj.getBasketItems();
+
+    if (basket.every(p => p.id != $event.id)) {
+      this.basketObj.addItem($event);
 
       this.alertSystemObj.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت به سبد اضافه شد`, 2000);
 
@@ -35,11 +37,12 @@ export class ProductsComponent {
       }, 2000);
     }
     else {
-      let product = this.basketProductsObj.basket.find(p => p.id == $event.id);
-      this.basketProductsObj.basket = this.basketProductsObj.basket.filter(p => p.id != $event.id);
+      let product = this.basketObj.getBasketItems().find(p => p.id == $event.id);
+      this.basketObj.removeItem($event);
+
       if (product) { // agar undefine nabood
         product.count += 1;
-        this.basketProductsObj.basket.push(product);
+        this.basketObj.addItem(product);
 
         this.alertSystemObj.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت به سبد اضافه شد`, 2000);
 
@@ -65,21 +68,21 @@ export class ProductsComponent {
   filterBy() {
     switch (this.productsFiltered) {
       case 'price-up':
-        return this.productsObj.productsPreview.sort((a, b) => Number(b.price) - Number(a.price));
+        return this.productsObj.getProductPreviews().sort((a, b) => Number(b.price) - Number(a.price));
 
       case 'price-down':
-        return this.productsObj.productsPreview.sort((a, b) => Number(a.price) - Number(b.price));
+        return this.productsObj.getProductPreviews().sort((a, b) => Number(a.price) - Number(b.price));
 
       case 'new-products':
-        return this.productsObj.productsPreview.sort((a, b) => b.id - a.id);
+        return this.productsObj.getProductPreviews().sort((a, b) => b.id - a.id);
 
       case 'old-products':
-        return this.productsObj.productsPreview.sort((a, b) => a.id - b.id);
+        return this.productsObj.getProductPreviews().sort((a, b) => a.id - b.id);
 
       case 'search':
         return this.searchedProducts;
 
-      default: return this.productsObj.productsPreview;
+      default: return this.productsObj.getProductPreviews();
     }
   }
 
