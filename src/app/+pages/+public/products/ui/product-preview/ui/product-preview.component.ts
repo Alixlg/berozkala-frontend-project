@@ -1,8 +1,8 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AlertService } from '../../../../../+services/alert.service';
-import { ProductPreview } from '../models/productPreview';
+import { ProductPreview } from '../models/productPreview.model';
+import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
 
 @Component({
   selector: 'app-product-preview',

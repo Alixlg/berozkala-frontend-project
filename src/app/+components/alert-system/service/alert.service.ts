@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertBody } from '../+components/alert-system/models/alert';
+import { AlertBody } from '../models/alert.model';
 
 
 @Injectable({

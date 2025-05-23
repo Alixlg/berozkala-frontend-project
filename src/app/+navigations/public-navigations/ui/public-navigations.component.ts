@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { BasketService } from '../../../+services/basket.service';
+import { BasketService } from '../../../+pages/+public/basket/service/basket.service';
 import { FooterComponent } from '../../../+components/footer/ui/footer.component';
 
 @Component({

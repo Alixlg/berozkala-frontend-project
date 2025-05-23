@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { ProductService } from '../../../../../+services/product.service';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ProductService } from '../../../../products/service/product.service';
 
 @Component({
   selector: 'app-products-banner',

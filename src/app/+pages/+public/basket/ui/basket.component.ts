@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { BasketService } from '../../../../+services/basket.service';
+import { BasketService } from '../service/basket.service';
 
 @Component({
   selector: 'app-basket',

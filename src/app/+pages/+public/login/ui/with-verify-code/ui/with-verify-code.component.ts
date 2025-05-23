@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AlertService } from '../../../../../+services/alert.service';
+import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
 
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { BasketService } from '../../../../+services/basket.service';
-import { ProductService } from '../../../../+services/product.service';
+import { BasketService } from '../../basket/service/basket.service';
+import { ProductService } from '../service/product.service';
 import { FormsModule } from '@angular/forms';
-import { AlertService } from '../../../../+services/alert.service';
 import { SearchProductComponent } from '../../../../+components/search-product/ui/search-product.component';
-import { ProductPreviewComponent } from '../product-preview/ui/product-preview.component';
-import { ProductPreview } from '../product-preview/models/productPreview';
+import { ProductPreviewComponent } from './product-preview/ui/product-preview.component';
+import { ProductPreview } from './product-preview/models/productPreview.model';
+import { AlertService } from '../../../../+components/alert-system/service/alert.service';
 
 @Component({
   selector: 'app-products',

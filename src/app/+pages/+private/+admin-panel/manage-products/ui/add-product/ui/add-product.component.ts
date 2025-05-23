@@ -1,8 +1,8 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ProductService } from '../../../../../../+services/product.service';
-import { Product } from '../../../../../+public/products/product/models/product';
 import { FormsModule } from '@angular/forms';
+import { Product } from '../../../../../../+public/products/ui/product/models/product.model';
+import { ProductService } from '../../../../../../+public/products/service/product.service';
 
 @Component({
   selector: 'app-add-product',

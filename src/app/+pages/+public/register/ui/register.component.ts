@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AlertService } from '../../../../+services/alert.service';
-import { Register } from '../models/register';
+import { Register } from '../models/register.model';
+import { AlertService } from '../../../../+components/alert-system/service/alert.service';
 
 @Component({
   selector: 'app-register',

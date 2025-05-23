@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BasketService } from '../../../../../+services/basket.service';
-import { ProductService } from '../../../../../+services/product.service';
+import { BasketService } from '../../../../+public/basket/service/basket.service';
+import { ProductService } from '../../../../+public/products/service/product.service';
 import { DecimalPipe } from '@angular/common';
 import { AlertService } from '../../../../../+services/alert.service';
 import { ProductPreview } from '../../../../+public/products/product-preview/models/productPreview';

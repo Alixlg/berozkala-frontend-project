@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { BasketService } from '../../../../../+services/basket.service';
-import { AlertService } from '../../../../../+services/alert.service';
-import { ProductPreview } from '../../../products/product-preview/models/productPreview';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { DiscountCode } from '../models/manageBasket';
+import { DiscountCode } from '../models/manageBasket.model';
+import { BasketService } from '../../../service/basket.service';
+import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
+import { ProductPreview } from '../../../../products/ui/product-preview/models/productPreview.model';
 
 @Component({
   selector: 'app-manage-basket',

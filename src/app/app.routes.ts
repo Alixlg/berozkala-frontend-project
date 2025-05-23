@@ -8,18 +8,18 @@ import { SupportComponent } from './+pages/+public/support/ui/support.component'
 import { HomeComponent } from './+pages/+public/home/ui/home.component';
 import { VideosComponent } from './+pages/+public/videos/ui/videos.component';
 import { RegisterComponent } from './+pages/+public/register/ui/register.component';
-import { WithPasswordComponent } from './+pages/+public/login/with-password/ui/with-password.component';
-import { WithVerifyCodeComponent } from './+pages/+public/login/with-verify-code/ui/with-verify-code.component';
-import { ForgetPasswordComponent } from './+pages/+public/login/forget-password/ui/forget-password.component';
-import { ManageBasketComponent } from './+pages/+public/basket/manage-basket/ui/manage-basket.component';
-import { CheckoutComponent } from './+pages/+public/basket/checkout/ui/checkout.component';
-import { PaymentComponent } from './+pages/+public/basket/payment/ui/payment.component';
 import { AdminPanelNavigationsComponent } from './+navigations/admin-panel-navigations/ui/admin-panel-navigations.component';
 import { UserPanelNavigationsComponent } from './+navigations/user-panel-navigations/ui/user-panel-navigations.component';
-import { AddProductComponent } from './+pages/+private/+admin-panel/manage-products/add-product/ui/add-product.component';
-import { EditProductComponent } from './+pages/+private/+admin-panel/manage-products/edit-product/ui/edit-product.component';
-import { RemoveProductComponent } from './+pages/+private/+admin-panel/manage-products/remove-product/ui/remove-product.component';
 import { AdminDashboardComponent } from './+pages/+private/+admin-panel/admin-dashboard/ui/admin-dashboard.component';
+import { ManageBasketComponent } from './+pages/+public/basket/ui/manage-basket/ui/manage-basket.component';
+import { CheckoutComponent } from './+pages/+public/basket/ui/checkout/ui/checkout.component';
+import { PaymentComponent } from './+pages/+public/basket/ui/payment/ui/payment.component';
+import { AddProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/add-product/ui/add-product.component';
+import { RemoveProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/remove-product/ui/remove-product.component';
+import { EditProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/edit-product/ui/edit-product.component';
+import { ForgetPasswordComponent } from './+pages/+public/login/ui/forget-password/ui/forget-password.component';
+import { WithVerifyCodeComponent } from './+pages/+public/login/ui/with-verify-code/ui/with-verify-code.component';
+import { WithPasswordComponent } from './+pages/+public/login/ui/with-password/ui/with-password.component';
 
 export const routes: Routes = [
   {

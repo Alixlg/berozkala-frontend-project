@@ -1,4 +1,4 @@
-import { IProduct } from "../../product/models/product";
+import { IProduct } from "../../product/models/product.model";
 
 export interface Productpw {
   id: number;

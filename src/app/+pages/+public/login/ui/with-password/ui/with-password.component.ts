@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { AlertService } from '../../../../../+services/alert.service';
 import { Router, RouterLink } from '@angular/router';
-import { Login } from '../../models/login';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from '../../../../../+services/login.service';
 import { delay, Observable, pipe } from 'rxjs';
+import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
+import { LoginService } from '../../../service/login.service';
+import { Login } from '../../../models/login.model';
 
 @Component({
   selector: 'app-with-password',
@@ -32,7 +32,7 @@ export class WithPasswordComponent {
       result.subscribe(r => {
         if (r) {
           this.isErrorStyle = false;
-          
+
           if (!r.isActive) {
             this.alertObj.newAlert("اکانت شما به دلایلی مسدود شده لطفا با مدیریت تماس بگیرید", 3000, true);
             this.isBussy = false;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from '../+shared/User';
-import { delay, Observable, of } from 'rxjs';
+import { User } from '../../../../+shared/user.model';
+import { delay, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
