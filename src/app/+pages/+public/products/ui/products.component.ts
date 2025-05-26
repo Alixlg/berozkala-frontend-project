@@ -6,10 +6,11 @@ import { SearchProductComponent } from '../../../../+components/search-product/u
 import { ProductPreviewComponent } from './product-preview/ui/product-preview.component';
 import { ProductPreview } from './product-preview/models/productPreview.model';
 import { AlertService } from '../../../../+components/alert-system/service/alert.service';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-products',
-  imports: [ProductPreviewComponent, FormsModule, SearchProductComponent],
+  imports: [ProductPreviewComponent, RouterOutlet, FormsModule, SearchProductComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -17,6 +18,7 @@ export class ProductsComponent {
   alertSystemObj = inject(AlertService);
   productsObj = inject(ProductService);
   basketObj = inject(BasketService);
+  router = inject(Router);
 
   searchedProducts: ProductPreview[] = [];
   isSearchBoxEmpty = true;
@@ -68,21 +70,21 @@ export class ProductsComponent {
   filterBy() {
     switch (this.productsFiltered) {
       case 'price-up':
-        return this.productsObj.getProductPreviews().sort((a, b) => Number(b.price) - Number(a.price));
+        return this.productsObj.getProductsPreview().sort((a, b) => Number(b.price) - Number(a.price));
 
       case 'price-down':
-        return this.productsObj.getProductPreviews().sort((a, b) => Number(a.price) - Number(b.price));
+        return this.productsObj.getProductsPreview().sort((a, b) => Number(a.price) - Number(b.price));
 
       case 'new-products':
-        return this.productsObj.getProductPreviews().sort((a, b) => b.id - a.id);
+        return this.productsObj.getProductsPreview().sort((a, b) => b.id - a.id);
 
       case 'old-products':
-        return this.productsObj.getProductPreviews().sort((a, b) => a.id - b.id);
+        return this.productsObj.getProductsPreview().sort((a, b) => a.id - b.id);
 
       case 'search':
         return this.searchedProducts;
 
-      default: return this.productsObj.getProductPreviews();
+      default: return this.productsObj.getProductsPreview();
     }
   }
 

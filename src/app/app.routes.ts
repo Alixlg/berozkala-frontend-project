@@ -17,12 +17,20 @@ import { EditProductComponent } from './+pages/+private/+admin-panel/manage-prod
 import { ForgetPasswordComponent } from './+pages/+public/login/ui/forget-password/ui/forget-password.component';
 import { WithVerifyCodeComponent } from './+pages/+public/login/ui/with-verify-code/ui/with-verify-code.component';
 import { WithPasswordComponent } from './+pages/+public/login/ui/with-password/ui/with-password.component';
+import { ProductComponent } from './+pages/+public/products/ui/product/ui/product.component';
+import { NotFoundPageComponent } from './+components/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
   {
     path: 'pb', component: PublicNavigationsComponent, children: [
       { path: 'home', component: HomeComponent },
-      { path: 'products', component: ProductsComponent },
+      {
+        path: 'products', component: ProductsComponent, children: [
+          { path: 'computer/:id', component: ProductComponent },
+          { path: '404', component: NotFoundPageComponent },
+          { path: '', redirectTo: 'products', pathMatch: 'prefix' }
+        ]
+      },
       { path: 'support', component: SupportComponent },
       { path: 'about', component: AboutComponent },
       { path: 'basket', component: BasketComponent },
@@ -49,9 +57,10 @@ export const routes: Routes = [
       { path: 'with-password', component: WithPasswordComponent },
       { path: 'with-verify-code', component: WithVerifyCodeComponent },
       { path: 'forget-password', component: ForgetPasswordComponent },
-      { path: '', redirectTo: 'with-password', pathMatch: 'prefix' }
+      { path: '', redirectTo: 'with-password', pathMatch: 'prefix' },
     ]
   },
   { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: 'pb', pathMatch: 'full' }
+  { path: '404', component: NotFoundPageComponent },
+  { path: '**', redirectTo: '404', pathMatch: 'full' }
 ];

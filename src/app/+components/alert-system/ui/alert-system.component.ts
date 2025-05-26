@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AlertService } from '../service/alert.service';
+import { AlertBody } from '../models/alert.model';
 
 @Component({
   selector: 'app-alert-system',
@@ -8,5 +9,5 @@ import { AlertService } from '../service/alert.service';
   styleUrl: './alert-system.component.css'
 })
 export class AlertSystemComponent {
-  alertSystemObj = inject(AlertService);
+  alertService = inject(AlertService);
 }

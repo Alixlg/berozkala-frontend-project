@@ -9,6 +9,7 @@ export interface Productpw {
   pic: string;
   count: number;
   maxCount: number;
+  category: string;
   scoreRank: number;
   isAddDisable: boolean;
   isRemoveDisable: boolean;
@@ -25,6 +26,7 @@ export class ProductPreview implements Productpw {
   count: number;
   maxCount: number;
   scoreRank: number;
+  category: string;
   isAddDisable = false;
   isRemoveDisable = false;
 
@@ -38,5 +40,6 @@ export class ProductPreview implements Productpw {
     this.scoreRank = p.scoreRank;
     this.count = p.count;
     this.maxCount = p.maxCount;
+    this.category = p.category;
   }
 }

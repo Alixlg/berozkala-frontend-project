@@ -1,6 +1,6 @@
 <section dir="ltr" class="p-5 fixed sm:left-5 sm:top-23 z-3">
 
-  @for (a of alertSystemObj.getAlerts(); track $index) {
+  @for (a of alertService.getAlerts(); track $index) {
   @if (a.isVisible) {
   <div
     class="max-w-120 mb-2 alert bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-neutral-800 dark:border-neutral-700"

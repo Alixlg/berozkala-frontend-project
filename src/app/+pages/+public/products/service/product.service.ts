@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../ui/product/models/product.model';
 import { ProductPreview } from '../ui/product-preview/models/productPreview.model';
+import { delay, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class ProductService {
   private product: Product[] = [
     new Product(
       true,
-      'کیبورد',
+      'computer',
       'ریزر',
       'کیبورد گیمینگ',
       '9800000',
@@ -53,7 +54,7 @@ export class ProductService {
     ),
     new Product(
       true,
-      'موس',
+      'computer',
       'ریزر',
       'موس گیمینگ',
       '7700000',
@@ -95,7 +96,7 @@ export class ProductService {
     ),
     new Product(
       true,
-      'کیبورد',
+      'computer',
       'لاجیتک',
       'کیبورد گیمینگ',
       '7200000',
@@ -140,7 +141,7 @@ export class ProductService {
     ),
     new Product(
       true,
-      'کیبورد',
+      'computer',
       'تسکو',
       'کیبورد گیمینگ',
       '4600000',
@@ -184,7 +185,7 @@ export class ProductService {
     ),
     new Product(
       true,
-      'موس',
+      'computer',
       'لاجیتک',
       'موس گیمینگ',
       '5300000',
@@ -224,7 +225,7 @@ export class ProductService {
     ),
     new Product(
       true,
-      'هدفن',
+      'computer',
       'ریزر',
       'هدفن گیمینگ',
       '6520400',
@@ -260,7 +261,7 @@ export class ProductService {
     ),
     new Product(
       true,
-      'هدفن',
+      'computer',
       'تسکو',
       'هدفن گیمینگ',
       '3200000',
@@ -296,7 +297,7 @@ export class ProductService {
     ),
     new Product(
       true,
-      'هدفن',
+      'computer',
       'لاجیتک',
       'هدفن گیمینگ',
       '4600000',
@@ -343,7 +344,12 @@ export class ProductService {
     new ProductPreview(this.product[7])
   ]
 
-  getProductPreviews(){
+  getProductsPreview() {
     return this.productsPreview;
+  }
+
+  getProduct(id: string) {
+    let result = this.product.find(r => r.id == Number(id));
+    return of(result).pipe(delay(2));
   }
 }

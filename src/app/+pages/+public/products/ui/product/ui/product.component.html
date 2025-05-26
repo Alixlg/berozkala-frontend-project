@@ -1,1 +1,102 @@
-<p>product works!</p>
+@if (!isLoading) {
+
+<section
+  class="flex justify-center h-10 items-center m-5 bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+
+  <ol class="flex items-center whitespace-nowrap">
+    <li class="inline-flex items-center">
+      <a class="flex items-center text-sm text-gray-500 hover:text-green-600 focus:outline-hidden focus:text-green-600 dark:text-neutral-500 dark:hover:text-green-500 dark:focus:text-green-500"
+        routerLink="/pb/home">
+        خانه
+      </a>
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="shrink-0 size-5 text-gray-400 dark:text-neutral-600 mx-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+    </li>
+    <li class="inline-flex items-center">
+      <a class="flex items-center text-sm text-gray-500 hover:text-green-600 focus:outline-hidden focus:text-green-600 dark:text-neutral-500 dark:hover:text-green-500 dark:focus:text-green-500"
+        routerLink="/pb/products">
+        محصولات
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="shrink-0 size-5 text-gray-400 dark:text-neutral-600 mx-2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+      </a>
+    </li>
+    <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate dark:text-neutral-200"
+      aria-current="page">
+      {{product.title}} {{product.brand}}
+    </li>
+  </ol>
+
+</section>
+
+
+
+<section
+  class="h-full flex flex-col m-5 bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+
+  <!-- Slider -->
+  <div dir="ltr" data-hs-carousel='{
+    "loadingClasses": "opacity-0",
+    "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"
+  }' class="relative lg:w-2/6 lg:h-150 h-110">
+    <div class="hs-carousel relative overflow-hidden w-full min-h-110 lg:min-h-150 bg-gray-100 dark:bg-neutral-800 rounded-lg">
+      <div
+        class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+        <div class="hs-carousel-slide">
+          <div class="flex justify-center h-full">
+            d
+          </div>
+        </div>
+        <div class="hs-carousel-slide">
+          <div class="flex justify-center h-full">
+            d
+          </div>
+        </div>
+        <div class="hs-carousel-slide">
+          <div class="flex justify-center h-full">
+            d
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button"
+      class="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default absolute top-1/2 start-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
+      <span class="text-2xl" aria-hidden="true">
+        <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </span>
+      <span class="sr-only">قبلی</span>
+    </button>
+    <button type="button"
+      class="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default absolute top-1/2 end-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
+      <span class="sr-only">بعدی</span>
+      <span class="text-2xl" aria-hidden="true">
+        <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </span>
+    </button>
+
+    <div class="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 flex gap-x-2"></div>
+  </div>
+  <!-- End Slider -->
+
+</section>
+
+}
+@else {
+<section class="flex justify-center items-center h-screen">
+  <div
+    class="animate-spin inline-block size-12 border-3 border-current border-t-transparent text-black rounded-full dark:text-white"
+    role="status" aria-label="loading">
+    <span class="sr-only">لطفا منتظر بمانید...</span>
+  </div>
+</section>
+}

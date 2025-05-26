@@ -1,6 +1,8 @@
+@if(router.isActive('/pb/products',true)){
+
 <section class="relative" action="">
 
-  <app-search-product [products]="productsObj.getProductPreviews()" (onDone)="search($event)"
+  <app-search-product [products]="productsObj.getProductsPreview()" (onDone)="search($event)"
     (onVisible)="isSearchBoxEmpty = $event"></app-search-product>
 
   <div class="m-auto mb-5 left-0 top-0 md:inline-flex md:absolute hs-dropdown md:w-1/7 ml-8 mr-8">
@@ -107,3 +109,7 @@
   <!-- End Card Blog -->
 
 </section>
+
+}@else {
+<router-outlet></router-outlet>
+}
