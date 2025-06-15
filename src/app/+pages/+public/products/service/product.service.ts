@@ -15,7 +15,12 @@ export class ProductService {
       'کیبورد گیمینگ',
       '9800000',
       '/images/Razer.png',
-      [],
+      [
+        'https://assets2.razerzone.com/images/pnx.assets/5330432bc718cd8deb4f652df8f2fbd3/razer-huntsman-v3-pro-tkl-500x500.webp',
+        'https://assets2.razerzone.com/images/pnx.assets/930d8250b82be9d438c6a1de524b5b5d/quick-actuation-adjustment-mode.webp',
+        'https://assets2.razerzone.com/images/pnx.assets/930d8250b82be9d438c6a1de524b5b5d/quick-rapid-trigger-adjustment-mode.webp',
+        'https://assets2.razerzone.com/images/pnx.assets/930d8250b82be9d438c6a1de524b5b5d/quick-side-snap-asdjustment-mode.webp'
+      ],
       ['18 ماه گارانتی', '12 ماه گارانتی'],
       2,
       [
@@ -101,7 +106,11 @@ export class ProductService {
       'کیبورد گیمینگ',
       '7200000',
       'https://wolflandshop.com/wp-content/uploads/2023/03/68-11.jpg',
-      [],
+      [
+        'https://resource.logitechg.com/w_572,c_lpad,ar_4:3,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/en/non-braid/flying-v-mx-g512/g512-keyboard-gallery-2-2x-nb.png?v=1',
+        'https://resource.logitechg.com/w_572,c_lpad,ar_4:3,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/products/gaming/keyboards/g512-mechanical-gaming-keyboard/920-008762/g512-backlit-mechanical-gaming-keyboard-23.png?v=1',
+        'https://resource.logitechg.com/w_80,h_50,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/flying-v-mx-g512/g512-keyboard-gallery-3-2x-nb.png?v=1'
+      ],
       ['18 ماه گارانتی', '12 ماه گارانتی'],
       3,
       [

@@ -3,8 +3,9 @@
 
   <div class="h-63 flex justify-center items-center">
     @defer () {
-    <img class="h-53 flex flex-col justify-center items-center rounded-2xl bg-white dark:bg-black rounded-t-xl"
-      [src]="product.pic" alt="product img">
+    <img
+      class="h-53 flex flex-col justify-center items-center rounded-2xl bg-white dark:bg-black rounded-t-xl cursor-pointer"
+      [src]="product.pic" alt="product img" routerLink="{{product.category}}/{{product.id}}">
     } @placeholder {
     <div class="flex justify-center items-center h-53">
       <div
