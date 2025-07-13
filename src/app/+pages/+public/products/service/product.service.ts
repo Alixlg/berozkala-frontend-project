@@ -373,7 +373,13 @@ export class ProductService {
   }
 
   deleteProduct(product: Product) {
-    this.products = this.products.filter(p => p != product);
+    this.products = this.products.filter(p => p.id != product.id);
+    return of("").pipe(delay(1000));
+  }
+
+  editProduct(product: Product) {
+    this.products = this.products.filter(p => p.id != product.id);
+    this.products.push(product);
     return of("").pipe(delay(1000));
   }
 }

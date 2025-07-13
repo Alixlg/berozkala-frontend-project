@@ -3,10 +3,11 @@ import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../../../+public/products/service/product.service';
 import { Product } from '../../../../+public/products/ui/product/models/product.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-list',
-  imports: [DecimalPipe, RouterLink],
+  imports: [DecimalPipe, RouterLink, FormsModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
@@ -18,6 +19,42 @@ export class ProductListComponent implements OnInit {
   isDeleteModal: boolean = false;
   isDeleteModalLoading: boolean = false;
   isEditModal: boolean = false;
+  isEditModalLoading: boolean = false;
+
+  addAttributes() {
+    this.productToActions.attributes.push(
+      {
+        titleName: '',
+        subset: [
+          { subsetName: '', subsetValue: '' }
+        ]
+      }
+    );
+  }
+
+  removeAttribute(a: { titleName: string; subset: { subsetName: string; subsetValue: string; }[]; }) {
+    this.productToActions.attributes = this.productToActions.attributes.filter(x => x != a);
+  }
+
+  addSubset(subsets: any[]) {
+    subsets.push({ subsetName: '', subsetValue: '' });
+  }
+
+  removeSubset(
+    subsets: {
+      titleName: string;
+      subset: { subsetName: string; subsetValue: string; }[];
+    },
+    subset: { subsetName: string, subsetValue: string }
+  ) {
+    subsets.subset = subsets.subset.filter(s =>
+      s.subsetName !== subset.subsetName || s.subsetValue !== subset.subsetValue
+    );
+  }
+
+  removeGarranty(g: string) {
+    this.productToActions.garranty = this.productToActions.garranty.filter(x => x != g);
+  }
 
   showScores(n: number) {
     let scores = [];
@@ -32,12 +69,27 @@ export class ProductListComponent implements OnInit {
     this.isDeleteModal = true;
   }
 
+  productEdit(p: Product) {
+    this.productToActions = p;
+    this.isEditModal = true;
+  }
+
   productDeleteSubmited() {
     let result = this.productService.deleteProduct(this.productToActions);
     this.isDeleteModalLoading = true;
     result.subscribe(r => {
       this.isDeleteModalLoading = false;
       this.isDeleteModal = false;
+      this.refresh();
+    });
+  }
+
+  productEditSubmited() {
+    let result = this.productService.editProduct(this.productToActions);
+    this.isEditModalLoading = true;
+    result.subscribe(r => {
+      this.isEditModalLoading = false;
+      this.isEditModal = false;
       this.refresh();
     });
   }
