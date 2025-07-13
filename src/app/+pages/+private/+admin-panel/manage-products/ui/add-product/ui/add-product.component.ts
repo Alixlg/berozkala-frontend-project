@@ -19,9 +19,11 @@ export class AddProductComponent {
         { subsetName: '', subsetValue: '' }
       ]
     }
-  ], 1, '');
+  ], 1, '', '', '');
+  isSuccessModal: boolean = false;
+  isLoadnig: boolean = true;
 
-  addSpecifications() {
+  addAttributes() {
     this.productModel.attributes.push(
       {
         titleName: '',
@@ -37,6 +39,12 @@ export class AddProductComponent {
   }
 
   addProduct() {
-    console.log(this.productModel);
+    let result = this.products.addProduct(this.productModel);
+    this.isSuccessModal = true;
+    this.isLoadnig = true;
+
+    result.subscribe(r => {
+      this.isLoadnig = false;
+    });
   }
 }

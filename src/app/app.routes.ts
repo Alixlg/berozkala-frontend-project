@@ -12,13 +12,12 @@ import { AdminPanelNavigationsComponent } from './+navigations/admin-panel-navig
 import { UserPanelNavigationsComponent } from './+navigations/user-panel-navigations/ui/user-panel-navigations.component';
 import { AdminDashboardComponent } from './+pages/+private/+admin-panel/admin-dashboard/ui/admin-dashboard.component';
 import { AddProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/add-product/ui/add-product.component';
-import { RemoveProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/remove-product/ui/remove-product.component';
-import { EditProductComponent } from './+pages/+private/+admin-panel/manage-products/ui/edit-product/ui/edit-product.component';
 import { ForgetPasswordComponent } from './+pages/+public/login/ui/forget-password/ui/forget-password.component';
 import { WithVerifyCodeComponent } from './+pages/+public/login/ui/with-verify-code/ui/with-verify-code.component';
 import { WithPasswordComponent } from './+pages/+public/login/ui/with-password/ui/with-password.component';
 import { ProductComponent } from './+pages/+public/products/ui/product/ui/product.component';
 import { NotFoundPageComponent } from './+components/not-found-page/not-found-page.component';
+import { ProductListComponent } from './+pages/+private/+admin-panel/manage-products/ui/product-list/ui/product-list.component';
 
 export const routes: Routes = [
   {
@@ -26,7 +25,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       {
         path: 'products', component: ProductsComponent, children: [
-          { path: 'computer/:id', component: ProductComponent },
+          { path: ':category/:id', component: ProductComponent },
           { path: '404', component: NotFoundPageComponent },
           { path: '', redirectTo: 'products', pathMatch: 'prefix' }
         ]
@@ -42,8 +41,7 @@ export const routes: Routes = [
     path: 'admin-panel', component: AdminPanelNavigationsComponent, children: [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'add-product', component: AddProductComponent },
-      { path: 'remove-product', component: RemoveProductComponent },
-      { path: 'edit-product', component: EditProductComponent },
+      { path: 'product-list', component: ProductListComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' }
     ]
   },

@@ -7,9 +7,9 @@ import { delay, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private product: Product[] = [
+  private products: Product[] = [
     new Product(
-      true,
+      false,
       'computer',
       'ریزر',
       'کیبورد گیمینگ',
@@ -343,22 +343,37 @@ export class ProductService {
   ];
 
   private productsPreview: ProductPreview[] = [
-    new ProductPreview(this.product[0]),
-    new ProductPreview(this.product[1]),
-    new ProductPreview(this.product[2]),
-    new ProductPreview(this.product[3]),
-    new ProductPreview(this.product[4]),
-    new ProductPreview(this.product[5]),
-    new ProductPreview(this.product[6]),
-    new ProductPreview(this.product[7])
+    new ProductPreview(this.products[0]),
+    new ProductPreview(this.products[1]),
+    new ProductPreview(this.products[2]),
+    new ProductPreview(this.products[3]),
+    new ProductPreview(this.products[4]),
+    new ProductPreview(this.products[5]),
+    new ProductPreview(this.products[6]),
+    new ProductPreview(this.products[7])
   ]
 
   getProductsPreview() {
     return this.productsPreview;
   }
 
+  getProducts() {
+    return of(this.products).pipe(delay(1000));
+  }
+
   getProduct(id: string) {
-    let result = this.product.find(r => r.id == Number(id));
-    return of(result).pipe(delay(2));
+    let result = this.products.find(r => r.id == Number(id));
+    return of(result).pipe(delay(1000));
+  }
+
+  addProduct(product: Product) {
+    this.products.push(product);
+    this.productsPreview.push(new ProductPreview(product));
+    return of("").pipe(delay(1000));
+  }
+
+  deleteProduct(product: Product) {
+    this.products = this.products.filter(p => p != product);
+    return of("").pipe(delay(1000));
   }
 }

@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { BasketService } from '../../../../+public/basket/service/basket.service';
 import { ProductService } from '../../../../+public/products/service/product.service';
 import { DecimalPipe } from '@angular/common';
-import { AlertService } from '../../../../../+services/alert.service';
-import { ProductPreview } from '../../../../+public/products/product-preview/models/productPreview';
+import { AlertService } from '../../../../../+components/alert-system/service/alert.service';
+import { ProductPreview } from '../../../../+public/products/ui/product-preview/models/productPreview.model';
 
 @Component({
   selector: 'app-manage-products',

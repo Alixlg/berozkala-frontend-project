@@ -1,5 +1,4 @@
-<section
-  class="flex flex-col items-center justify-center bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+<section class="flex flex-col items-center justify-center">
 
   <!-- Card -->
   <div
@@ -85,6 +84,7 @@
         <div class="sm:col-span-9">
           <div class="sm:flex">
             <input type="text" id="form-title" name="form-title" placeholder="Asus PRIME H310M-K Motherboard"
+              [(ngModel)]="productModel.title"
               class="peer py-2.5 shadow-2xs shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-3 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
           </div>
         </div>
@@ -100,6 +100,7 @@
         <div class="sm:col-span-9">
           <div class="sm:flex">
             <input type="text" id="form-brand" name="form-brand" placeholder="مادربرد ایسوس مدل PRIME H310M-K"
+              [(ngModel)]="productModel.brand"
               class="peer py-2.5 shadow-2xs shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-3 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
           </div>
         </div>
@@ -115,7 +116,7 @@
         <div class="sm:col-span-9">
           <div class="sm:flex">
             <input type="text" id="form-category" name="form-category"
-              placeholder="قطعات کامپیوتر , لپتاپ و جانبی , موبایل"
+              placeholder="قطعات کامپیوتر , لپتاپ و جانبی , موبایل" [(ngModel)]="productModel.category"
               class="peer py-2.5 shadow-2xs shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-3 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
           </div>
         </div>
@@ -361,8 +362,8 @@
 
               @for (subset of specifications.subset; track $index; let secondIdx = $index) {
               <div class="sm:flex mb-2.5">
-                <input id="form-subsetName-{{firstIdx}}-{{secondIdx}}" name="form-subsetName-{{firstIdx}}-{{secondIdx}}" type="text"
-                  [(ngModel)]="subset.subsetName" placeholder="نام ویژگی"
+                <input id="form-subsetName-{{firstIdx}}-{{secondIdx}}" name="form-subsetName-{{firstIdx}}-{{secondIdx}}"
+                  type="text" [(ngModel)]="subset.subsetName" placeholder="نام ویژگی"
                   class="dark:bg-neutral-800 w-full border-gray-300 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 bg-gray-100 sm:border-l sm:text-sm shadow-2xs shadow-gray-200 dark:shadow-neutral-600 text-neutral-700 py-1.5 sm:py-2 px-3 block sm:w-1/3 -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg relative focus:z-10 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700"
                   [maxLength]="45">
                 <input type="text" name="form-subsetValue-{{firstIdx}}-{{secondIdx}}" [(ngModel)]="subset.subsetValue"
@@ -395,7 +396,7 @@
         }
 
         <div class="sm:col-span-12">
-          <button (click)="addSpecifications()"
+          <button (click)="addAttributes()"
             class="inline-flex items-center gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500">
             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -459,32 +460,16 @@
         </div>
         <!-- End Col -->
 
-        <div class="sm:col-span-3">
-          <label for="af-submit-application-desired-salary"
-            class="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500">
-            Desired salary
-          </label>
+        <div class="sm:col-span-12">
+          <div class="w-full">
+            <label for="textarea-description" class="sr-only">Description</label>
+            <textarea id="textarea-description" name="product-description" [(ngModel)]="productModel.description"
+              class="py-2 px-3 sm:py-3 sm:px-4 block w-full bg-gray-100 border-gray-500 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              rows="10" placeholder="بنویسید . . . "></textarea>
+          </div>
         </div>
         <!-- End Col -->
 
-        <div class="sm:col-span-9">
-          <input id="af-submit-application-desired-salary" type="text"
-            class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-        </div>
-        <!-- End Col -->
-
-        <div class="sm:col-span-3">
-          <label for="af-submit-application-available-start-date"
-            class="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500">
-            Available start date
-          </label>
-        </div>
-        <!-- End Col -->
-
-        <div class="sm:col-span-9">
-          <input id="af-submit-application-available-start-date" type="text"
-            class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-        </div>
         <!-- End Col -->
       </div>
       <!-- End Section -->
@@ -499,31 +484,13 @@
         </div>
         <!-- End Col -->
 
-        <div class="sm:col-span-3">
-          <label for="af-submit-application-desired-salary"
-            class="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500">
-            Desired salary
-          </label>
-        </div>
-        <!-- End Col -->
-
-        <div class="sm:col-span-9">
-          <input id="af-submit-application-desired-salary" type="text"
-            class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-        </div>
-        <!-- End Col -->
-
-        <div class="sm:col-span-3">
-          <label for="af-submit-application-available-start-date"
-            class="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500">
-            Available start date
-          </label>
-        </div>
-        <!-- End Col -->
-
-        <div class="sm:col-span-9">
-          <input id="af-submit-application-available-start-date" type="text"
-            class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+        <div class="sm:col-span-12">
+          <div class="w-full">
+            <label for="textarea-review" class="sr-only">Review</label>
+            <textarea id="textarea-review" name="product-review" [(ngModel)]="productModel.review"
+              class="py-2 px-3 sm:py-3 sm:px-4 block w-full bg-gray-100 border-gray-500 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              rows="8" placeholder="بنویسید . . . "></textarea>
+          </div>
         </div>
         <!-- End Col -->
       </div>
@@ -555,6 +522,63 @@
       </button>
     </form>
   </div>
+
+  @if (isSuccessModal) {
+  <div
+    class="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 size-full fixed top-0 start-0 z-80 transition-all overflow-y-auto pointer-events-auto">
+    <div class="bg-gray-800/40 dark:bg-black/50 h-full items-center flex justify-center">
+      <div class="sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+        <div
+          class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+          <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+            <h3 class="font-bold text-gray-800 dark:text-white">
+              @if (isLoadnig) {
+              <div
+                class="animate-spin inline-block size-8 border-3 border-current border-t-transparent text-black rounded-full dark:text-white"
+                role="status" aria-label="loading">
+                <span class="sr-only">لطفا منتظر بمانید...</span>
+              </div>
+              } @else {
+              <svg viewBox="0 -0.5 25 25" fill="none" class="size-10 dark:fill-gray-400 fill-gray-900"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5.03033 11.4697C4.73744 11.1768 4.26256 11.1768 3.96967 11.4697C3.67678 11.7626 3.67678 12.2374 3.96967 12.5303L5.03033 11.4697ZM8.5 16L7.96967 16.5303C8.26256 16.8232 8.73744 16.8232 9.03033 16.5303L8.5 16ZM17.0303 8.53033C17.3232 8.23744 17.3232 7.76256 17.0303 7.46967C16.7374 7.17678 16.2626 7.17678 15.9697 7.46967L17.0303 8.53033ZM9.03033 11.4697C8.73744 11.1768 8.26256 11.1768 7.96967 11.4697C7.67678 11.7626 7.67678 12.2374 7.96967 12.5303L9.03033 11.4697ZM12.5 16L11.9697 16.5303C12.2626 16.8232 12.7374 16.8232 13.0303 16.5303L12.5 16ZM21.0303 8.53033C21.3232 8.23744 21.3232 7.76256 21.0303 7.46967C20.7374 7.17678 20.2626 7.17678 19.9697 7.46967L21.0303 8.53033ZM3.96967 12.5303L7.96967 16.5303L9.03033 15.4697L5.03033 11.4697L3.96967 12.5303ZM9.03033 16.5303L17.0303 8.53033L15.9697 7.46967L7.96967 15.4697L9.03033 16.5303ZM7.96967 12.5303L11.9697 16.5303L13.0303 15.4697L9.03033 11.4697L7.96967 12.5303ZM13.0303 16.5303L21.0303 8.53033L19.9697 7.46967L11.9697 15.4697L13.0303 16.5303Z" />
+              </svg>
+              }
+            </h3>
+            <button type="button" (click)="isSuccessModal = false"
+              class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600">
+              <span class="sr-only">بستن</span>
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="p-4 overflow-y-auto">
+            <p class="mt-1 text-gray-800 dark:text-neutral-400">
+              @if (isLoadnig) {
+              در حال بارگذاری . . .
+              } @else {
+              محصول {{productModel.brand}} با موفقیت اضافه شد
+              }
+            </p>
+          </div>
+          <form (ngSubmit)="isSuccessModal = false"
+            class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+            @if(!isLoadnig){
+            <button
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
+              برگشت
+            </button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
   <!-- End Card -->
 
 </section>

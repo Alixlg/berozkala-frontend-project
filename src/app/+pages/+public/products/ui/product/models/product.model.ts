@@ -8,10 +8,13 @@ export interface IProduct {
   discountPercent: string;
   previewImageUrl: string;
   imagesUrl: string[];
-  garranty: string[];//
+  garranty: string[];
+  description: string;
+  review: string;
   count: number;
   maxCount: number;
   scoreRank: number;
+  addDate: string;
   attributes: {
     titleName: string,
     subset: { subsetName: string, subsetValue: string }[]
@@ -30,12 +33,15 @@ export class Product implements IProduct {
   previewImageUrl: string;
   imagesUrl: string[];
   garranty: string[];
+  description: string;
+  review: string;
   count: number = 1;
   maxCount: number;
   scoreRank: number;
+  addDate: string = "";
   attributes: { titleName: string; subset: { subsetName: string; subsetValue: string; }[]; }[];
 
-  constructor (
+  constructor(
     isAvailable: boolean,
     category: string,
     brand: string,
@@ -45,12 +51,14 @@ export class Product implements IProduct {
     imagesUrl: string[],
     garranty: string[],
     maxCount: number,
-    specifications: {
+    attributes: {
       titleName: string;
       subset: { subsetName: string; subsetValue: string; }[];
     }[],
     scoreRank: number = 1,
-    discountPercent: string = '0') {
+    discountPercent: string = '0',
+    description: string = "",
+    review: string = "") {
 
     this.id = Product._id++;
     this.isAvailable = isAvailable;
@@ -61,8 +69,10 @@ export class Product implements IProduct {
     this.previewImageUrl = previewImageUrl;
     this.imagesUrl = imagesUrl;
     this.garranty = garranty;
+    this.description = description;
+    this.review = review;
     this.maxCount = maxCount;
-    this.attributes = specifications;
+    this.attributes = attributes;
     this.scoreRank = scoreRank;
     this.discountPercent = discountPercent;
   }
