@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ProductService } from '../../../../../../+public/products/service/product.service';
-import { Product } from '../../../../../../+public/products/ui/product/models/product.model';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ProductService } from '../../../../+public/products/service/product.service';
+import { Product } from '../../../../+public/products/ui/product/models/product.model';
 
 @Component({
   selector: 'app-product-list',
