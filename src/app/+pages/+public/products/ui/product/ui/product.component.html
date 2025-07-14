@@ -1,5 +1,4 @@
 @if (!isLoading) {
-
 <section
   class="flex justify-center h-10 items-center m-5 bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
 
@@ -32,63 +31,388 @@
 
 </section>
 
-<section
-  class="h-full flex flex-col m-5 bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+<section class="p-5 pt-0">
+  <div
+    class="h-full w-full lg:inline-flex bg-white border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
 
-  <!-- Slider -->
-  <div data-hs-carousel='{
+    <!-- Slider -->
+    <div data-hs-carousel='{
       "loadingClasses": "opacity-0",
       "dotsItemClasses": "hs-carousel-active:bg-green-700 hs-carousel-active:border-green-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-green-500 dark:hs-carousel-active:border-green-500"
     }'
-    class="relative w-full max-w-[480px] sm:max-w-[500px] lg:w-[400px] lg:h-[400px] xl:w-[480px] xl:h-[480px] lg:mx-0 mx-auto aspect-square lg:aspect-auto">
+      class="relative w-full max-w-[480px] sm:max-w-[500px] lg:w-[400px] lg:h-[400px] xl:w-[480px] xl:h-[480px] lg:mx-0 mx-auto aspect-square lg:aspect-auto">
 
-    <div class="hs-carousel relative overflow-hidden w-full h-full bg-gray-100 dark:bg-neutral-800 rounded-lg">
-      <div dir="ltr"
-        class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0 w-full h-full">
+      <div class="hs-carousel relative overflow-hidden w-full h-full bg-gray-100 dark:bg-neutral-800 rounded-lg">
+        <div dir="ltr"
+          class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0 w-full h-full">
 
-        <div class="hs-carousel-slide flex items-center justify-center w-full h-full">
-          <div class="flex justify-center items-center w-full h-full">
-            <img class="w-full h-full" [src]="product.previewImageUrl" alt="previewImage">
+          <div class="hs-carousel-slide flex items-center justify-center w-full h-full">
+            <div class="flex justify-center items-center w-full h-full">
+              <img class="w-full h-full" [src]="product.previewImageUrl" alt="previewImage">
+            </div>
+          </div>
+
+          @for (imageUrl of product.imagesUrl; track $index) {
+          <div class="hs-carousel-slide flex items-center justify-center w-full h-full">
+            <div class="flex justify-center items-center w-full h-full">
+              <img class="w-full h-full" [src]="imageUrl" alt="product images">
+            </div>
+          </div>
+          }
+
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <button type="button"
+        class="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default absolute top-1/2 start-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
+        <svg class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+        <span class="sr-only">بعدی</span>
+      </button>
+
+      <button type="button"
+        class="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default absolute top-1/2 end-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
+        <svg class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        <span class="sr-only">قبلی</span>
+      </button>
+
+      <div dir="ltr" class="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 gap-x-2"></div>
+
+    </div>
+    <!-- End Slider -->
+
+    <section
+      class="lg:h-69 mt-5 lg:mr-5 bg-gray-100 border border-gray-200 shadow-2xs rounded-xl p-4 md:p-5 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+      <ul class="relative">
+        <li class="me-1 inline-flex items-center text-lg text-gray-800 dark:text-neutral-200">
+          {{product.title}} {{product.brand}}
+        </li>
+
+        <div class="flex items-center lg:relative mt-1 mb-1 absolute top-0 left-0">
+
+          @for (item of showScores(product.scoreRank); track $index) {
+          <svg class="shrink-0 size-5 text-yellow-400 dark:text-yellow-600" xmlns="http://www.w3.org/2000/svg"
+            width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path
+              d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+            </path>
+          </svg>
+          }
+
+        </div>
+      </ul>
+
+      <dl class="flex flex-row sm:flex-row gap-1">
+        <dt class="min-w-40">
+          <span class="block text-sm text-gray-500 dark:text-neutral-500">دسته بندی :</span>
+        </dt>
+        <dd>
+          <ul>
+            <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
+              {{product.category}}
+            </li>
+          </ul>
+        </dd>
+      </dl>
+
+      <dl class="flex flex-col sm:flex-row gap-1">
+        <dd>
+          <ul>
+            <li class="me-1 inline-flex items-center text-lg text-blue-800 dark:text-blue-200">
+              {{product.price | number}} تومان
+            </li>
+          </ul>
+        </dd>
+      </dl>
+
+      <dl class="flex flex-row mt-2 items-center sm:flex-row gap-1">
+        <dt class="min-w-20">
+          <span class="block text-sm text-gray-500 dark:text-neutral-500">گارانتی :</span>
+        </dt>
+        <dd>
+          <ul>
+            <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
+              <select data-hs-select='{
+                "placeholder": "گارانتی را انتخاب کنید",
+                "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-green-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
+                "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto dark:bg-neutral-900 dark:border-neutral-700",
+                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-green-600 dark:text-green-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
+                  }'>
+                <option value=""></option>
+
+                @for (g of product.garranty; track $index) {
+                <option>{{g}}</option>
+                }
+
+              </select>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+
+      <div class="flex p-5 flex-row lg:justify-center items-center">
+
+        <div dir="ltr"
+          class="py-2 ml-3 px-3 bg-gray-200 shadow-2xs shadow-gray-300 dark:shadow-neutral-600 rounded-lg dark:bg-neutral-700 w-30"
+          data-hs-input-number="">
+          <div class="w-full flex justify-between items-center gap-x-5">
+            <div class="grow">
+              <input disabled
+                class="w-full text-center p-0 bg-transparent border-0 text-gray-800 focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white"
+                type="number" [value]="product.count">
+            </div>
+            <div class="flex justify-end items-center gap-x-1.5">
+              <button type="button" (click)="product.count = product.count - 1" [disabled]="product.count == 1"
+                class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
+                <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                </svg>
+              </button>
+              <button type="button" (click)="product.count = product.count + 1"
+                [disabled]="product.count == product.maxCount"
+                class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
+                <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        @for (imageUrl of product.imagesUrl; track $index) {
-        <div class="hs-carousel-slide flex items-center justify-center w-full h-full">
-          <div class="flex justify-center items-center w-full h-full">
-            <img class="w-full h-full" [src]="imageUrl" alt="product images">
-          </div>
+        <button dir="ltr" type="button"
+          class="py-3 px-4 h-10 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
+          افزودن به سبد
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m5 11 4-7"></path>
+            <path d="m19 11-4-7"></path>
+            <path d="M2 11h20"></path>
+            <path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8c.9 0 1.8-.7 2-1.6l1.7-7.4"></path>
+            <path d="m9 11 1 9"></path>
+            <path d="M4.5 15.5h15"></path>
+            <path d="m15 11-1 9"></path>
+          </svg>
+        </button>
+
+      </div>
+
+    </section>
+
+    <aside class="m-5 lg:mr-10 lg:left-5 lg:absolute">
+      <!-- List -->
+      <div class="space-y-3">
+
+        <dl class="flex flex-col sm:flex-row gap-1">
+          <dt class="min-w-40">
+            <span class="block text-sm text-gray-500 dark:text-neutral-500">وضعیت محصول :</span>
+          </dt>
+          <dd>
+            <ul>
+              <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
+                @if (product.isAvailable) {
+                <span
+                  class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                  <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                  </svg>
+                  موجود
+                </span>
+                }@else {
+                <span
+                  class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full dark:bg-red-500/10 dark:text-red-500">
+                  <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                  </svg>
+                  ناموجود
+                </span>
+                }
+              </li>
+            </ul>
+          </dd>
+        </dl>
+
+        <dl class="flex flex-col sm:flex-row gap-1">
+          <dt class="min-w-40">
+            <span class="block text-sm text-gray-500 dark:text-neutral-500">تعداد قابل خرید :</span>
+          </dt>
+          <dd>
+            <ul>
+              <li class="me-1 inline-flex items-center text-sm text-green-800 dark:text-green-200">
+                {{product.maxCount}} عدد
+              </li>
+            </ul>
+          </dd>
+        </dl>
+
+        <dl class="flex flex-col sm:flex-row gap-1">
+          <dt class="min-w-40">
+            <span class="block text-sm text-gray-500 dark:text-neutral-500">ضمانت اصل بودن :</span>
+          </dt>
+          <dd>
+            <ul>
+              <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                  class="size-5 ml-1 text-green-800 dark:text-green-200">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                دارد
+              </li>
+            </ul>
+          </dd>
+        </dl>
+
+        <dl class="flex flex-col sm:flex-row gap-1">
+          <dt class="min-w-40">
+            <span class="block text-sm text-gray-500 dark:text-neutral-500">ارسال به تمام نقاط :</span>
+          </dt>
+          <dd>
+            <ul>
+              <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                  class="size-5 ml-1 text-green-800 dark:text-green-200">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                دارد
+              </li>
+            </ul>
+          </dd>
+        </dl>
+
+        <dl class="flex flex-col sm:flex-row gap-1">
+          <dt class="min-w-40">
+            <span class="block text-sm text-gray-500 dark:text-neutral-500">تحویل اکسپرس :</span>
+          </dt>
+          <dd>
+            <ul>
+              <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                  class="size-5 ml-1 text-green-800 dark:text-green-200">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                دارد
+              </li>
+            </ul>
+          </dd>
+        </dl>
+
+      </div>
+      <!-- End List -->
+    </aside>
+
+  </div>
+</section>
+
+<section class="p-5">
+
+  <div class="w-full bg-white rounded-lg shadow-2xs border border-gray-200 dark:border-neutral-700 dark:bg-neutral-900">
+    <div class="border-b border-gray-200 px-4 dark:border-neutral-700">
+      <nav class="flex gap-x-2" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
+        <button type="button"
+          class="hs-tab-active:font-semibold hs-tab-active:border-green-600 hs-tab-active:text-green-600 py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-green-600 focus:outline-hidden focus:text-green-600 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-green-500 dark:focus:text-green-500 active"
+          id="basic-tabs-item-1" aria-selected="true" data-hs-tab="#basic-tabs-1" aria-controls="basic-tabs-1"
+          role="tab">
+          مشخصات محصول
+        </button>
+        <button type="button"
+          class="hs-tab-active:font-semibold hs-tab-active:border-green-600 hs-tab-active:text-green-600 py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-green-600 focus:outline-hidden focus:text-green-600 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-green-500 dark:focus:text-green-500"
+          id="basic-tabs-item-2" aria-selected="false" data-hs-tab="#basic-tabs-2" aria-controls="basic-tabs-2"
+          role="tab">
+          توضیحات محصول
+        </button>
+        <button type="button"
+          class="hs-tab-active:font-semibold hs-tab-active:border-green-600 hs-tab-active:text-green-600 py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-green-600 focus:outline-hidden focus:text-green-600 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-green-500 dark:focus:text-green-500"
+          id="basic-tabs-item-3" aria-selected="false" data-hs-tab="#basic-tabs-3" aria-controls="basic-tabs-3"
+          role="tab">
+          نقد و بررسی
+        </button>
+      </nav>
+    </div>
+
+    <div class="mt-3 p-4">
+      <div id="basic-tabs-1" role="tabpanel" aria-labelledby="basic-tabs-item-1">
+
+        @for (attribute of product.attributes; track $index) {
+        <div class="space-y-3 m-5 p-5 rounded-2xl border-dashed dark:border-neutral-500 border-neutral-400 border-2">
+          <dl class="flex flex-col sm:flex-row gap-1">
+            <dd>
+              <ul>
+                <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
+                  <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                    class="size-5 text-blue-500 ml-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  {{attribute.titleName}}
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          @for (subset of attribute.subset; track $index) {
+          <dl class="flex flex-col sm:flex-row gap-1">
+            <dt class="ml-5">
+              <span class="inline-flex text-sm text-gray-500 dark:text-neutral-500">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                  class="size-5 ml-2 mr-5 text-green-700 dark:text-green-300">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                </svg>
+                {{subset.subsetName}} :
+              </span>
+            </dt>
+            <dd>
+              <ul>
+                <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
+                  {{subset.subsetValue}}
+                </li>
+              </ul>
+            </dd>
+          </dl>
+          }
+
         </div>
         }
 
       </div>
+      <div id="basic-tabs-2" class="hidden" role="tabpanel" aria-labelledby="basic-tabs-item-2">
+
+        <p class="text-gray-500 dark:text-neutral-400 break-words">
+          {{product.description}}
+        </p>
+
+      </div>
+      <div id="basic-tabs-3" class="hidden" role="tabpanel" aria-labelledby="basic-tabs-item-3">
+
+        <p class="text-gray-500 dark:text-neutral-400 break-words">
+          {{product.review}}
+        </p>
+
+      </div>
     </div>
-
-    <!-- Controls -->
-    <button type="button"
-      class="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default absolute top-1/2 start-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
-      <svg class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round" viewBox="0 0 24 24">
-        <path d="m9 18 6-6-6-6" />
-      </svg>
-      <span class="sr-only">بعدی</span>
-    </button>
-
-    <button type="button"
-      class="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default absolute top-1/2 end-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
-      <svg class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round" viewBox="0 0 24 24">
-        <path d="m15 18-6-6 6-6" />
-      </svg>
-      <span class="sr-only">قبلی</span>
-    </button>
-
-    <div dir="ltr" class="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 gap-x-2"></div>
   </div>
-  <!-- End Slider -->
 
 </section>
-}
-@else {
+} @else {
 <section class="flex justify-center items-center h-screen">
   <div
     class="animate-spin inline-block size-12 border-3 border-current border-t-transparent text-black rounded-full dark:text-white"

@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../../+public/products/service/product.service';
 import { Product } from '../../../../+public/products/ui/product/models/product.model';
+import { AlertService } from '../../../../../+components/alert-system/service/alert.service';
 
 @Component({
   selector: 'app-add-product',
@@ -12,6 +13,8 @@ import { Product } from '../../../../+public/products/ui/product/models/product.
 })
 export class AddProductComponent {
   products = inject(ProductService);
+  alertService = inject(AlertService);
+
   productModel: Product = new Product(true, '', '', '', '', '', [''], [''], 5, [
     {
       titleName: '',
@@ -42,8 +45,10 @@ export class AddProductComponent {
     let result = this.products.addProduct(this.productModel);
     this.isSuccessModal = true;
     this.isLoadnig = true;
+    this.alertService.newAlert("در حال اضافه کردن محصول", 2000, true);
 
     result.subscribe(r => {
+      this.alertService.newAlert(`محصول ${this.productModel.title} ${this.productModel.brand} با موفقیت اضافه شد`, 2000);
       this.isLoadnig = false;
     });
   }

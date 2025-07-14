@@ -363,7 +363,7 @@ export class ProductService {
 
   getProduct(id: string) {
     let result = this.products.find(r => r.id == Number(id));
-    return of(result).pipe(delay(1000));
+    return of(result);
   }
 
   addProduct(product: Product) {

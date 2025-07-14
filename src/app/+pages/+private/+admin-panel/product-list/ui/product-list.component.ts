@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { ProductService } from '../../../../+public/products/service/product.service';
 import { Product } from '../../../../+public/products/ui/product/models/product.model';
 import { FormsModule } from '@angular/forms';
+import { AlertService } from '../../../../../+components/alert-system/service/alert.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProductListComponent implements OnInit {
   productService = inject(ProductService);
+  alertService = inject(AlertService);
   products: Product[] = [];
   productToActions!: Product;
   isLoading: boolean = true;
@@ -20,6 +22,7 @@ export class ProductListComponent implements OnInit {
   isDeleteModalLoading: boolean = false;
   isEditModal: boolean = false;
   isEditModalLoading: boolean = false;
+
 
   addAttributes() {
     this.productToActions.attributes.push(
@@ -77,7 +80,10 @@ export class ProductListComponent implements OnInit {
   productDeleteSubmited() {
     let result = this.productService.deleteProduct(this.productToActions);
     this.isDeleteModalLoading = true;
+    this.alertService.newAlert("در حال حذف محصول", 2000, true);
+
     result.subscribe(r => {
+      this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت حذف شد`, 2000);
       this.isDeleteModalLoading = false;
       this.isDeleteModal = false;
       this.refresh();
@@ -87,7 +93,10 @@ export class ProductListComponent implements OnInit {
   productEditSubmited() {
     let result = this.productService.editProduct(this.productToActions);
     this.isEditModalLoading = true;
+    this.alertService.newAlert("در حال ویرایش محصول", 2000, true);
+
     result.subscribe(r => {
+      this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت ویرایش شد`, 2000);
       this.isEditModalLoading = false;
       this.isEditModal = false;
       this.refresh();
