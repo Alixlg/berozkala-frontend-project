@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Product } from '../models/product.model';
 import { ProductService } from '../../../service/product.service';
 import { DecimalPipe } from '@angular/common';
+import { Product } from '../../../../../../+shared/models/product.model';
 
 @Component({
   selector: 'app-product',
@@ -13,9 +13,9 @@ import { DecimalPipe } from '@angular/common';
 export class ProductComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
-  products = inject(ProductService);
-  product!: Product;
-  isLoading = true;
+  productService = inject(ProductService);
+  product!: any | Product;
+  isLoading = false;
 
   showScores(n: number) {
     let scores = [];
@@ -25,23 +25,25 @@ export class ProductComponent implements OnInit {
     return scores;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     let id = '';
     // let category = '';
     this.activatedRoute.paramMap.subscribe(params => {
       id = params.get('id')!;
       // category = params.get('category')!;
     });
-    let result = this.products.getProduct(id);
 
-    result.subscribe(r => {
-      if (r) {
-        this.product = r;
-        this.isLoading = false;
-      }
-      else {
-        this.router.navigateByUrl('/pb/products/404');
-      }
-    });
+    this.product = await this.productService.getProduct(id);
+    // let result = this.products.getProduct(id);
+
+    // result.subscribe(r => {
+    //   if (r) {
+    //     this.product = r;
+    //     this.isLoading = false;
+    //   }
+    //   else {
+    //     this.router.navigateByUrl('/pb/products/404');
+    //   }
+    // });
   }
 }

@@ -2,9 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../../../+public/products/service/product.service';
-import { Product } from '../../../../+public/products/ui/product/models/product.model';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../../../+components/alert-system/service/alert.service';
+import { Product } from '../../../../../+shared/models/product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -15,9 +15,9 @@ import { AlertService } from '../../../../../+components/alert-system/service/al
 export class ProductListComponent implements OnInit {
   productService = inject(ProductService);
   alertService = inject(AlertService);
-  products: Product[] = [];
+  products!: Product[] | any;
   productToActions!: Product;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   isDeleteModal: boolean = false;
   isDeleteModalLoading: boolean = false;
   isEditModal: boolean = false;
@@ -68,17 +68,17 @@ export class ProductListComponent implements OnInit {
   }
 
   productDelete(p: Product) {
-    this.productToActions = p;
+    this.productToActions = { ...p };
     this.isDeleteModal = true;
   }
 
   productEdit(p: Product) {
-    this.productToActions = p;
+    this.productToActions = { ...p };
     this.isEditModal = true;
   }
 
   productDeleteSubmited() {
-    let result = this.productService.deleteProduct(this.productToActions);
+    let result = this.productService.deleteProduct(this.productToActions.id);
     this.isDeleteModalLoading = true;
     this.alertService.newAlert("در حال حذف محصول", 2000, true);
 
@@ -86,7 +86,11 @@ export class ProductListComponent implements OnInit {
       this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت حذف شد`, 2000);
       this.isDeleteModalLoading = false;
       this.isDeleteModal = false;
-      this.refresh();
+
+      setTimeout(
+        () => this.refresh(),
+        1200
+      );
     });
   }
 
@@ -99,21 +103,27 @@ export class ProductListComponent implements OnInit {
       this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت ویرایش شد`, 2000);
       this.isEditModalLoading = false;
       this.isEditModal = false;
-      this.refresh();
+
+      setTimeout(
+        () => this.refresh(),
+        1200
+      );
     });
   }
 
-  refresh() {
-    let result = this.productService.getProducts();
-    this.isLoading = true;
+  async refresh() {
+    this.products = await this.productService.getProducts();
 
-    result.subscribe(p => {
-      this.products = p;
-      this.isLoading = false;
-    });
+    // let result = this.productService.getProducts();
+    // this.isLoading = true;
+
+    // result.subscribe(p => {
+    //   this.products = p;
+    //   this.isLoading = false;
+    // });
   }
 
-  ngOnInit() {
-    this.refresh();
+  async ngOnInit() {
+    await this.refresh();
   }
 }

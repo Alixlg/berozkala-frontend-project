@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { ProductPreview } from '../../products/ui/product-preview/models/productPreview.model';
+import { ProductPreviewFrontendModel } from '../../products/ui/product-preview/models/productPreview.model';
 import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
-  private basket: ProductPreview[] = [];
+  private basket: ProductPreviewFrontendModel[] = [];
 
   getBasketItems() {
     return this.basket;
   }
 
-  addItem(product: ProductPreview) {
+  addItem(product: ProductPreviewFrontendModel) {
     let result = false;
     this.basket.push(product);
     result = true; //agar add movafaghiat amiz bud (mesal chon in javab az backend miad !)
@@ -20,7 +20,7 @@ export class BasketService {
     return of(result);
   }
 
-  removeItem(product: ProductPreview) {
+  removeItem(product: ProductPreviewFrontendModel) {
     let result = false;
     this.basket = this.basket.filter(x => x.id != product.id);
     result = true; //agar add movafaghiat amiz bud (mesal chon in javab az backend miad !)

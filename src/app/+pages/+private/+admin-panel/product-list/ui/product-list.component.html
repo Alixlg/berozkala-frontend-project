@@ -1,5 +1,5 @@
 <!-- Table Section -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="max-w-[88rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
   <!-- Card -->
   <div class="flex flex-col">
     <div class="-m-1.5 overflow-x-auto">
@@ -176,8 +176,8 @@
                 </td>
                 <td class="size-px whitespace-nowrap align-top">
                   <a class="block p-6">
-                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{p.addDate == "" ? "بدون تاریخ" :
-                      p.addDate}}</span>
+                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{p.dateToAdd == "" ? "بدون تاریخ" :
+                      p.dateToAdd}}</span>
                   </a>
                 </td>
                 <td class="size-px whitespace-nowrap align-top">
@@ -500,12 +500,12 @@
                   </div>
                   <div class="sm:col-span-9">
                     <div class="sm:flex">
-                      <input type="text" id="form-price" placeholder="55,540,000" name="form-price"
-                        [(ngModel)]="productToActions.price" [maxlength]="15"
+                      <input type="number" id="form-price" placeholder="55,540,000" name="form-price"
+                        [(ngModel)]="productToActions.price"
                         class="peer py-2.5 shadow-2xs text-center shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-3 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                       <span
                         class="flex sm:flex-col text-sm dark:text-white sm:max-w-25 text-black flex-wrap text-center justify-center items-center sm:mr-7 sm:ml-7 sm:mt-0 sm:mb-0 m-5">
-                        <p class="text-green-500">{{productToActions.price == '' ? '00,000' : productToActions.price |
+                        <p class="text-green-500">{{productToActions.price == 0 ? '00,000' : productToActions.price |
                           number}}
                         </p>
                         <p class="sm:p-0 pr-2">تومان</p>
@@ -556,7 +556,7 @@
                       </label>
                     </div>
                     <div dir="ltr" class="flex flex-row-reverse justify-start sm:mt-0 mt-2.5 items-center">
-                      <input id="hs-ratings-readonly-1" type="radio" [(ngModel)]="productToActions.scoreRank" value="5"
+                      <input id="hs-ratings-readonly-1" type="radio" [(ngModel)]="productToActions.scoreRank" value=5
                         class="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
                         name="hs-ratings-readonly">
                       <label for="hs-ratings-readonly-1"
@@ -570,7 +570,7 @@
                       </label>
                       <input id="hs-ratings-readonly-2" type="radio"
                         class="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
-                        name="hs-ratings-readonly" [(ngModel)]="productToActions.scoreRank" value="4">
+                        name="hs-ratings-readonly" [(ngModel)]="productToActions.scoreRank" value=4>
                       <label for="hs-ratings-readonly-2"
                         class="peer-checked:text-yellow-400 text-gray-300 pointer-events-none dark:peer-checked:text-yellow-600 dark:text-neutral-600">
                         <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -582,7 +582,7 @@
                       </label>
                       <input id="hs-ratings-readonly-3" type="radio"
                         class="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
-                        name="hs-ratings-readonly" [(ngModel)]="productToActions.scoreRank" value="3">
+                        name="hs-ratings-readonly" [(ngModel)]="productToActions.scoreRank" value=3>
                       <label for="hs-ratings-readonly-3"
                         class="peer-checked:text-yellow-400 text-gray-300 pointer-events-none dark:peer-checked:text-yellow-600 dark:text-neutral-600">
                         <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -594,7 +594,7 @@
                       </label>
                       <input id="hs-ratings-readonly-4" type="radio"
                         class="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
-                        name="hs-ratings-readonly" [(ngModel)]="productToActions.scoreRank" value="2">
+                        name="hs-ratings-readonly" [(ngModel)]="productToActions.scoreRank" value=2>
                       <label for="hs-ratings-readonly-4"
                         class="peer-checked:text-yellow-400 text-gray-300 pointer-events-none dark:peer-checked:text-yellow-600 dark:text-neutral-600">
                         <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -606,7 +606,7 @@
                       </label>
                       <input id="hs-ratings-readonly-5" type="radio"
                         class="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
-                        name="hs-ratings-readonly" [(ngModel)]="productToActions.scoreRank" value="1">
+                        name="hs-ratings-readonly" [(ngModel)]="productToActions.scoreRank" value=1>
                       <label for="hs-ratings-readonly-5"
                         class="text-yellow-400 pointer-events-none dark:text-yellow-600">
                         <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -627,12 +627,12 @@
                     <div class="sm:col-span-3">
                       <label for="form-discountPercent"
                         class="inline-block sm:ml-5 text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500 sm:mt-0">
-                        تخفیف {{productToActions.discountPercent == '' ? '0' : productToActions.discountPercent}} درصد
+                        تخفیف {{productToActions.discountPercent}} درصد
                       </label>
                     </div>
                     <div class="sm:flex sm:w-15">
-                      <input type="text" id="form-discountPercent" placeholder="0%" name="form-discountPercent"
-                        [(ngModel)]="productToActions.discountPercent" maxlength="3"
+                      <input type="number" id="form-discountPercent" placeholder="0%" name="form-discountPercent"
+                        [(ngModel)]="productToActions.discountPercent"
                         class="peer sm:mt-0 py-1.5 shadow-2xs text-center shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-2 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-2.5">
                     </div>
 
@@ -649,8 +649,7 @@
                       </label>
                     </div>
                     <div class="sm:flex sm:w-28">
-                      <input type="text" id="form-maxCount" name="form-maxCount" [(ngModel)]="productToActions.maxCount"
-                        maxlength="10"
+                      <input type="number" id="form-maxCount" name="form-maxCount" [(ngModel)]="productToActions.maxCount"
                         class="peer sm:mt-0 py-1.5 shadow-2xs text-center shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-2 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-2.5">
                     </div>
 

@@ -4,7 +4,7 @@ import { ProductService } from '../service/product.service';
 import { FormsModule } from '@angular/forms';
 import { SearchProductComponent } from '../../../../+components/search-product/ui/search-product.component';
 import { ProductPreviewComponent } from './product-preview/ui/product-preview.component';
-import { ProductPreview } from './product-preview/models/productPreview.model';
+import { ProductPreviewFrontendModel } from './product-preview/models/productPreview.model';
 import { AlertService } from '../../../../+components/alert-system/service/alert.service';
 import { Router, RouterOutlet } from '@angular/router';
 
@@ -20,12 +20,12 @@ export class ProductsComponent {
   basketObj = inject(BasketService);
   router = inject(Router);
 
-  searchedProducts: ProductPreview[] = [];
+  searchedProducts: ProductPreviewFrontendModel[] = [];
   isSearchBoxEmpty = true;
 
   productsFiltered = '';
 
-  buy($event: ProductPreview) {
+  buy($event: ProductPreviewFrontendModel) {
     let basket = this.basketObj.getBasketItems();
 
     if (basket.every(p => p.id != $event.id)) {
@@ -56,7 +56,7 @@ export class ProductsComponent {
     }
   }
 
-  search($event: ProductPreview[]) {
+  search($event: ProductPreviewFrontendModel[]) {
     this.searchedProducts = $event;
 
     if (this.isSearchBoxEmpty) {

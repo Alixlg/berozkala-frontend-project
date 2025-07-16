@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { DiscountCode } from '../models/manageBasket.model';
 import { BasketService } from '../../../service/basket.service';
 import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
-import { ProductPreview } from '../../../../products/ui/product-preview/models/productPreview.model';
+import { ProductPreviewFrontendModel } from '../../../../products/ui/product-preview/models/productPreview.model';
 
 @Component({
   selector: 'app-manage-basket',
@@ -18,7 +18,7 @@ export class ManageBasketComponent {
   alertSystemObj = inject(AlertService);
   discountCode: DiscountCode = { code: '' };
 
-  remove($event: ProductPreview) {
+  remove($event: ProductPreviewFrontendModel) {
     if ($event.count == 1) {
       this.basketService.removeItem($event);
 
@@ -47,7 +47,7 @@ export class ManageBasketComponent {
     }
   }
 
-  upCount(product: ProductPreview) {
+  upCount(product: ProductPreviewFrontendModel) {
     this.alertSystemObj.newAlert(`محصول ${product.title} ${product.brand} با موفقیت به سبد اضافه شد`, 2000);
 
     product.count++;
@@ -57,7 +57,7 @@ export class ManageBasketComponent {
     }, 2000);
   }
 
-  downCount(product: ProductPreview) {
+  downCount(product: ProductPreviewFrontendModel) {
     this.alertSystemObj.newAlert(`محصول ${product.title} ${product.brand} با موفقیت از سبد کم شد`, 2000);
 
     product.count--;
@@ -67,7 +67,7 @@ export class ManageBasketComponent {
     }, 2000);
   }
 
-  removeProduct(product: ProductPreview) {
+  removeProduct(product: ProductPreviewFrontendModel) {
     product.count = 1;
     this.basketService.removeItem(product);
     this.alertSystemObj.newAlert(`محصول ${product.title} ${product.brand} با موفقیت از سبد حذف شد`, 2000);

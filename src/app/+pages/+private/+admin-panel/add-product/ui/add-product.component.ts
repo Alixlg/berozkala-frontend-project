@@ -2,8 +2,8 @@ import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../../+public/products/service/product.service';
-import { Product } from '../../../../+public/products/ui/product/models/product.model';
 import { AlertService } from '../../../../../+components/alert-system/service/alert.service';
+import { AddProductModel } from '../models/addProduct.model';
 
 @Component({
   selector: 'app-add-product',
@@ -15,14 +15,30 @@ export class AddProductComponent {
   products = inject(ProductService);
   alertService = inject(AlertService);
 
-  productModel: Product = new Product(true, '', '', '', '', '', [''], [''], 5, [
-    {
-      titleName: '',
-      subset: [
-        { subsetName: '', subsetValue: '' }
-      ]
-    }
-  ], 1, '', '', '');
+  productModel: AddProductModel = {
+    isAvailable: true,
+    category: "",
+    brand: "",
+    title: "",
+    price: 0,
+    discountPercent: 0,
+    previewImageUrl: "",
+    imagesUrl: [],
+    description: "",
+    review: "",
+    maxCount: 0,
+    scoreRank: 5,
+    garranty: [""],
+    attributes: [
+      {
+        titleName: '',
+        subset: [
+          { subsetName: '', subsetValue: '' }
+        ]
+      }
+    ]
+  };
+
   isSuccessModal: boolean = false;
   isLoadnig: boolean = true;
 

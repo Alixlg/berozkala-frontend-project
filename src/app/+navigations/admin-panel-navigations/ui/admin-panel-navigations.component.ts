@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../../../+components/footer/ui/footer.component';
 import { FormsModule } from '@angular/forms';
-import { TimeService } from '../../../+shared/time.service';
+import { TimeService } from '../../../+shared/services/time.service';
 
 @Component({
   selector: 'app-admin-component',

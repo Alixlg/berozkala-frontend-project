@@ -1,7 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ProductPreview } from '../models/productPreview.model';
+import { ProductPreviewFrontendModel } from '../models/productPreview.model';
 import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { AlertService } from '../../../../../../+components/alert-system/service
   styleUrl: './product-preview.component.css'
 })
 export class ProductPreviewComponent implements OnInit {
-  @Input() product!: ProductPreview;
-  @Output() onBuy = new EventEmitter<ProductPreview>;
+  @Input() product!: ProductPreviewFrontendModel;
+  @Output() onBuy = new EventEmitter<ProductPreviewFrontendModel>;
   @Input() isAddDisable = false;
 
   productAlertObj = inject(AlertService);

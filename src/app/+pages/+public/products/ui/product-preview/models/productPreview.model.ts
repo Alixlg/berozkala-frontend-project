@@ -1,6 +1,6 @@
-import { IProduct } from "../../product/models/product.model";
+import { Product } from "../../../../../../+shared/models/product.model";
 
-export interface Productpw {
+export interface ProductPreviewBackendModel {
   id: number;
   brand: string;
   title: string;
@@ -9,14 +9,10 @@ export interface Productpw {
   pic: string;
   count: number;
   maxCount: number;
-  category: string;
   scoreRank: number;
-  isAddDisable: boolean;
-  isRemoveDisable: boolean;
 }
 
-export class ProductPreview implements Productpw {
-
+export interface ProductPreviewFrontendModel {
   id: number;
   brand: string;
   title: string;
@@ -27,19 +23,6 @@ export class ProductPreview implements Productpw {
   maxCount: number;
   scoreRank: number;
   category: string;
-  isAddDisable = false;
-  isRemoveDisable = false;
-
-  constructor(p: IProduct) {
-    this.id = p.id;
-    this.brand = p.brand;
-    this.title = p.title;
-    this.price = p.price;
-    this.pic = p.previewImageUrl;
-    this.discountPercent = p.discountPercent;
-    this.scoreRank = p.scoreRank;
-    this.count = p.count;
-    this.maxCount = p.maxCount;
-    this.category = p.category;
-  }
+  isAddDisable :boolean;
+  isRemoveDisable :boolean;
 }

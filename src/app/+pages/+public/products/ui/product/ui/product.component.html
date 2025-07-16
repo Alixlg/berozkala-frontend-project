@@ -52,10 +52,10 @@
             </div>
           </div>
 
-          @for (imageUrl of product.imagesUrl; track $index) {
+          @for (url of product.imagesUrl; track $index) {
           <div class="hs-carousel-slide flex items-center justify-center w-full h-full">
             <div class="flex justify-center items-center w-full h-full">
-              <img class="w-full h-full" [src]="imageUrl" alt="product images">
+              <img class="w-full h-full" [src]="url" alt="product images">
             </div>
           </div>
           }
