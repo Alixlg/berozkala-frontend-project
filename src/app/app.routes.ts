@@ -60,5 +60,6 @@ export const routes: Routes = [
   },
   { path: 'register', component: RegisterComponent },
   { path: '404', component: NotFoundPageComponent },
+  { path: '', redirectTo: '/pb', pathMatch: 'full' },
   { path: '**', redirectTo: '404', pathMatch: 'full' }
 ];
