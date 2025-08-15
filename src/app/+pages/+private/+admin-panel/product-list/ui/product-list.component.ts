@@ -83,14 +83,14 @@ export class ProductListComponent implements OnInit {
     this.alertService.newAlert("در حال حذف محصول", 2000, true);
 
     result.subscribe(r => {
-      this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت حذف شد`, 2000);
-      this.isDeleteModalLoading = false;
-      this.isDeleteModal = false;
+      r.subscribe(res => {
 
-      setTimeout(
-        () => this.refresh(),
-        1200
-      );
+        this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت حذف شد`, 2000);
+        this.isDeleteModalLoading = false;
+        this.isDeleteModal = false;
+
+        this.refresh()
+      });
     });
   }
 
@@ -100,30 +100,29 @@ export class ProductListComponent implements OnInit {
     this.alertService.newAlert("در حال ویرایش محصول", 2000, true);
 
     result.subscribe(r => {
-      this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت ویرایش شد`, 2000);
-      this.isEditModalLoading = false;
-      this.isEditModal = false;
+      r.subscribe(res => {
+        this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت ویرایش شد`, 2000);
+        this.isEditModalLoading = false;
+        this.isEditModal = false;
 
-      setTimeout(
-        () => this.refresh(),
-        1200
-      );
+        this.refresh()
+      });
     });
   }
 
-  async refresh() {
-    this.products = await this.productService.getProducts();
+  refresh() {
+    let result = this.productService.getProducts();
+    this.isLoading = true;
 
-    // let result = this.productService.getProducts();
-    // this.isLoading = true;
-
-    // result.subscribe(p => {
-    //   this.products = p;
-    //   this.isLoading = false;
-    // });
+    result.subscribe(p => {
+      p.subscribe(res => {
+        this.products = res;
+        this.isLoading = false;
+      });
+    });
   }
 
-  async ngOnInit() {
-    await this.refresh();
+  ngOnInit() {
+    this.refresh();
   }
 }

@@ -76,10 +76,10 @@ export class ProductsComponent {
         return this.productsObj.getProductsPreview().sort((a, b) => Number(a.price) - Number(b.price));
 
       case 'new-products':
-        return this.productsObj.getProductsPreview().sort((a, b) => b.id - a.id);
+        // return this.productsObj.getProductsPreview().sort((a, b) => b.id - a.id);
 
       case 'old-products':
-        return this.productsObj.getProductsPreview().sort((a, b) => a.id - b.id);
+        // return this.productsObj.getProductsPreview().sort((a, b) => a.id - b.id);
 
       case 'search':
         return this.searchedProducts;

@@ -414,7 +414,7 @@
           </h2>
         </div>
 
-        @for (g of productModel.garranty; track $index) {
+        @for (g of productModel.garrantys; track $index) {
         @if ($first) {
         <div class="sm:col-span-3">
           <label for="form-garranty-0"
@@ -429,14 +429,14 @@
         <div class="sm:col-span-9">
           <div class="sm:col-span-9">
             <input id="form-garranty-{{$index}}" type="text" name="form-garranty-{{$index}}"
-              [(ngModel)]="productModel.garranty[$index]" placeholder="6 ماه ضمانت شرکتی"
+              [(ngModel)]="productModel.garrantys[$index]" placeholder="6 ماه ضمانت شرکتی"
               class="peer sm:mt-0 py-1.5 shadow-2xs shadow-gray-200 dark:shadow-neutral-600 border-transparent text-neutral-700 sm:py-2 px-4 block w-full bg-gray-100 border rounded-lg sm:text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 mt-1">
           </div>
         </div>
         }
 
         <div class="sm:col-start-4 sm:col-span-8">
-          <button (click)="productModel.garranty.push('')"
+          <button (click)="productModel.garrantys.push('')"
             class="inline-flex items-center gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500">
             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

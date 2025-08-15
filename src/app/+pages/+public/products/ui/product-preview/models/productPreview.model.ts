@@ -1,28 +1,21 @@
 import { Product } from "../../../../../../+shared/models/product.model";
 
 export interface ProductPreviewBackendModel {
-  id: number;
+  id?: string;
+  isAvailable: boolean;
   brand: string;
+  category: string[];
   title: string;
   price: string;
   discountPercent: string;
-  pic: string;
-  count: number;
+  previewImageUrl: string;
   maxCount: number;
   scoreRank: number;
 }
 
-export interface ProductPreviewFrontendModel {
-  id: number;
-  brand: string;
-  title: string;
-  price: string;
-  discountPercent: string;
-  pic: string;
+export interface ProductPreviewFrontendModel extends ProductPreviewBackendModel {
   count: number;
-  maxCount: number;
-  scoreRank: number;
-  category: string;
-  isAddDisable :boolean;
-  isRemoveDisable :boolean;
+  isAddDisable: boolean;
+  isRemoveDisable: boolean;
 }
+

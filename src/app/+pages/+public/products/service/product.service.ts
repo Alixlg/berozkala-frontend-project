@@ -347,11 +347,25 @@ export class ProductService {
   private productsPreview: ProductPreviewFrontendModel[] = []
 
   getProductsPreview() {
+    let products;
+    let p = this.getProductsPreviewBackendList();
+    p.subscribe(r => {
+      r.subscribe(res => {
+        products = res;
+        console.log(products)// moshek dare bayad type dade ham behesh bedim !
+      });
+    });
+    console.log()
     return this.productsPreview;
   }
 
-  async getProducts() {
-    return await this.httpService.get("http://localhost:5145/api/v1/products/list").toPromise();
+
+  getProductsPreviewBackendList() {
+    return of(this.httpService.get("http://localhost:5145/api/v1/productsprevirw/list"));
+  }
+
+  getProducts() {
+    return of(this.httpService.get("http://localhost:5145/api/v1/products/list"));
   }
 
   async getProduct(productId: string) {
@@ -371,20 +385,19 @@ export class ProductService {
       review: product.review,
       maxCount: product.maxCount,
       scoreRank: product.scoreRank,
-      imagesUrl: product.imagesUrl
+      imagesUrl: product.imagesUrls,
+      // garrantys: product.garrantys,
+      // attributes: product.attributes,
     }
 
-    this.httpService.post("http://localhost:5145/api/v1/products/create", p).toPromise();
-    return of("");
+    return of(this.httpService.post("http://localhost:5145/api/v1/products/create", p));
   }
 
   deleteProduct(productId: string) {
-    this.httpService.put("http://localhost:5145/api/v1/products/delete" + productId, {}).toPromise();
-    return of("");
+    return of(this.httpService.delete("http://localhost:5145/api/v1/products/delete/" + productId, {}));
   }
 
   editProduct(product: Product) {
-    this.httpService.put("http://localhost:5145/api/v1/products/edit" + product.id, product).toPromise();
-    return of("");
+    return of(this.httpService.put("http://localhost:5145/api/v1/products/edit/" + product.id, product));
   }
 }

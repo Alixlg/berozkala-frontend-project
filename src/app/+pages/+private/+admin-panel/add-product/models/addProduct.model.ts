@@ -1,6 +1,6 @@
 export interface AddProductModel {
   isAvailable: boolean;
-  category: string;
+  category: string[];
   brand: string;
   title: string;
   price: number;
@@ -10,8 +10,8 @@ export interface AddProductModel {
   review: string;
   maxCount: number;
   scoreRank: number;
-  imagesUrl: string[];
-  garranty: string[];
+  imagesUrls: string[];
+  garrantys: string[];
   attributes: {
     titleName: string,
     subset: { subsetName: string, subsetValue: string }[]

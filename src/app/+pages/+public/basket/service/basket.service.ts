@@ -29,6 +29,6 @@ export class BasketService {
   }
 
   sortById() {
-    return this.basket.sort((a, b) => b.id - a.id);
+    // return this.basket.sort((a, b) => b.id - a.id);
   }
 }

@@ -17,23 +17,23 @@ export class AddProductComponent {
 
   productModel: AddProductModel = {
     isAvailable: true,
-    category: "",
+    category: [""],
     brand: "",
     title: "",
     price: 0,
     discountPercent: 0,
     previewImageUrl: "",
-    imagesUrl: [],
+    imagesUrls: [""],
     description: "",
     review: "",
     maxCount: 0,
     scoreRank: 5,
-    garranty: [""],
+    garrantys: [""],
     attributes: [
       {
-        titleName: '',
+        titleName: "",
         subset: [
-          { subsetName: '', subsetValue: '' }
+          { subsetName: "", subsetValue: "" }
         ]
       }
     ]
@@ -64,8 +64,10 @@ export class AddProductComponent {
     this.alertService.newAlert("در حال اضافه کردن محصول", 2000, true);
 
     result.subscribe(r => {
-      this.alertService.newAlert(`محصول ${this.productModel.title} ${this.productModel.brand} با موفقیت اضافه شد`, 2000);
-      this.isLoadnig = false;
+      r.subscribe(res => {
+        this.alertService.newAlert(`محصول ${this.productModel.title} ${this.productModel.brand} با موفقیت اضافه شد`, 2000);
+        this.isLoadnig = false;
+      });
     });
   }
 }
