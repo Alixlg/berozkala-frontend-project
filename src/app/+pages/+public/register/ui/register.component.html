@@ -40,7 +40,7 @@
 <main
   class="mt-7 w-100 m-5 bg-white border border-gray-200 rounded-xl shadow-2xs dark:bg-neutral-900 dark:border-neutral-700">
 
-  @if (!isCodeSended) {
+  @if (isCodeSended) {
   <div class="p-4 sm:p-7">
     <div class="text-center">
       <header
@@ -94,7 +94,7 @@
                 <input
                   class="peer py-2.5 text-neutral-700 sm:py-3 px-4 ps-11 block w-full bg-gray-100 border rounded-lg sm:text-sm focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                   placeholder="نام کاربری خود را وارد کنید" type="text" id="username" name="username" [required]="true"
-                  [(ngModel)]="registerModel.username" [class.border-red-500]="!isUsernameValid"
+                  [(ngModel)]="singUp.userName" [class.border-red-500]="!isUsernameValid"
                   [class.border-transparent]="isUsernameValid">
                 <div
                   class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
@@ -145,7 +145,7 @@
                         <input type="password" id="hs-strong-password-with-indicator-and-hint-in-popover"
                           name="password"
                           class="peer py-2.5 text-neutral-700 sm:py-3 px-4 ps-11 block w-full bg-gray-100 border rounded-lg sm:text-sm focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                          placeholder="رمز عبور خود را وارد کنید" [required]="true" [(ngModel)]="registerModel.password"
+                          placeholder="رمز عبور خود را وارد کنید" [required]="true" [(ngModel)]="singUp.passWord"
                           [class.border-red-500]="!isPasswordValid" [class.border-transparent]="isPasswordValid">
                         <div
                           class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
@@ -188,7 +188,7 @@
                     </div>
 
                     <h4 class="mt-3 mb-1 text-sm font-semibold text-gray-800 dark:text-white">
-                      رمز عبور شما باید شامل موارد زیر باشد :
+                      رمز عبور شما حداقل باید شامل موارد زیر باشد :
                     </h4>
 
                     <ul class="space-y-1 text-sm text-gray-500 dark:text-neutral-500">
@@ -211,44 +211,6 @@
                         </span>
                         حداقل تعداد کاراکترها 6 عدد باشد.
                       </li>
-                      <li data-hs-strong-password-hints-rule-text="lowercase"
-                        class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
-                        <span class="hidden" data-check="">
-                          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
-                        </span>
-                        <span data-uncheck="">
-                          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 6 6 18"></path>
-                            <path d="m6 6 12 12"></path>
-                          </svg>
-                        </span>
-                        باید حاوی حروف کوچک باشد.
-                      </li>
-                      <li data-hs-strong-password-hints-rule-text="uppercase"
-                        class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
-                        <span class="hidden" data-check="">
-                          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
-                        </span>
-                        <span data-uncheck="">
-                          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 6 6 18"></path>
-                            <path d="m6 6 12 12"></path>
-                          </svg>
-                        </span>
-                        باید دارای حروف بزرگ باشد.
-                      </li>
                       <li data-hs-strong-password-hints-rule-text="numbers"
                         class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
                         <span class="hidden" data-check="">
@@ -267,25 +229,6 @@
                           </svg>
                         </span>
                         باید شامل اعداد باشد.
-                      </li>
-                      <li data-hs-strong-password-hints-rule-text="special-characters"
-                        class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
-                        <span class="hidden" data-check="">
-                          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
-                        </span>
-                        <span data-uncheck="">
-                          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 6 6 18"></path>
-                            <path d="m6 6 12 12"></path>
-                          </svg>
-                        </span>
-                        باید شامل کاراکترهای خاص باشد.
                       </li>
                     </ul>
                   </div>
@@ -307,7 +250,7 @@
                   <input
                     class="peer border py-2.5 text-neutral-700 sm:py-3 px-4 ps-11 block w-full bg-gray-100 rounded-lg sm:text-sm focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" [maxlength]="11"
                     placeholder="شماره موبایل خود را وارد کنید" type="text" id="phoneNumber" name="phoneNumber"
-                    [required]="true" [(ngModel)]="registerModel.phone" [class.border-red-500]="!isPhoneValid"
+                    [required]="true" [(ngModel)]="singUp.phoneNumber" [class.border-red-500]="!isPhoneValid"
                     [class.border-transparent]="isPhoneValid">
                   <div
                     class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
@@ -350,7 +293,7 @@
               <div class="flex">
                 <input id="remember-me" name="remember-me" type="checkbox" [required]="true"
                   class="shrink-0 mt-0.5 border-gray-200 rounded-sm text-green-600 focus:ring-green-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-green-500 dark:checked:border-green-500 dark:focus:ring-offset-gray-800"
-                  [(ngModel)]="registerModel.appRules">
+                  [(ngModel)]="singUp.appRules">
               </div>
               <div class="ms-3">
 
@@ -394,7 +337,7 @@
         ثبت نام
       </header>
       <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400">
-        کد به شماره {{registerModel.phone}} ارسال شده
+        کد به شماره {{singUp.phoneNumber}} ارسال شده
         <a class="text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500"
           routerLink="/register">
           ارسال دوباره کد

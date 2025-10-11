@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { ProductPreviewFrontendModel } from '../ui/product-preview/models/productPreview.model';
-import { delay, of } from 'rxjs';
 import { Product } from '../../../../+shared/models/product.model';
-import { HttpClient } from '@angular/common/http';
 import { AddProductModel } from '../../../+private/+admin-panel/add-product/models/addProduct.model';
+import { BackendService } from '../../../../+shared/services/backend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  httpService = inject(HttpClient);
+  backendService = inject(BackendService);
+
   //   new ProductClass(
   //     false,
   //     'computer',
@@ -347,29 +347,29 @@ export class ProductService {
   private productsPreview: ProductPreviewFrontendModel[] = []
 
   getProductsPreview() {
-    let products;
-    let p = this.getProductsPreviewBackendList();
-    p.subscribe(r => {
-      r.subscribe(res => {
-        products = res;
-        console.log(products)// moshek dare bayad type dade ham behesh bedim !
-      });
-    });
-    console.log()
+    // let products;
+    // let p = this.getProductsPreviewBackendList();
+    // p.subscribe(r => {
+    //   r.subscribe(res => {
+    //     products = res;
+    //     console.log(products)// moshek dare bayad type dade ham behesh bedim !
+    //   });
+    // });
+    // console.log()
     return this.productsPreview;
   }
 
 
   getProductsPreviewBackendList() {
-    return of(this.httpService.get("http://localhost:5145/api/v1/productsprevirw/list"));
+    return this.backendService.get("api/v1/productsprevirw/list");
   }
 
   getProducts() {
-    return of(this.httpService.get("http://localhost:5145/api/v1/products/list"));
+    return this.backendService.get("api/v1/products/list");
   }
 
-  async getProduct(productId: string) {
-    return await this.httpService.get("http://localhost:5145/api/v1/products/getproduct" + productId).toPromise();
+  getProduct(productId: string) {
+    return this.backendService.get("api/v1/products/getproduct" + productId);
   }
 
   addProduct(product: AddProductModel) {
@@ -390,14 +390,14 @@ export class ProductService {
       // attributes: product.attributes,
     }
 
-    return of(this.httpService.post("http://localhost:5145/api/v1/products/create", p));
+    return this.backendService.post("http://localhost:5145/api/v1/products/create", p);
   }
 
   deleteProduct(productId: string) {
-    return of(this.httpService.delete("http://localhost:5145/api/v1/products/delete/" + productId, {}));
+    return this.backendService.del("http://localhost:5145/api/v1/products/delete/" + productId, {});
   }
 
   editProduct(product: Product) {
-    return of(this.httpService.put("http://localhost:5145/api/v1/products/edit/" + product.id, product));
+    return this.backendService.put("http://localhost:5145/api/v1/products/edit/" + product.id, product);
   }
 }

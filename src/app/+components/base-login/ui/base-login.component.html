@@ -1,0 +1,91 @@
+<section class="flex items-center absolute top-8 left-5 sm:top-6 sm:left-10" dir="ltr">
+
+  <button routerLink="/pb" type="button"
+    class="mr-2 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+    برگشت
+  </button>
+
+  <button type="button"
+    class="hs-dark-mode-active:hidden block hs-dark-mode font-medium text-gray-800 rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+    data-hs-theme-click-value="dark">
+    <span class="group inline-flex shrink-0 justify-center items-center size-9">
+      <svg class="shrink-0 size-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+      </svg>
+    </span>
+  </button>
+
+  <button type="button"
+    class="hs-dark-mode-active:block hidden hs-dark-mode font-medium text-gray-800 rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-800"
+    data-hs-theme-click-value="light">
+    <span class="group inline-flex shrink-0 justify-center items-center size-9">
+      <svg class="shrink-0 size-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2"></path>
+        <path d="M12 20v2"></path>
+        <path d="m4.93 4.93 1.41 1.41"></path>
+        <path d="m17.66 17.66 1.41 1.41"></path>
+        <path d="M2 12h2"></path>
+        <path d="M20 12h2"></path>
+        <path d="m6.34 17.66-1.41 1.41"></path>
+        <path d="m19.07 4.93-1.41 1.41"></path>
+      </svg>
+    </span>
+  </button>
+
+</section>
+
+<main
+  class="mt-7 w-100 m-5 bg-white border border-gray-200 rounded-xl shadow-2xs dark:bg-neutral-900 dark:border-neutral-700">
+  <div class="p-4 sm:p-7">
+    <div class="text-center">
+      <header
+        class="block text-2xl font-bold text-gray-800 dark:text-white first-letter:text-green-600 dark:first-letter:text-green-500">
+        @if (!isAdmin){
+        ورود به حساب
+        } @else {
+        ورود به پنل مدیریت
+        }
+      </header>
+      @if (!isAdmin){
+      <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400">
+        حساب ندارید؟
+        <a class="text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500"
+          routerLink="/register">
+          ثبت نام کنید
+        </a>
+      </p>
+      <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400">
+        <a class="text-yellow-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-yellow-500"
+          routerLink="/admin-login">
+          ورود به پنل مدیریت
+        </a>
+      </p>
+      } @else {
+      <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400">
+        <a class="text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500"
+          routerLink="/login">
+          ورود به پنل یوزر
+        </a>
+      </p>
+      }
+    </div>
+
+    @switch (currentAction) {
+    @case (loginAction.loginWithUsername) {
+    <app-with-password (onChangeAction)="currentAction = $event" [routePanelAdrress]="routePanelAdrress"
+      [loginWithUsernameApi]="loginWithUsernameApi" [isAdmin]="isAdmin" />
+    }
+    @case (loginAction.loginWithCode) {
+    <app-with-verify-code (onChangeAction)="currentAction = $event" [routePanelAdrress]="routePanelAdrress"
+      [loginWithCodeApi]="loginWithCodeApi" [validateCodeApi]="validateCodeApi" />
+    }
+    @case(loginAction.forgetPassword) {
+    <app-forget-password />
+    }
+    }
+
+  </div>
+</main>

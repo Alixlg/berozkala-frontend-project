@@ -11,7 +11,7 @@
           @if (isCodeSended) {
           <button
             class="inline-flex gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500 cursor-pointer"
-            (click)="isCodeSended = false">ارسال دوباره کد تایید</button>
+            type="submit">ارسال دوباره کد تایید</button>
           }
         </div>
         <div class="relative">
@@ -20,7 +20,7 @@
             <input
               class="peer border py-2.5 text-neutral-700 sm:py-3 px-4 ps-11 block w-full bg-gray-100 rounded-lg sm:text-sm focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
               placeholder="شماره موبایل خود را وارد کنید" type="text" id="phoneNumber" name="phoneNumber"
-              [required]="true" [(ngModel)]="phoneNumber" [class.border-red-500]="isErrorStyle"
+              [required]="true" [(ngModel)]="loginModel.phoneNumber" [class.border-red-500]="isErrorStyle"
               [disabled]="isCodeSended" [class.border-transparent]="!isErrorStyle">
             <div
               class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
@@ -43,6 +43,11 @@
               }
             </div>
           </div>
+          @if(isCodeSended){
+          <button
+            class="inline-flex gap-x-1 text-sm text-green-600 mt-2 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500 cursor-pointer"
+            (click)="isCodeSended = false">تغییر شماره</button>
+          }
         </div>
         @if (isErrorStyle) {
         <p class="text-sm mb-0.5 text-red-600 mt-2" id="hs-validation-name-error-helper">لطفا یک شماره موبایل معتبر
@@ -53,7 +58,7 @@
       <!-- End Form Group -->
 
       @if (!isCodeSended) {
-      <button [disabled]="phoneNumber.length < 10" type="submit"
+      <button [disabled]="loginModel.phoneNumber.length < 10" type="submit"
         class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
         @if (!isBussy) {
         ورود
@@ -76,26 +81,37 @@
           <div class="flex justify-center gap-x-3" data-hs-pin-input='{
             "availableCharsRE": "^[0-9]+$"}'>
             <input type="tel"
-              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" [maxLength]="1"
-              autocomplete="one-time-code" placeholder="⚬" data-hs-pin-input-item="">
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              [maxLength]="1" [(ngModel)]="optCode[0]" name="optCode1" placeholder="⚬" data-hs-pin-input-item="">
             <input type="tel"
-              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" [maxLength]="1"
-              placeholder="⚬" data-hs-pin-input-item="">
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              [maxLength]="1" [(ngModel)]="optCode[1]" name="optCode2" placeholder="⚬" data-hs-pin-input-item="">
             <input type="tel"
-              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" [maxLength]="1"
-              placeholder="⚬" data-hs-pin-input-item="">
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              [maxLength]="1" [(ngModel)]="optCode[2]" name="optCode3" placeholder="⚬" data-hs-pin-input-item="">
             <input type="tel"
-              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" [maxLength]="1"
-              placeholder="⚬" data-hs-pin-input-item="">
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              [maxLength]="1" [(ngModel)]="optCode[3]" name="optCode4" placeholder="⚬" data-hs-pin-input-item="">
             <input type="tel"
-              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" [maxLength]="1"
-              placeholder="⚬" data-hs-pin-input-item="">
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              [maxLength]="1" [(ngModel)]="optCode[4]" name="optCode5" placeholder="⚬" data-hs-pin-input-item="">
+            <input type="tel"
+              class="block bg-gray-100 size-11 text-center border-gray-200 rounded-md sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              [maxLength]="1" [(ngModel)]="optCode[5]" name="optCode6" placeholder="⚬" data-hs-pin-input-item="">
           </div>
         </div>
 
-        <button [disabled]="" type="submit"
+        <button [disabled]="isBussy" type="submit"
           class="mt-4 w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
+          @if(!isBussy){
           تایید کد و ورود
+          }
+          @else {
+          <span
+            class="animate-spin inline-block size-4 border-3 border-current border-t-transparent text-neutral-50 rounded-full"
+            role="status" aria-label="loading">
+          </span>
+          }
         </button>
       </form>
       }
@@ -103,8 +119,8 @@
       <!-- End Form Group -->
 
       <div class="flex flex-wrap justify-between gap-2">
-        <a class="inline-flex gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500"
-          routerLink="/login/with-password">ورود با نام کاربری و ایمیل</a>
+        <a class="inline-flex cursor-pointer gap-x-1 text-sm text-green-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-green-500"
+          (click)="onChangeAction.emit(loginAction.loginWithUsername)">ورود با نام کاربری و رمز عبور</a>
       </div>
 
     </div>

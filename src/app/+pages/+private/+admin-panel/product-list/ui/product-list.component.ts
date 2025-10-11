@@ -82,15 +82,12 @@ export class ProductListComponent implements OnInit {
     this.isDeleteModalLoading = true;
     this.alertService.newAlert("در حال حذف محصول", 2000, true);
 
-    result.subscribe(r => {
-      r.subscribe(res => {
-
+    result.subscribe(res => {
         this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت حذف شد`, 2000);
         this.isDeleteModalLoading = false;
         this.isDeleteModal = false;
 
         this.refresh()
-      });
     });
   }
 
@@ -99,14 +96,12 @@ export class ProductListComponent implements OnInit {
     this.isEditModalLoading = true;
     this.alertService.newAlert("در حال ویرایش محصول", 2000, true);
 
-    result.subscribe(r => {
-      r.subscribe(res => {
-        this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت ویرایش شد`, 2000);
-        this.isEditModalLoading = false;
-        this.isEditModal = false;
+    result.subscribe(res => {
+      this.alertService.newAlert(`محصول ${this.productToActions.title} ${this.productToActions.brand} با موفقیت ویرایش شد`, 2000);
+      this.isEditModalLoading = false;
+      this.isEditModal = false;
 
-        this.refresh()
-      });
+      this.refresh()
     });
   }
 
@@ -114,11 +109,9 @@ export class ProductListComponent implements OnInit {
     let result = this.productService.getProducts();
     this.isLoading = true;
 
-    result.subscribe(p => {
-      p.subscribe(res => {
-        this.products = res;
-        this.isLoading = false;
-      });
+    result.subscribe(res => {
+      this.products = res;
+      this.isLoading = false;
     });
   }
 

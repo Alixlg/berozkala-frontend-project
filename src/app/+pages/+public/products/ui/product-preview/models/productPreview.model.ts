@@ -4,6 +4,7 @@ export interface ProductPreviewBackendModel {
   id?: string;
   isAvailable: boolean;
   brand: string;
+  pic: string;
   category: string[];
   title: string;
   price: string;

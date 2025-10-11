@@ -2,7 +2,8 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AlertService } from '../../../../+components/alert-system/service/alert.service';
-import { Register } from '../models/register';
+import { MemberSignUp, MemberSignUpModel } from '../models/register';
+import { BackendService } from '../../../../+shared/services/backend.service';
 
 @Component({
   selector: 'app-register',
@@ -11,54 +12,75 @@ import { Register } from '../models/register';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-
   router = inject(Router);
   alertObj = inject(AlertService);
+  backendService = inject(BackendService);
 
-  registerModel: Register = { username: '', password: '', phone: '', appRules: false };
+  singUp: MemberSignUp = { userName: '', passWord: '', phoneNumber: '', appRules: false };
 
   isUsernameValid = true;
   isPasswordValid = true;
   isPhoneValid = true;
 
   isBussy = false;
-  isCodeSended = false;
+  isCodeSended = true;
 
   register() {
+    this.isBussy = true;
 
-    if (this.registerModel.username == '') {
+    if (this.singUp.userName == '' || this.singUp.userName.length < 5) {
       this.isUsernameValid = false;
       this.isBussy = false;
+      return;
+    } else {
+      this.isUsernameValid = true;
     }
 
-    if (this.registerModel.password == '') {
+    if (this.singUp.passWord == '' || this.singUp.userName.length < 5) {
       this.isPasswordValid = false;
       this.isBussy = false;
+      return;
+    } else {
+      this.isPasswordValid = true;
     }
 
-    if (!Number(this.registerModel.phone) || !this.registerModel.phone.includes('09') || this.registerModel.phone.length <= 10) {
+    if (!Number(this.singUp.phoneNumber) || !this.singUp.phoneNumber.includes('09') || this.singUp.phoneNumber.length <= 10) {
       this.isPhoneValid = false;
       this.isBussy = false;
+      return;
+    } else {
+      this.isPhoneValid = true;
     }
 
-    if (this.registerModel.appRules == false) {
+    if (this.singUp.appRules == false) {
       this.alertObj.newAlert("لطفا تیک گزینه قوانین را بزنید", 2000, false, true);
       this.isBussy = false;
+      return;
     }
 
+    let body: MemberSignUpModel = {
+      userName: this.singUp.userName,
+      passWord: this.singUp.passWord,
+      phoneNumber: this.singUp.phoneNumber
+    }
 
-    if (Number(this.registerModel.phone) && this.registerModel.phone.includes('09') && this.registerModel.username != '' && this.registerModel.password != '' && this.registerModel.appRules == true) {
-      this.isBussy = true;
-      this.isUsernameValid = true;
-      this.isPasswordValid = true;
-      this.isPhoneValid = true;
+    let result = this.backendService.post<string, MemberSignUpModel>('api/v1/auth/member/singup', body);
 
-      setTimeout(() => {
-        this.alertObj.newAlert("اطلاعات شما صحیح است و کد برای شما ارسال شد", 2000);
-        this.isCodeSended = true;
+    result.subscribe({
+      next: res => {
+        if (res.isSuccess && (res.body != null || undefined)) {
+          localStorage.clear();
+          localStorage.setItem('token', res.body);
+
+          this.alertObj.newAlert("شما با موفقیت ثبت نام کردید ! در حال انتقال . . ", 2000, false, false, true);
+          this.router.navigateByUrl('/user-panel');
+        }
         this.isBussy = false;
-      }, 2500);
-    }
+      },
+      error: err => {
+        this.isBussy = false;
+      }
+    });
   }
 
   validateCode() {

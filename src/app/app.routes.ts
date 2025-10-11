@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { PublicNavigationsComponent } from './+navigations/public-navigations/ui/public-navigations.component';
 import { ProductsComponent } from './+pages/+public/products/ui/products.component';
 import { BasketComponent } from './+pages/+public/basket/ui/basket.component';
-import { LoginComponent } from './+pages/+public/login/ui/login.component';
 import { AboutComponent } from './+pages/+public/about/ui/about.component';
 import { SupportComponent } from './+pages/+public/support/ui/support.component';
 import { HomeComponent } from './+pages/+public/home/ui/home.component';
@@ -11,13 +10,12 @@ import { RegisterComponent } from './+pages/+public/register/ui/register.compone
 import { AdminPanelNavigationsComponent } from './+navigations/admin-panel-navigations/ui/admin-panel-navigations.component';
 import { UserPanelNavigationsComponent } from './+navigations/user-panel-navigations/ui/user-panel-navigations.component';
 import { AdminDashboardComponent } from './+pages/+private/+admin-panel/admin-dashboard/ui/admin-dashboard.component';
-import { ForgetPasswordComponent } from './+pages/+public/login/ui/forget-password/ui/forget-password.component';
-import { WithVerifyCodeComponent } from './+pages/+public/login/ui/with-verify-code/ui/with-verify-code.component';
-import { WithPasswordComponent } from './+pages/+public/login/ui/with-password/ui/with-password.component';
 import { ProductComponent } from './+pages/+public/products/ui/product/ui/product.component';
 import { NotFoundPageComponent } from './+components/not-found-page/not-found-page.component';
 import { AddProductComponent } from './+pages/+private/+admin-panel/add-product/ui/add-product.component';
 import { ProductListComponent } from './+pages/+private/+admin-panel/product-list/ui/product-list.component';
+import { LoginComponent } from './+pages/+public/login/ui/login.component';
+import { AdminLoginComponent } from './+pages/+private/admin-login/ui/admin-login.component';
 
 export const routes: Routes = [
   {
@@ -46,18 +44,10 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'user-panel', component: UserPanelNavigationsComponent, children: [
-
-    ]
+    path: 'user-panel', component: UserPanelNavigationsComponent, children: []
   },
-  {
-    path: 'login', component: LoginComponent, children: [
-      { path: 'with-password', component: WithPasswordComponent },
-      { path: 'with-verify-code', component: WithVerifyCodeComponent },
-      { path: 'forget-password', component: ForgetPasswordComponent },
-      { path: '', redirectTo: 'with-password', pathMatch: 'prefix' },
-    ]
-  },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'admin-login', component: AdminLoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: '404', component: NotFoundPageComponent },
   { path: '', redirectTo: '/pb', pathMatch: 'full' },

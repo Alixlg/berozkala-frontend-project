@@ -63,11 +63,9 @@ export class AddProductComponent {
     this.isLoadnig = true;
     this.alertService.newAlert("در حال اضافه کردن محصول", 2000, true);
 
-    result.subscribe(r => {
-      r.subscribe(res => {
-        this.alertService.newAlert(`محصول ${this.productModel.title} ${this.productModel.brand} با موفقیت اضافه شد`, 2000);
-        this.isLoadnig = false;
-      });
+    result.subscribe(res => {
+      this.alertService.newAlert(`محصول ${this.productModel.title} ${this.productModel.brand} با موفقیت اضافه شد`, 2000);
+      this.isLoadnig = false;
     });
   }
 }
