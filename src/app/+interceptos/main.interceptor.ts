@@ -8,6 +8,9 @@ export const mainInterceptor: HttpInterceptorFn = (req, next) => {
   let alertService = inject(AlertService);
 
   const token: string | null = sessionStorage.getItem('token') != null ? sessionStorage.getItem('token') : localStorage.getItem('token');
+  const skipApis = [
+    'http://localhost:5145/api/v1/auth/valid-token'
+  ];
 
   if (token != null) {
     currentReuest = req.clone({
@@ -19,7 +22,7 @@ export const mainInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(currentReuest).pipe(
     map((res: any) => {
-      if (res.body && res.body.isSuccess == false && res.url != 'http://localhost:5145/api/v1/auth/valid-token') {
+      if (res.body && res.body.isSuccess == false && !skipApis.includes(res.url)) {
         alertService.newAlert(res.body.message, 3000, false, true);
       }
 
@@ -47,7 +50,7 @@ export const mainInterceptor: HttpInterceptorFn = (req, next) => {
 
       console.error('Interceptor caught error:', err);
 
-      if (err.url != 'http://localhost:5145/api/v1/auth/valid-token') {
+      if (!skipApis.includes(err.url)) {
         alertService.newAlert(message, 3000, false, true);
       }
 

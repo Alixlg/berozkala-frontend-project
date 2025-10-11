@@ -16,6 +16,9 @@ import { AddProductComponent } from './+pages/+private/+admin-panel/add-product/
 import { ProductListComponent } from './+pages/+private/+admin-panel/product-list/ui/product-list.component';
 import { LoginComponent } from './+pages/+public/login/ui/login.component';
 import { AdminLoginComponent } from './+pages/+private/admin-login/ui/admin-login.component';
+import { isUserGuard } from './+guards/is-user.guard';
+import { authGuard } from './+guards/auth.guard';
+import { isAdminGuard } from './+guards/is-admin.guard';
 
 export const routes: Routes = [
   {
@@ -30,13 +33,13 @@ export const routes: Routes = [
       },
       { path: 'support', component: SupportComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'basket', component: BasketComponent },
+      { path: 'basket', component: BasketComponent, canActivate: [isUserGuard] },
       { path: 'videos', component: VideosComponent },
       { path: '', redirectTo: 'home', pathMatch: 'prefix' }
     ]
   },
   {
-    path: 'admin-panel', component: AdminPanelNavigationsComponent, children: [
+    path: 'admin-panel', component: AdminPanelNavigationsComponent, canActivate: [isAdminGuard], children: [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'add-product', component: AddProductComponent },
       { path: 'product-list', component: ProductListComponent },
@@ -44,11 +47,11 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'user-panel', component: UserPanelNavigationsComponent, children: []
+    path: 'user-panel', component: UserPanelNavigationsComponent, canActivate: [isUserGuard], children: []
   },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'admin-login', component: AdminLoginComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [authGuard], pathMatch: 'full' },
+  { path: 'admin-login', component: AdminLoginComponent, canActivate: [authGuard], pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent, canActivate: [authGuard] },
   { path: '404', component: NotFoundPageComponent },
   { path: '', redirectTo: '/pb', pathMatch: 'full' },
   { path: '**', redirectTo: '404', pathMatch: 'full' }

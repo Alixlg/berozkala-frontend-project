@@ -1,0 +1,14 @@
+@if(loadingService.getStatus()){
+<div class="fixed inset-0 z-55 flex items-center justify-center bg-black/40 backdrop-blur-sm" role="alert"
+  aria-busy="true" aria-live="assertive">
+  <div class="flex flex-col items-center gap-4 p-4">
+
+    <div class="w-14 h-14 rounded-full border-4 border-t-4 border-gray-200 border-t-gray-800 animate-spin"
+      aria-hidden="true"></div>
+
+    <div class="text-sm font-medium text-white">
+      لطفا صبر کنید...
+    </div>
+  </div>
+</div>
+}

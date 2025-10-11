@@ -5,6 +5,7 @@ import { BasketService } from '../../../+pages/+public/basket/service/basket.ser
 import { AuthCheckModel } from '../models/auth-check.model';
 import { AccountRole } from '../../../+shared/enums/account-role';
 import { BackendService } from '../../../+shared/services/backend.service';
+import { LoadingService } from '../../../+components/loading/service/loading.service';
 
 @Component({
   selector: 'app-public-navigations',
@@ -16,6 +17,7 @@ export class PublicNavigationsComponent implements OnInit {
   basketService = inject(BasketService);
   router = inject(Router);
   backendService = inject(BackendService);
+  loadingService = inject(LoadingService);
 
   singOutModal = false;
   isDropDown = false;
@@ -49,6 +51,7 @@ export class PublicNavigationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadingService.show();
     var result = this.backendService.get<AuthCheckModel>('api/v1/auth/valid-token');
     result.subscribe({
       next: res => {
@@ -56,6 +59,12 @@ export class PublicNavigationsComponent implements OnInit {
           this.authCheck.accountRole = res.body.accountRole;
           this.authCheck.isSingIn = res.body.isSingIn
         }
+        this.loadingService.hide();
+      },
+      error: err => {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        this.loadingService.hide();
       }
     });
   }
