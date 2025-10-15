@@ -25,5 +25,4 @@ export class BackendService {
   del<TResponse, THttpBody>(api: string, body?: THttpBody): Observable<RequestResultModel<TResponse>> {
     return this.httpService.delete<RequestResultModel<TResponse>>(`${environment.ServerAddress}${api}`, { body });
   }
-
 }

@@ -6,6 +6,7 @@ import { BackendService } from '../../../../../+shared/services/backend.service'
 import { LoginWithCodeModel, SubmitCodeModel } from '../../../models/login.model';
 import { LoginAction } from '../../../enums/login-action';
 import { RequestResultModel } from '../../../../../+shared/models/requestResult.model';
+import { AccountService } from '../../../../../+shared/services/account.service';
 
 @Component({
   selector: 'app-with-verify-code',
@@ -16,6 +17,7 @@ import { RequestResultModel } from '../../../../../+shared/models/requestResult.
 export class WithVerifyCodeComponent {
   alertObj = inject(AlertService);
   backendService = inject(BackendService);
+  accountService = inject(AccountService);
   router = inject(Router);
 
   isErrorStyle = false;
@@ -79,13 +81,22 @@ export class WithVerifyCodeComponent {
     result.subscribe({
       next: res => {
         if (res.isSuccess && (res.body != null || undefined)) {
-          localStorage.clear();
+          localStorage.removeItem('token');
           localStorage.setItem('token', res.body);
 
-          this.alertObj.newAlert("شما با موفقیت وارد شدید در حال انتقال . . ", 3000);
-          this.router.navigateByUrl(this.routePanelAdrress);
+          this.accountService.setAccount().subscribe({
+            next: res => {
+              if (res.isSuccess) {
+                this.alertObj.newAlert("شما با موفقیت وارد شدید در حال انتقال . . ", 3000);
+                this.router.navigateByUrl(this.routePanelAdrress);
+              } else {
+                localStorage.removeItem('token');
+                this.alertObj.newAlert("خطا در انجام پردازش لطفا دوباره امتحان کنید", 3000, false, true);
+              }
+              this.isBussy = false;
+            }, error: err => this.isBussy = false
+          });
         }
-        this.isBussy = false;
       },
       error: err => {
         this.isBussy = false;

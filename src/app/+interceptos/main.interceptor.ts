@@ -1,28 +1,42 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AlertService } from '../+components/alert-system/service/alert.service';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, finalize, map, tap, throwError } from 'rxjs';
+import { LoadingService } from '../+components/loading/service/loading.service';
+import { environment } from '../../environments/environment';
 
 export const mainInterceptor: HttpInterceptorFn = (req, next) => {
-  let currentReuest = req;
+  let currentRequest = req;
   let alertService = inject(AlertService);
+  let loadingService = inject(LoadingService);
 
   const token: string | null = sessionStorage.getItem('token') != null ? sessionStorage.getItem('token') : localStorage.getItem('token');
-  const skipApis = [
-    'http://localhost:5145/api/v1/auth/valid-token'
+  const skipAlertApis = [
+    `${environment.ServerAddress}api/v1/auth/valid-token`,
+    `${environment.ServerAddress}api/v1/auth/member/get-info`
+  ];
+
+  const loadingServiceApis = [
+    `${environment.ServerAddress}api/v1/auth/valid-token`,
+    `${environment.ServerAddress}api/v1/auth/member/get-info`
   ];
 
   if (token != null) {
-    currentReuest = req.clone({
+    currentRequest = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`
       }
     });
   }
 
-  return next(currentReuest).pipe(
+  return next(currentRequest).pipe(
+    tap(() => {
+      if (loadingServiceApis.includes(currentRequest.url)) {
+        loadingService.show();
+      }
+    }),
     map((res: any) => {
-      if (res.body && res.body.isSuccess == false && !skipApis.includes(res.url)) {
+      if (res.body && res.body.isSuccess == false && !skipAlertApis.includes(res.url)) {
         alertService.newAlert(res.body.message, 3000, false, true);
       }
 
@@ -41,7 +55,7 @@ export const mainInterceptor: HttpInterceptorFn = (req, next) => {
         } else if (err.error?.message) {
           message = err.error.message;
         } else {
-          message = `خطا (${err.status}): ${err.statusText}`;
+          message = `خطا(${err.status}): ${err.statusText}`;
         }
       }
       else {
@@ -50,11 +64,15 @@ export const mainInterceptor: HttpInterceptorFn = (req, next) => {
 
       console.error('Interceptor caught error:', err);
 
-      if (!skipApis.includes(err.url)) {
+      if (!skipAlertApis.includes(err.url)) {
         alertService.newAlert(message, 3000, false, true);
       }
 
       return throwError(() => err);
+    }), finalize(() => {
+      if (loadingServiceApis.includes(currentRequest.url)) {
+        loadingService.hide();
+      }
     })
   );
 };

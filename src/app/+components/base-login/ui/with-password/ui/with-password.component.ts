@@ -5,6 +5,7 @@ import { AlertService } from '../../../../alert-system/service/alert.service';
 import { LoginWithUsername, LoginWithUsernameModel } from '../../../models/login.model';
 import { BackendService } from '../../../../../+shared/services/backend.service';
 import { LoginAction } from '../../../enums/login-action';
+import { AccountService } from '../../../../../+shared/services/account.service';
 
 @Component({
   selector: 'app-with-password',
@@ -16,6 +17,7 @@ export class WithPasswordComponent {
   router = inject(Router);
   alertObj = inject(AlertService);
   backendService = inject(BackendService);
+  accountService = inject(AccountService);
 
   isPasswordWrong = false;
   isUserNameWrong = false;
@@ -48,16 +50,28 @@ export class WithPasswordComponent {
             this.isUserNameWrong = false;
 
             if (this.loginModel.keepMe) {
-              localStorage.clear();
+              localStorage.removeItem('token');
               localStorage.setItem("token", res.body);
             }
             else {
-              sessionStorage.clear();
+              sessionStorage.removeItem('token');
               sessionStorage.setItem("token", res.body);
             }
 
-            this.alertObj.newAlert("شما با موفقیت وارد شدید در حال انتقال . . ", 3000);
-            this.router.navigateByUrl(this.routePanelAdrress);
+            this.accountService.setAccount().subscribe({
+              next: res => {
+                if (res.isSuccess) {
+                  this.alertObj.newAlert("شما با موفقیت وارد شدید در حال انتقال . . ", 3000);
+                  this.router.navigateByUrl(this.routePanelAdrress);
+                } else {
+                  localStorage.removeItem('token');
+                  sessionStorage.removeItem('token');
+                  this.alertObj.newAlert("خطا در انجام پردازش لطفا دوباره امتحان کنید", 3000, false, true);
+                }
+                this.isBussy = false;
+              },
+              error: err => this.isBussy = false
+            });
           }
           else {
             if (res.message == "پسورد اشتباه است") {
@@ -67,8 +81,8 @@ export class WithPasswordComponent {
               this.isUserNameWrong = true;
               this.isPasswordWrong = true;
             }
+            this.isBussy = false;
           }
-          this.isBussy = false;
         },
         error: err => {
           this.isBussy = false;
