@@ -2,11 +2,11 @@ import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular
 import { BasketService } from '../service/basket.service';
 import { ManageBasketComponent } from "./manage-basket/ui/manage-basket.component";
 import { CheckoutComponent } from "./checkout/ui/checkout.component";
-import { PaymentComponent } from "./payment/ui/payment.component";
+import { PaymentsComponent } from "./payment/ui/payments.component";
 
 @Component({
   selector: 'app-basket',
-  imports: [ManageBasketComponent, CheckoutComponent, PaymentComponent],
+  imports: [ManageBasketComponent, CheckoutComponent, PaymentsComponent],
   templateUrl: './basket.component.html',
   styleUrl: './basket.component.css'
 })

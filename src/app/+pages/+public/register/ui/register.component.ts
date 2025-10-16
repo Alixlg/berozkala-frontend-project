@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AlertService } from '../../../../+components/alert-system/service/alert.service';
 import { MemberSignUp, MemberSignUpModel } from '../models/register';
 import { BackendService } from '../../../../+shared/services/backend.service';
+import { AccountService } from '../../../../+shared/services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,7 @@ export class RegisterComponent {
   router = inject(Router);
   alertObj = inject(AlertService);
   backendService = inject(BackendService);
+  accountService = inject(AccountService);
 
   singUp: MemberSignUp = { userName: '', passWord: '', phoneNumber: '', appRules: false };
 
@@ -69,11 +71,23 @@ export class RegisterComponent {
     result.subscribe({
       next: res => {
         if (res.isSuccess && (res.body != null || undefined)) {
-          localStorage.clear();
+          localStorage.removeItem('token');
           localStorage.setItem('token', res.body);
 
-          this.alertObj.newAlert("شما با موفقیت ثبت نام کردید ! در حال انتقال . . ", 2000, false, false, true);
-          this.router.navigateByUrl('/user-panel');
+          this.accountService.setAccount().subscribe({
+            next: res => {
+              if (res.isSuccess) {
+                this.alertObj.newAlert("شما با موفقیت ثبت نام کردید ! در حال انتقال . . ", 2000, false, false, true);
+                this.router.navigateByUrl('/user-panel');
+              } else {
+                localStorage.removeItem('token');
+                sessionStorage.removeItem('token');
+                this.alertObj.newAlert("خطا در انجام پردازش لطفا دوباره امتحان کنید", 3000, false, true);
+              }
+              this.isBussy = false;
+            },
+            error: err => this.isBussy = false
+          });
         }
         this.isBussy = false;
       },

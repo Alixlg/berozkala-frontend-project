@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { AccountProfileComponent } from "../../../../../+components/account-profile/ui/account-profile.component";
 
 @Component({
-  selector: 'app-admin-dashboard',
+  selector: 'app-user-dashboard',
   imports: [AccountProfileComponent],
-  templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css'
+  templateUrl: './user-dashboard.component.html',
+  styleUrl: './user-dashboard.component.css'
 })
-export class AdminDashboardComponent {
+export class UserDashboardComponent {
 
 }

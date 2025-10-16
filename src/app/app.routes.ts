@@ -19,6 +19,13 @@ import { AdminLoginComponent } from './+pages/+private/admin-login/ui/admin-logi
 import { isUserGuard } from './+guards/is-user.guard';
 import { authGuard } from './+guards/auth.guard';
 import { isAdminGuard } from './+guards/is-admin.guard';
+import { FavoriteProductsComponent } from './+pages/+private/+user-panel/favorite-products/ui/favorite-products.component';
+import { OrderListComponent } from './+pages/+private/+user-panel/order-list/ui/order-list.component';
+import { PaymentsComponent } from './+pages/+public/basket/ui/payment/ui/payments.component';
+import { ManageAddressesComponent } from './+pages/+private/+shared/manage-addresses/ui/manage-addresses.component';
+import { ChangePasswordComponent } from './+pages/+private/+shared/change-password/ui/change-password.component';
+import { UserDashboardComponent } from './+pages/+private/+user-panel/user-dashboard/ui/user-dashboard.component';
+import { ProfileEditComponent } from './+pages/+private/+shared/profile-edit/ui/profile-edit.component';
 
 export const routes: Routes = [
   {
@@ -42,12 +49,24 @@ export const routes: Routes = [
     path: 'admin-panel', component: AdminPanelNavigationsComponent, canActivate: [isAdminGuard], children: [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'add-product', component: AddProductComponent },
+      { path: 'edit-profile', component: ProfileEditComponent },
+      { path: 'manage-addresses', component: ManageAddressesComponent },
+      { path: 'change-password', component: ChangePasswordComponent },
       { path: 'product-list', component: ProductListComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' }
     ]
   },
   {
-    path: 'user-panel', component: UserPanelNavigationsComponent, canActivate: [isUserGuard], children: []
+    path: 'user-panel', component: UserPanelNavigationsComponent, canActivate: [isUserGuard], children: [
+      { path: 'dashboard', component: UserDashboardComponent },
+      { path: 'edit-profile', component: ProfileEditComponent },
+      { path: 'favorite-products', component: FavoriteProductsComponent },
+      { path: 'orders-list', component: OrderListComponent },
+      { path: 'payments', component: PaymentsComponent },
+      { path: 'manage-addresses', component: ManageAddressesComponent },
+      { path: 'change-password', component: ChangePasswordComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' }
+    ]
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuard], pathMatch: 'full' },
   { path: 'admin-login', component: AdminLoginComponent, canActivate: [authGuard], pathMatch: 'full' },

@@ -1,0 +1,94 @@
+<!-- پروفایل -->
+<div class="flex items-center gap-x-3 bg-white dark:bg-neutral-800 p-6 rounded-2xl shadow-md">
+  <div class="shrink-0">
+    <img src="/images/profile.webp" alt="Avatar"
+      class="w-20 h-20 rounded-full object-cover border-2 border-green-200 dark:border-green-600">
+  </div>
+
+  <div class="grow">
+    <h1 class="text-lg font-medium text-gray-800 dark:text-neutral-200">
+      {{accountService.getAccount()?.userName ?? "مقدار دهی نشده"}}
+    </h1>
+    <p class="text-sm text-gray-600 dark:text-neutral-400">
+      نقش : {{accountService.getAccount()?.accountRole | accountRole}}
+    </p>
+    <p class="text-xs text-gray-500 dark:text-neutral-500 mt-1">
+      عضو از تاریخ : {{(accountService.getAccount()?.dateOfSingup | faDate) ??
+      "مقدار دهی نشده"}}
+    </p>
+  </div>
+</div>
+<!-- پایان پروفایل -->
+
+<!-- اطلاعات حساب -->
+<div class="mt-6 bg-white dark:bg-neutral-800 p-6 rounded-2xl shadow-md">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300">نام کامل</label>
+      <p class="mt-1 text-gray-800 dark:text-gray-200">{{accountService.getAccount()?.fullName ?? "مقدار دهی نشده"}}</p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300">نام کاربری</label>
+      <p class="mt-1 text-gray-800 dark:text-gray-200">{{accountService.getAccount()?.userName ?? "مقدار دهی نشده"}}</p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300">ایمیل</label>
+      <p class="mt-1 text-gray-800 dark:text-gray-200">{{accountService.getAccount()?.email ?? "مقدار دهی نشده"}}</p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300">شماره تماس</label>
+      <p class="mt-1 text-gray-800 dark:text-gray-200">{{accountService.getAccount()?.phoneNumber ?? "مقدار دهی نشده"}}
+      </p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300">کد ملی</label>
+      <p class="mt-1 text-gray-800 dark:text-gray-200">{{accountService.getAccount()?.nationalCode ?? "مقدار دهی نشده"}}
+      </p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300">تاریخ تولد</label>
+      <p class="mt-1 text-gray-800 dark:text-gray-200">{{(accountService.getAccount()?.dateOfBirth | faDate) ??
+        "مقدار دهی نشده"}}</p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300">وضعیت حساب</label>
+      <p class="mt-1 text-gray-800 dark:text-gray-200">{{accountService.getAccount()?.status | accountStatus}}</p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300">جنسیت</label>
+      <p class="mt-1 text-gray-800 dark:text-gray-200">{{accountService.getAccount()?.gender | accountGender}}</p>
+    </div>
+  </div>
+</div>
+<!-- پایان اطلاعات حساب -->
+
+<!-- آدرس‌ها -->
+<div class="mt-6 bg-white dark:bg-neutral-800 p-6 rounded-2xl shadow-md">
+  <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">آدرس‌ها</h3>
+
+  <div class="space-y-4">
+    @for (address of accountService.getAccount()?.addresses; track $index) {
+    <div class="p-4 rounded-lg bg-gray-200 dark:bg-neutral-700">
+      <p class="text-sm text-gray-600 dark:text-gray-300">{{address.addressBody}}</p>
+      <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">کد پستی : {{address.postalCode}}</p>
+      <p class="text-xs text-gray-500 dark:text-gray-400">شماره تماس : {{address.phoneNumber}}</p>
+    </div>
+    } @empty {
+    <div
+      class="m-5 bg-yellow-100 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4 dark:bg-yellow-800/10 dark:border-yellow-900 dark:text-yellow-500"
+      role="alert">
+      <span class="font-bold ml-2">هشدار</span>
+      شما هیچ آدرسی تا کنون اظافه نکردید
+    </div>
+    }
+
+  </div>
+</div>
+<!-- پایان آدرس‌ها -->
