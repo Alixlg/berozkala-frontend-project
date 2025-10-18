@@ -15,6 +15,7 @@ export interface AccountModel {
 }
 
 export interface AddressModel {
+  id?: string;
   addressBody: string;
   postalCode: string;
   phoneNumber?: string;
