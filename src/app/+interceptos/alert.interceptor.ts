@@ -13,7 +13,7 @@ export const alertInterceptor: HttpInterceptorFn = (req, next) => {
     `${environment.ServerAddress}api/v1/auth/member/login-with-username`,
     `${environment.ServerAddress}api/v1/auth/member/singup`,
     `${environment.ServerAddress}api/v1/auth/admin/login`,
-    `${environment.ServerAddress}api/v1/auth/member/get-info`
+    `${environment.ServerAddress}api/v1/user/get-info`
   ];
 
   return next(req).pipe(

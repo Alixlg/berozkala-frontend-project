@@ -107,7 +107,7 @@
 
       <!-- دکمه‌ها -->
       <div class="mt-6 flex justify-end gap-x-2">
-        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent
+        <button type="submit" [disabled]="isBussy" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent
                  bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700">
           @if(!isBussy){
           ذخیره تغییرات

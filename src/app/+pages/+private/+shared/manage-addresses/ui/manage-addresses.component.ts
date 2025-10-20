@@ -4,7 +4,6 @@ import { BackendService } from '../../../../../+shared/services/backend.service'
 import { AlertService } from '../../../../../+components/alert-system/service/alert.service';
 import { AddressModel } from '../../../../../+shared/models/account.model';
 import { FormsModule } from '@angular/forms';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-manage-addresses',
@@ -18,7 +17,7 @@ export class ManageAddressesComponent {
   alertService = inject(AlertService);
 
   addressesAddModel: AddressModel[] = [];
-  addressesEditModel: AddressModel[];
+  addressesEditModel: AddressModel[] = [];
 
   isBussy = false;
 
@@ -58,7 +57,7 @@ export class ManageAddressesComponent {
       });
     }
 
-    if (this.addressesEditModel.length != 0) { // ایراد دارد
+    if (this.addressesEditModel.length != 0) {
       this.isBussy = true;
       editResult.subscribe({
         next: res => {
@@ -73,7 +72,18 @@ export class ManageAddressesComponent {
     }
   }
 
-  get allAddresses() {
+  editMethod(addressId: string | undefined) {
+    if (addressId) {
+      let address = this.accountService.getAccount()?.addresses?.find(x => x.id == addressId);
+      let editAddress = this.addressesEditModel.find(x => x.id == addressId);
+
+      if (address && !editAddress) {
+        this.addressesEditModel.push(address);
+      }
+    }
+  }
+
+  allAddresses() {
     return [
       ...(this.accountService.getAccount()?.addresses ?? []),
       ...(this.addressesAddModel ?? [])
@@ -82,11 +92,10 @@ export class ManageAddressesComponent {
 
   constructor() {
     let accountInfo = this.accountService.getAccount();
-    if (accountInfo) {
-      this.addressesEditModel = accountInfo.addresses ?? [];
-    } else {
+    if (!accountInfo) {
       this.alertService.newAlert('اطلاعات فعلی شما یافت نشد لطفا صفحه را رفرش دهید', 3000, false, true);
       this.addressesEditModel = [];
+      this.addressesAddModel = [];
     }
   }
 }

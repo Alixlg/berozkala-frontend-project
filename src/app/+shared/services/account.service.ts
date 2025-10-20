@@ -11,7 +11,7 @@ export class AccountService {
   backendService = inject(BackendService);
 
   setAccount() {
-    return this.backendService.get<AccountModel>('api/v1/auth/member/get-info')
+    return this.backendService.get<AccountModel>('api/v1/user/get-info')
       .pipe(
         tap(res => {
           if (res.isSuccess && res.body != null) {
