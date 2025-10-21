@@ -26,6 +26,7 @@ import { ManageAddressesComponent } from './+pages/+private/+shared/manage-addre
 import { ChangePasswordComponent } from './+pages/+private/+shared/change-password/ui/change-password.component';
 import { UserDashboardComponent } from './+pages/+private/+user-panel/user-dashboard/ui/user-dashboard.component';
 import { ProfileEditComponent } from './+pages/+private/+shared/profile-edit/ui/profile-edit.component';
+import { ManageCategoryComponent } from './+pages/+private/+admin-panel/manage-category/ui/manage-category.component';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'add-product', component: AddProductComponent },
       { path: 'edit-profile', component: ProfileEditComponent },
+      { path: 'manage-category', component: ManageCategoryComponent },
       { path: 'manage-addresses', component: ManageAddressesComponent },
       { path: 'change-password', component: ChangePasswordComponent },
       { path: 'product-list', component: ProductListComponent },

@@ -13,7 +13,9 @@ export const mainInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingServiceApis = [
     `${environment.ServerAddress}api/v1/auth/valid-token`,
     `${environment.ServerAddress}api/v1/address/delete`,
-    `${environment.ServerAddress}api/v1/user/get-info`
+    `${environment.ServerAddress}api/v1/user/get-info`,
+    `${environment.ServerAddress}api/v1/subcategorys/delete`,
+    `${environment.ServerAddress}api/v1/categorys/delete`
   ];
 
   if (token != null) {

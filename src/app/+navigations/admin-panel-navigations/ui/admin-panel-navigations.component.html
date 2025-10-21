@@ -319,20 +319,68 @@
                 role="region" aria-labelledby="account-accordion">
                 <ul class="ps-8 pt-1 space-y-1">
                   <li>
-                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200" routerLink="edit-profile">
+                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
+                      routerLink="edit-profile">
                       ویرایش پروفایل
                     </a>
                   </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="hs-accordion" id="category-accordion">
+              <button type="button"
+                class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
+                aria-expanded="true" aria-controls="category-accordion-child">
+                <svg class="shrink-0 mt-0.5 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+
+                  <!-- سه ردیفِ کتگوری -->
+                  <rect x="6" y="10" width="34" height="9" rx="2" />
+                  <rect x="6" y="28" width="34" height="9" rx="2" />
+                  <rect x="6" y="46" width="20" height="9" rx="2" />
+
+                  <!-- چرخ‌دنده (مدیریت) -->
+                  <!-- بدنه مرکزی -->
+                  <circle cx="46" cy="34" r="6" fill="currentColor" stroke="none" />
+                  <!-- دایره میانی (حلقه) -->
+                  <circle cx="46" cy="34" r="3" fill="none" stroke="currentColor" stroke-width="1.6" />
+
+                  <!-- دندانه‌ها (6 تا؛ یک مستطیل پایه که می‌چرخونیم) -->
+                  <g fill="currentColor" stroke="none">
+                    <rect x="45" y="22" width="2" height="6" rx="1" transform="rotate(0 46 34)" />
+                    <rect x="45" y="22" width="2" height="6" rx="1" transform="rotate(60 46 34)" />
+                    <rect x="45" y="22" width="2" height="6" rx="1" transform="rotate(120 46 34)" />
+                    <rect x="45" y="22" width="2" height="6" rx="1" transform="rotate(180 46 34)" />
+                    <rect x="45" y="22" width="2" height="6" rx="1" transform="rotate(240 46 34)" />
+                    <rect x="45" y="22" width="2" height="6" rx="1" transform="rotate(300 46 34)" />
+                  </g>
+
+                </svg>
+                کتگوری ها
+
+                <svg class="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg class="hs-accordion-active:hidden ms-auto block size-4" xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+
+              <div id="category-accordion-child"
+                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+                role="region" aria-labelledby="category-accordion">
+                <ul class="ps-8 pt-1 space-y-1">
                   <li>
                     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
-                      href="#">
-                      Link 2
-                    </a>
-                  </li>
-                  <li>
-                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
-                      href="#">
-                      Link 3
+                      routerLink="manage-category">
+                      مدیریت کتگوری ها
                     </a>
                   </li>
                 </ul>

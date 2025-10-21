@@ -1,0 +1,263 @@
+<div class="max-w-[88rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+
+  <!-- Card -->
+  <div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div
+          class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden dark:bg-neutral-900 dark:border-neutral-700">
+
+          <!-- Header -->
+          <div
+            class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+
+            <div class="flex justify-end gap-x-2">
+              <button type="button" (click)="showAddModal = true"
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-600 text-white shadow-2xs hover:bg-green-700">
+                <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                افزودن کتگوری جدید
+              </button>
+            </div>
+          </div>
+          <!-- End Header -->
+
+          <!-- Loading Spinner -->
+          @if(isLoading) {
+          <div class="flex justify-center items-center h-40">
+            <div
+              class="animate-spin inline-block w-10 h-10 border-4 border-current border-t-transparent rounded-full text-black dark:text-white"
+              role="status" aria-label="loading">
+              <span class="sr-only">لطفا منتظر بمانید...</span>
+            </div>
+          </div>
+          } @else {
+          <!-- Table -->
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+            <thead class="bg-gray-50 dark:bg-neutral-800">
+              <tr>
+                <th class="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                  نام کتگوری
+                </th>
+                <th class="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                  زیردسته‌ها
+                </th>
+                <th class="px-6 py-3 text-start text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                  عملیات
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+              @for(c of categorys; track $index) {
+              <tr>
+                <td class="px-6 py-4 font-medium text-gray-800 dark:text-neutral-200">
+                  {{ c.categoryName }}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-600 dark:text-neutral-400">
+                  @if(c.subCategorys?.length) {
+                  <ul class="list-disc ps-5">
+                    @for(s of c.subCategorys; track $index) {
+                    <li>{{ s.subCategoryName }}</li>
+                    }
+                  </ul>
+                  } @else {
+                  <span class="text-gray-400">ندارد</span>
+                  }
+                </td>
+                <td class="px-6 py-4">
+                  <div class="inline-flex">
+                    <button (click)="editCategoryButton(c)" class="text-blue-600 hover:text-blue-800 ml-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z" />
+                      </svg>
+                    </button>
+                    <button (click)="deleteCategory(c.id ?? '')" class="text-red-500 hover:text-red-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              } @empty {
+              <tr>
+                <td colspan="3" class="px-6 py-4 text-center text-gray-500 dark:text-neutral-400">
+                  هیچ کتگوری‌ای پیدا نشد
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Category Modal -->
+<div id="category-modal" [class.hidden]="!showAddModal"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+
+  <div class="bg-white dark:bg-neutral-900 rounded-2xl shadow-xl w-full max-w-lg">
+    <div class="flex justify-between items-center border-b border-gray-200 dark:border-neutral-700 px-6 py-4">
+      <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+        افزودن کتگوری جدید
+      </h3>
+      <button (click)="showAddModal = false" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="px-6 py-5 space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-2 dark:text-neutral-300">نام کتگوری</label>
+        <input type="text" [(ngModel)]="categoryAddModel.categoryName"
+          class="py-2 px-3 block w-full bg-gray-100 border-gray-200 rounded-lg text-sm focus:border-green-500 focus:ring-green-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300"
+          placeholder="مثلاً: لوازم دیجیتال" />
+      </div>
+
+      <!-- Subcategories Section -->
+      <div class="border border-gray-200 rounded-lg p-3 dark:border-neutral-700">
+        <div class="flex justify-between items-center mb-3">
+          <h4 class="font-medium text-sm dark:text-neutral-300">زیردسته‌ها</h4>
+          <button (click)="addSubCategory('add')"
+            class="text-xs text-green-600 hover:text-green-800 dark:text-green-400">+
+            افزودن زیردسته</button>
+        </div>
+
+        @if(categoryAddModel.subCategorys) {
+        <ul class="space-y-2">
+          @for(s of categoryAddModel.subCategorys; track $index) {
+          <li class="flex items-center gap-x-2">
+            <input type="text" [(ngModel)]="s.subCategoryName" name="add-subcategory-name-{{$index}}"
+              class="flex-1 py-1.5 px-3 bg-gray-100 border border-gray-200 rounded-lg text-sm dark:bg-neutral-800 dark:border-neutral-700"
+              placeholder="نام زیردسته" />
+            <button (click)="removeSubCategory(s,'add')"
+              class="text-red-500 hover:text-red-700 dark:text-red-600 dark:hover:text-red-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </li>
+          } @empty {
+          <p class="text-sm text-gray-400 text-center">هیچ زیردسته‌ای افزوده نشده است</p>
+          }
+        </ul>
+        }
+      </div>
+
+    </div>
+
+    <div class="flex justify-end gap-x-3 border-t border-gray-200 px-6 py-4 dark:border-neutral-700">
+      <button (click)="showAddModal = false"
+        class="py-2 px-3 text-sm font-medium border border-gray-200 rounded-lg hover:bg-gray-100 dark:border-neutral-700 dark:text-neutral-300">
+        انصراف
+      </button>
+      <button (click)="saveCategory()" [disabled]="(!categoryAddModel.categoryName) || isAddCategoryLoading" class="py-2.5 px-6 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent
+            bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700
+            disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400">
+        @if (!isAddCategoryLoading) {
+        ذخیره
+        }
+        @else {
+        <span
+          class="animate-spin inline-block size-4 border-3 border-current border-t-transparent text-neutral-50 rounded-full"
+          role="status" aria-label="loading">
+        </span>
+        }
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div id="category-edit-modal" [class.hidden]="!showEditModal"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+
+  <div class="bg-white dark:bg-neutral-900 rounded-2xl shadow-xl w-full max-w-lg">
+    <div class="flex justify-between items-center border-b border-gray-200 dark:border-neutral-700 px-6 py-4">
+      <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+        ویرایش کتگوری
+      </h3>
+      <button (click)="showEditModal = false" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="2"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="px-6 py-5 space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-2 dark:text-neutral-300">نام کتگوری</label>
+        <input type="text" [(ngModel)]="categoryEditModel.categoryName"
+          class="py-2 px-3 block w-full bg-gray-100 border-gray-200 rounded-lg text-sm focus:border-green-500 focus:ring-green-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300"
+          placeholder="مثلاً: لوازم دیجیتال" />
+      </div>
+
+      <!-- Subcategories Section -->
+      <div class="border border-gray-200 rounded-lg p-3 dark:border-neutral-700">
+        <div class="flex justify-between items-center mb-3">
+          <h4 class="font-medium text-sm dark:text-neutral-300">زیردسته‌ها</h4>
+          <button (click)="addSubCategory('edit')"
+            class="text-xs text-green-600 hover:text-green-800 dark:text-green-400">+
+            افزودن زیردسته</button>
+        </div>
+
+        @if(categoryEditModel.subCategorys) {
+        <ul class="space-y-2">
+          @for(s of categoryEditModel.subCategorys; track $index) {
+          <li class="flex items-center gap-x-2">
+            <input type="text" [(ngModel)]="s.subCategoryName" name="edit-subcategory-name-{{$index}}"
+              class="flex-1 py-1.5 px-3 bg-gray-100 border border-gray-200 rounded-lg text-sm dark:bg-neutral-800 dark:border-neutral-700"
+              placeholder="نام زیردسته" />
+            <button (click)="removeSubCategory(s,'edit')"
+              class="text-red-500 hover:text-red-700 dark:text-red-600 dark:hover:text-red-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </li>
+          } @empty {
+          <p class="text-sm text-gray-400 text-center">هیچ زیردسته‌ای افزوده نشده است</p>
+          }
+        </ul>
+        }
+      </div>
+
+    </div>
+
+    <div class="flex justify-end gap-x-3 border-t border-gray-200 px-6 py-4 dark:border-neutral-700">
+      <button (click)="showEditModal = false"
+        class="py-2 px-3 text-sm font-medium border border-gray-200 rounded-lg hover:bg-gray-100 dark:border-neutral-700 dark:text-neutral-300">
+        انصراف
+      </button>
+      <button (click)="editCategorySubmited()" [disabled]="(!categoryEditModel.categoryName) || isEditCategoryLoading" class="py-2.5 px-6 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent
+            bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700
+            disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400">
+        @if (!isEditCategoryLoading) {
+        ذخیره
+        }
+        @else {
+        <span
+          class="animate-spin inline-block size-4 border-3 border-current border-t-transparent text-neutral-50 rounded-full"
+          role="status" aria-label="loading">
+        </span>
+        }
+      </button>
+    </div>
+  </div>
+</div>
