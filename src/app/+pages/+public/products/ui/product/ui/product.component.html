@@ -52,10 +52,10 @@
             </div>
           </div>
 
-          @for (url of product.imagesUrl; track $index) {
+          @for (image of product.imagesUrls; track $index) {
           <div class="hs-carousel-slide flex items-center justify-center w-full h-full">
             <div class="flex justify-center items-center w-full h-full">
-              <img class="w-full h-full" [src]="url" alt="product images">
+              <img class="w-full h-full" [src]="image.imagePath" [alt]="image.imagePath">
             </div>
           </div>
           }
@@ -148,8 +148,8 @@
                   }'>
                 <option value=""></option>
 
-                @for (g of product.garranty; track $index) {
-                <option>{{g}}</option>
+                @for (g of product.garrantys; track $index) {
+                <option>{{g.name}}</option>
                 }
 
               </select>
@@ -167,10 +167,10 @@
             <div class="grow">
               <input disabled
                 class="w-full text-center p-0 bg-transparent border-0 text-gray-800 focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white"
-                type="number" [value]="product.count">
+                type="number" [value]="productCount">
             </div>
             <div class="flex justify-end items-center gap-x-1.5">
-              <button type="button" (click)="product.count = product.count - 1" [disabled]="product.count == 1"
+              <button type="button" (click)="productCount = productCount - 1" [disabled]="productCount == 1"
                 class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
                 <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -178,8 +178,8 @@
                   <path d="M5 12h14"></path>
                 </svg>
               </button>
-              <button type="button" (click)="product.count = product.count + 1"
-                [disabled]="product.count == product.maxCount"
+              <button type="button" (click)="productCount = productCount + 1"
+                [disabled]="productCount == product.maxCount"
                 class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
                 <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -368,7 +368,7 @@
             </dd>
           </dl>
 
-          @for (subset of attribute.subset; track $index) {
+          @for (subset of attribute.subsets; track $index) {
           <dl class="flex flex-col sm:flex-row gap-1">
             <dt class="ml-5">
               <span class="inline-flex text-sm text-gray-500 dark:text-neutral-500">
@@ -377,13 +377,13 @@
                   <path stroke-linecap="round" stroke-linejoin="round"
                     d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
-                {{subset.subsetName}} :
+                {{subset.name}} :
               </span>
             </dt>
             <dd>
               <ul>
                 <li class="me-1 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-                  {{subset.subsetValue}}
+                  {{subset.value}}
                 </li>
               </ul>
             </dd>

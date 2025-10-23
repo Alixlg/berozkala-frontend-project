@@ -1,4 +1,4 @@
-export interface ProductBackendModel {
+export interface ProductBackendModell {
   id: string;
   dateToAdd: string;
   isAvailable: boolean;
@@ -21,7 +21,7 @@ export interface ProductBackendModel {
   // }[];
 }
 
-export interface Product {
+export interface Productt {
   id: string;
   isAvailable: boolean;
   category: string;

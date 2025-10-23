@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { ProductService } from '../../../../+public/products/service/product.service';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../../../+components/alert-system/service/alert.service';
-import { Product } from '../../../../../+shared/models/product.model';
+import { Productt } from '../../../../../+shared/models/product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -15,8 +15,8 @@ import { Product } from '../../../../../+shared/models/product.model';
 export class ProductListComponent implements OnInit {
   productService = inject(ProductService);
   alertService = inject(AlertService);
-  products!: Product[] | any;
-  productToActions!: Product;
+  products!: Productt[] | any;
+  productToActions!: Productt;
   isLoading: boolean = false;
   isDeleteModal: boolean = false;
   isDeleteModalLoading: boolean = false;
@@ -67,12 +67,12 @@ export class ProductListComponent implements OnInit {
     return scores;
   }
 
-  productDelete(p: Product) {
+  productDelete(p: Productt) {
     this.productToActions = { ...p };
     this.isDeleteModal = true;
   }
 
-  productEdit(p: Product) {
+  productEdit(p: Productt) {
     this.productToActions = { ...p };
     this.isEditModal = true;
   }

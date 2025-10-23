@@ -18,7 +18,7 @@
                 class="bg-gray-100 border sm:w-full h-full border-gray-200 rounded-xl shadow-2xs sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
                 <div
                   class="shrink-0 relative w-full rounded-t-xl overflow-hidden pt-[70%] sm:pt-[40%] sm:rounded-s-xl sm:max-w-60 md:rounded-se-none md:max-w-xs">
-                  <a routerLink="/pb/products/{{p.category}}/{{p.id}}">
+                  <a routerLink="/pb/product/{{p.id}}">
                     <img class="size-full absolute top-0 start-0 object-cover" [src]="p.previewImageUrl" alt="">
                   </a>
                 </div>
@@ -81,7 +81,7 @@
   <div class="pl-8 hidden sm:flex">
     <a dir="rtl"
       class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-lg focus:outline-hidden focus:shadow-lg transition dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
-      routerLink="/pb/products/{{discountProductPreview()?.category}}/{{discountProductPreview()?.id}}">
+      routerLink="/pb/product/{{discountProductPreview()?.id}}">
       <div class="w-full h-67 flex justify-center items-center">
         <img class="w-50 h-50 rounded-t-xl rounded-2xl" [src]="discountProductPreview()?.previewImageUrl" alt="Card Image">
       </div>

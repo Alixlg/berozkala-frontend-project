@@ -2,8 +2,6 @@ import { DecimalPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProductPreviewFrontendModel } from '../models/productPreview.model';
-import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
-
 @Component({
   selector: 'app-product-preview',
   imports: [DecimalPipe, RouterLink],
@@ -15,7 +13,6 @@ export class ProductPreviewComponent implements OnInit {
   @Output() onBuy = new EventEmitter<ProductPreviewFrontendModel>;
   @Input() isAddDisable = false;
 
-  productAlertObj = inject(AlertService);
   scores: number[] = [];
 
   ngOnInit() {

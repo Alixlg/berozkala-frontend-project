@@ -1,37 +1,40 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { BasketService } from '../../basket/service/basket.service';
-import { ProductService } from '../service/product.service';
 import { FormsModule } from '@angular/forms';
-import { SearchProductComponent } from '../../../../+components/search-product/ui/search-product.component';
 import { ProductPreviewComponent } from './product-preview/ui/product-preview.component';
-import { ProductPreviewFrontendModel } from './product-preview/models/productPreview.model';
+import { ProductPreviewFrontendModel, ProductPreviewModel } from './product-preview/models/productPreview.model';
 import { AlertService } from '../../../../+components/alert-system/service/alert.service';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
+import { BackendService } from '../../../../+shared/services/backend.service';
+import { ProductFilterModel } from '../models/productFillter.model';
+import { map } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-products',
-  imports: [ProductPreviewComponent, RouterOutlet, FormsModule, SearchProductComponent],
+  imports: [ProductPreviewComponent, FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
-  alertSystemObj = inject(AlertService);
-  productsObj = inject(ProductService);
-  basketObj = inject(BasketService);
+  alertService = inject(AlertService);
+  basketService = inject(BasketService);
+  backendService = inject(BackendService);
   router = inject(Router);
 
   searchedProducts: ProductPreviewFrontendModel[] = [];
-  isSearchBoxEmpty = true;
+  productFillter: ProductFilterModel = { pageCount: 20, pageId: 1, filter: 0 };
 
-  productsFiltered = '';
+  isBusy = false;
+  searchQuery = '';
 
   buy($event: ProductPreviewFrontendModel) {
-    let basket = this.basketObj.getBasketItems();
+    let basket = this.basketService.getBasketItems();
 
     if (basket.every(p => p.id != $event.id)) {
-      this.basketObj.addItem($event);
+      this.basketService.addItem($event);
 
-      this.alertSystemObj.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت به سبد اضافه شد`, 2000);
+      this.alertService.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت به سبد اضافه شد`, 2000);
 
       $event.isAddDisable = true;
       setTimeout(() => {
@@ -39,14 +42,14 @@ export class ProductsComponent {
       }, 2000);
     }
     else {
-      let product = this.basketObj.getBasketItems().find(p => p.id == $event.id);
-      this.basketObj.removeItem($event);
+      let product = this.basketService.getBasketItems().find(p => p.id == $event.id);
+      this.basketService.removeItem($event);
 
       if (product) { // agar undefine nabood
         product.count += 1;
-        this.basketObj.addItem(product);
+        this.basketService.addItem(product);
 
-        this.alertSystemObj.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت به سبد اضافه شد`, 2000);
+        this.alertService.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت به سبد اضافه شد`, 2000);
 
         $event.isAddDisable = true;
         setTimeout(() => {
@@ -56,41 +59,48 @@ export class ProductsComponent {
     }
   }
 
-  search($event: ProductPreviewFrontendModel[]) {
-    this.searchedProducts = $event;
-
-    if (this.isSearchBoxEmpty) {
-      this.productsFiltered = '';
-    }
-    else {
-      this.productsFiltered = 'search';
-    }
+  search() {
+    this.getProducts();
   }
 
-  filterBy() {
-    switch (this.productsFiltered) {
-      case 'price-up':
-        return this.productsObj.getProductsPreview().sort((a, b) => Number(b.price) - Number(a.price));
+  getProducts() {
+    this.isBusy = true;
 
-      case 'price-down':
-        return this.productsObj.getProductsPreview().sort((a, b) => Number(a.price) - Number(b.price));
+    let result;
 
-      case 'new-products':
-        // return this.productsObj.getProductsPreview().sort((a, b) => b.id - a.id);
+    if (this.searchQuery != '') {
+      let param = new HttpParams()
+        .set('searchQuery', this.searchQuery);
 
-      case 'old-products':
-        // return this.productsObj.getProductsPreview().sort((a, b) => a.id - b.id);
-
-      case 'search':
-        return this.searchedProducts;
-
-      default: return this.productsObj.getProductsPreview();
+      result = this.backendService.post<ProductPreviewModel[], ProductFilterModel>('api/v1/productsprevirw/list', this.productFillter, param);
+    } else {
+      result = this.backendService.post<ProductPreviewModel[], ProductFilterModel>('api/v1/productsprevirw/list', this.productFillter);
     }
+
+    result
+      .pipe(
+        map((obj: { body: ProductPreviewModel[] }) => {
+          return obj.body.map(product => ({
+            ...product,
+            count: 1,
+            isAddDisable: false,
+            isRemoveDisable: true
+          } as ProductPreviewFrontendModel));
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.searchedProducts = res;
+          this.isBusy = false;
+        },
+        error: err => {
+          this.searchedProducts = [];
+          this.isBusy = false;
+        }
+      });
   }
 
-  // ngOnInit() {
-  //   for (let index = 0; index < 30; index++) {
-  //     this.productsObj.products.push(new Product('test', 'test', '900000', 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/6e61b/MainAfter.avif'));
-  //   }
-  // }
+  ngOnInit() {
+    this.getProducts();
+  }
 }

@@ -73,8 +73,8 @@ export class ManageBasketComponent {
     this.alertSystemObj.newAlert(`محصول ${product.title} ${product.brand} با موفقیت از سبد حذف شد`, 2000);
   }
 
-  countPriceUpdater(price: string, count: number) {
-    return Number(price) * count;
+  countPriceUpdater(price: number, count: number) {
+    return price * count;
   }
 
   checkDiscountCode() {

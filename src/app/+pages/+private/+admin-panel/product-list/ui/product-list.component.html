@@ -136,7 +136,7 @@
               @for (p of products.body; track $index) {
               <tr class="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800">
                 <td class="size-px whitespace-nowrap align-top cursor-pointer"
-                  routerLink="/pb/products/{{p.category}}/{{p.id}}">
+                  routerLink="/pb/product/{{p.id}}">
                   <a class="block p-6">
                     <div class="flex items-center gap-x-4">
                       <img class="shrink-0 size-9.5 rounded-lg" [src]="p.previewImageUrl" alt="Product Image">

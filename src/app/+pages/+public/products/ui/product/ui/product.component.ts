@@ -1,8 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ProductService } from '../../../service/product.service';
 import { DecimalPipe } from '@angular/common';
-import { Product } from '../../../../../../+shared/models/product.model';
+import { BackendService } from '../../../../../../+shared/services/backend.service';
+import { ProductFilterModel } from '../../../models/productFillter.model';
+import { ProductModel } from '../models/product.model';
+import { HttpParams } from '@angular/common/http';
+import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
 
 @Component({
   selector: 'app-product',
@@ -12,9 +15,15 @@ import { Product } from '../../../../../../+shared/models/product.model';
 })
 export class ProductComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
+  backendService = inject(BackendService);
+  alertService = inject(AlertService);
   router = inject(Router);
-  productService = inject(ProductService);
-  product!: any | Product;
+
+  productCount = 1;
+
+  product!: ProductModel;
+  productFillter: ProductFilterModel = { pageCount: 1, pageId: 1 };
+
   isLoading = false;
 
   showScores(n: number) {
@@ -25,25 +34,34 @@ export class ProductComponent implements OnInit {
     return scores;
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.isLoading = true;
+
     let id = '';
-    // let category = '';
     this.activatedRoute.paramMap.subscribe(params => {
       id = params.get('id')!;
-      // category = params.get('category')!;
     });
 
-    this.product = await this.productService.getProduct(id);
-    // let result = this.products.getProduct(id);
+    let param = new HttpParams()
+      .set('searchQuery', id);
 
-    // result.subscribe(r => {
-    //   if (r) {
-    //     this.product = r;
-    //     this.isLoading = false;
-    //   }
-    //   else {
-    //     this.router.navigateByUrl('/pb/products/404');
-    //   }
-    // });
+    let result = this.backendService.post<ProductModel[], ProductFilterModel>('api/v1/products/list', this.productFillter, param);
+
+    result.subscribe({
+      next: (res) => {
+        if (res.isSuccess && res.body.length != 0) {
+          this.product = res.body.find(x => x)!;
+          this.isLoading = false;
+        } else {
+          this.isLoading = false;
+          this.alertService.newAlert('محصول مورد نظر یافت نشد', 3000, false, true);
+          this.router.navigateByUrl('/pb/products');
+        }
+      },
+      error: err => {
+        this.isLoading = false;
+        this.router.navigateByUrl('/pb/products');
+      }
+    });
   }
 }

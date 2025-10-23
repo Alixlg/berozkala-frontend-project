@@ -1,20 +1,16 @@
-import { Product } from "../../../../../../+shared/models/product.model";
-
-export interface ProductPreviewBackendModel {
-  id?: string;
+export interface ProductPreviewModel {
+  id: string;
   isAvailable: boolean;
   brand: string;
-  pic: string;
-  category: string[];
   title: string;
-  price: string;
-  discountPercent: string;
-  previewImageUrl: string;
+  price: number;
   maxCount: number;
   scoreRank: number;
+  discountPercent: number;
+  previewImageUrl?: string;
 }
 
-export interface ProductPreviewFrontendModel extends ProductPreviewBackendModel {
+export interface ProductPreviewFrontendModel extends ProductPreviewModel {
   count: number;
   isAddDisable: boolean;
   isRemoveDisable: boolean;

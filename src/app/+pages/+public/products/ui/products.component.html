@@ -1,9 +1,43 @@
-@if(router.isActive('/pb/products',true)){
-
 <section class="relative" action="">
 
-  <app-search-product [products]="productsObj.getProductsPreview()" (onDone)="search($event)"
-    (onVisible)="isSearchBoxEmpty = $event"></app-search-product>
+  <section class="md:w-6/7">
+
+    <form (ngSubmit)="search()" class="m-5 md:ml-15">
+      <label for="searchBox" class="sr-only">Search Box</label>
+      <div class="relative flex rounded-lg bg-white dark:bg-neutral-800 shadow-2xs">
+
+        <button type="submit" [disabled]="isBusy"
+          class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-s-md border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
+          @if(isBusy){
+          <div class="flex justify-center items-center">
+            <div
+              class="animate-spin inline-block w-5 h-5 border-4 border-current border-t-transparent rounded-full text-white"
+              role="status" aria-label="loading">
+              <span class="sr-only">لطفا منتظر بمانید...</span>
+            </div>
+          </div>
+          }@else{
+          جستوجو
+          }
+        </button>
+
+        <input id="searchBox" [(ngModel)]="searchQuery" name="search" type="search"
+          placeholder="برای جستوجو بنویسید و اینتر بزنید" list="search-list"
+          class="py-2.5 sm:py-3 px-4 pe-11 block w-full border-gray-200 rounded-e-lg text-neutral-500 text-[0.8em] sm:text-sm focus:z-10 focus:border-green-500 focus:ring-green-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+
+        <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none z-20 pe-4">
+          <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </div>
+
+      </div>
+    </form>
+
+  </section>
 
   <div class="m-auto mb-5 left-0 top-0 md:inline-flex md:absolute hs-dropdown md:w-1/7 ml-8 mr-8">
 
@@ -23,7 +57,7 @@
       role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-with-icons">
       <div class="p-1 space-y-0.5">
         <a class="cursor-pointer flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-          (click)="this.productsFiltered = 'price-up'">
+          (click)="productFillter.filter = 3" (click)="search()">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -32,7 +66,7 @@
           قیمت (زیاد به کم)
         </a>
         <a class="cursor-pointer flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-          (click)="this.productsFiltered = 'price-down'">
+          (click)="productFillter.filter = 2" (click)="search()">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -41,7 +75,7 @@
           قیمت (کم به زیاد)
         </a>
         <a class="cursor-pointer flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-          (click)="this.productsFiltered = 'new-products'">
+          (click)="productFillter.filter = 4" (click)="search()">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -50,7 +84,7 @@
           محصولات جدید
         </a>
         <a class="cursor-pointer flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-          (click)="this.productsFiltered = 'old-products'">
+          (click)="productFillter.filter = 5" (click)="search()">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -72,10 +106,10 @@
     <!-- Grid -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      @for (item of filterBy(); track $index) {
+      @for (item of searchedProducts; track $index) {
       <app-product-preview (onBuy)="buy($event)" [product]="item"
         [isAddDisable]="item.isAddDisable"></app-product-preview>
-      }@empty {
+      } @empty {
       <div>
         <div
           class="bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4 dark:bg-yellow-800/10 dark:border-yellow-900 dark:text-yellow-500"
@@ -109,7 +143,3 @@
   <!-- End Card Blog -->
 
 </section>
-
-}@else {
-<router-outlet></router-outlet>
-}

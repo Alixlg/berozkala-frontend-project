@@ -13,16 +13,18 @@ export const alertInterceptor: HttpInterceptorFn = (req, next) => {
     `${environment.ServerAddress}api/v1/auth/member/login-with-username`,
     `${environment.ServerAddress}api/v1/auth/member/singup`,
     `${environment.ServerAddress}api/v1/auth/admin/login`,
+    `${environment.ServerAddress}api/v1/products/list`,
+    `${environment.ServerAddress}api/v1/productsprevirw/list`,
     `${environment.ServerAddress}api/v1/user/get-info`
   ];
 
   return next(req).pipe(
     tap((res: any) => {
-      if (res.body && res.body.isSuccess == false && !skipAlertApis.includes(res.url)) {
+      if (res.body && res.body.isSuccess == false && (!skipAlertApis.some(url => res.url.startsWith(url)))) {
         alertService.newAlert(res.body.message, 3000, false, true);
       }
 
-      if (res.body && res.body.isSuccess == true && !skipAlertApis.includes(res.url)) {
+      if (res.body && res.body.isSuccess == true && (!skipAlertApis.some(url => res.url.startsWith(url)))) {
         alertService.newAlert(res.body.message, 3000);
       }
     }),

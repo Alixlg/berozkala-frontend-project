@@ -10,7 +10,6 @@ import { RegisterComponent } from './+pages/+public/register/ui/register.compone
 import { AdminPanelNavigationsComponent } from './+navigations/admin-panel-navigations/ui/admin-panel-navigations.component';
 import { UserPanelNavigationsComponent } from './+navigations/user-panel-navigations/ui/user-panel-navigations.component';
 import { AdminDashboardComponent } from './+pages/+private/+admin-panel/admin-dashboard/ui/admin-dashboard.component';
-import { ProductComponent } from './+pages/+public/products/ui/product/ui/product.component';
 import { NotFoundPageComponent } from './+components/not-found-page/not-found-page.component';
 import { AddProductComponent } from './+pages/+private/+admin-panel/add-product/ui/add-product.component';
 import { ProductListComponent } from './+pages/+private/+admin-panel/product-list/ui/product-list.component';
@@ -27,18 +26,14 @@ import { ChangePasswordComponent } from './+pages/+private/+shared/change-passwo
 import { UserDashboardComponent } from './+pages/+private/+user-panel/user-dashboard/ui/user-dashboard.component';
 import { ProfileEditComponent } from './+pages/+private/+shared/profile-edit/ui/profile-edit.component';
 import { ManageCategoryComponent } from './+pages/+private/+admin-panel/manage-category/ui/manage-category.component';
+import { ProductComponent } from './+pages/+public/products/ui/product/ui/product.component';
 
 export const routes: Routes = [
   {
     path: 'pb', component: PublicNavigationsComponent, children: [
       { path: 'home', component: HomeComponent },
-      {
-        path: 'products', component: ProductsComponent, children: [
-          { path: ':category/:id', component: ProductComponent },
-          { path: '404', component: NotFoundPageComponent },
-          { path: '', redirectTo: 'products', pathMatch: 'prefix' }
-        ]
-      },
+      { path: 'products', component: ProductsComponent },
+      { path: 'product/:id', component: ProductComponent },
       { path: 'support', component: SupportComponent },
       { path: 'about', component: AboutComponent },
       { path: 'basket', component: BasketComponent, canActivate: [isUserGuard] },

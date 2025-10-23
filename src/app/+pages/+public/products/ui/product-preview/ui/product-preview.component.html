@@ -5,7 +5,7 @@
     @defer () {
     <img
       class="h-53 flex flex-col justify-center items-center rounded-2xl bg-white dark:bg-black rounded-t-xl cursor-pointer"
-      [src]="product.pic" alt="product img" routerLink="{{product.category}}/{{product.id}}">
+      [src]="product.previewImageUrl" alt="product img" routerLink="{{product.id}}">
     } @placeholder {
     <div class="flex justify-center items-center h-53">
       <div
@@ -26,7 +26,7 @@
     </h3>
     <p class="mt-3 text-gray-500 dark:text-neutral-500">
       قیمت <span
-        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-teal-100 text-teal-800 dark:bg-teal-800/30 dark:text-teal-500">{{product.price|number}}<svg
+        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-teal-100 text-teal-800 dark:bg-teal-800/30 dark:text-teal-500">{{product.price | number}}<svg
           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="size-4">
           <path stroke-linecap="round" stroke-linejoin="round"
@@ -55,7 +55,7 @@
   <div
     class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700">
     <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-      routerLink="{{product.category}}/{{product.id}}">
+      routerLink="/pb/product/{{product.id}}">
       رفتن به صفحه محصول
     </a>
     <button (click)="onBuy.emit(product)" [disabled]="isAddDisable"

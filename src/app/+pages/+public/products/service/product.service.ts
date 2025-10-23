@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { ProductPreviewFrontendModel } from '../ui/product-preview/models/productPreview.model';
-import { Product } from '../../../../+shared/models/product.model';
+import { Productt } from '../../../../+shared/models/product.model';
 import { AddProductModel } from '../../../+private/+admin-panel/add-product/models/addProduct.model';
 import { BackendService } from '../../../../+shared/services/backend.service';
 
@@ -397,7 +397,7 @@ export class ProductService {
     return this.backendService.del("http://localhost:5145/api/v1/products/delete/" + productId, {});
   }
 
-  editProduct(product: Product) {
+  editProduct(product: Productt) {
     return this.backendService.put("http://localhost:5145/api/v1/products/edit/" + product.id, product);
   }
 }
