@@ -23,7 +23,7 @@ export class ProductsComponent {
   router = inject(Router);
 
   searchedProducts: ProductPreviewFrontendModel[] = [];
-  productFillter: ProductFilterModel = { pageCount: 20, pageId: 1, filter: 0 };
+  productFillter: ProductFilterModel = { pageCount: 20, pageId: 1, fillter: 0 };
 
   isBusy = false;
   searchQuery = '';

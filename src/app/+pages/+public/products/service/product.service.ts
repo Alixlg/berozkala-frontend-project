@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { ProductPreviewFrontendModel } from '../ui/product-preview/models/productPreview.model';
 import { Productt } from '../../../../+shared/models/product.model';
-import { AddProductModel } from '../../../+private/+admin-panel/add-product/models/addProduct.model';
 import { BackendService } from '../../../../+shared/services/backend.service';
 
 @Injectable({
@@ -370,27 +369,6 @@ export class ProductService {
 
   getProduct(productId: string) {
     return this.backendService.get("api/v1/products/getproduct" + productId);
-  }
-
-  addProduct(product: AddProductModel) {
-    let p = {
-      isAvailable: product.isAvailable,
-      category: product.category,
-      brand: product.brand,
-      title: product.title,
-      price: product.price,
-      discountPercent: product.discountPercent,
-      previewImageUrl: product.previewImageUrl,
-      description: product.description,
-      review: product.review,
-      maxCount: product.maxCount,
-      scoreRank: product.scoreRank,
-      imagesUrl: product.imagesUrls,
-      // garrantys: product.garrantys,
-      // attributes: product.attributes,
-    }
-
-    return this.backendService.post("http://localhost:5145/api/v1/products/create", p);
   }
 
   deleteProduct(productId: string) {
