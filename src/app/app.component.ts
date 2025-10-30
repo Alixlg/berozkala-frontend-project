@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NavigationEnd, Router, Event, RouterOutlet } from '@angular/router';
 import { AlertSystemComponent } from './+components/alert-system/ui/alert-system.component';
 import { LoadingComponent } from "./+components/loading/ui/loading.component";
@@ -19,17 +19,21 @@ export class AppComponent implements OnInit {
   accountService = inject(AccountService);
 
   ngOnInit() {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationEnd) {
-        setTimeout(() => window.HSStaticMethods.autoInit(), 100);
-      }
-    });
+    // this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     setTimeout(() => window.HSStaticMethods.autoInit(), 1000);
+    //   }
+    // });
 
     this.accountService.setAccount().subscribe(res => {
-      if(!res.isSuccess){
+      if (!res.isSuccess) {
         sessionStorage.removeItem('token');
         localStorage.removeItem('token');
       }
     });
+  }
+
+  ngAfterViewChecked() {
+    window.HSStaticMethods.autoInit();
   }
 }
