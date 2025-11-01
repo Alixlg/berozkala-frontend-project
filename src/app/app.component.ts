@@ -5,6 +5,7 @@ import { LoadingComponent } from "./+components/loading/ui/loading.component";
 import { BackendService } from './+shared/services/backend.service';
 import { AccountModel } from './+shared/models/account.model';
 import { AccountService } from './+shared/services/account.service';
+import { BasketService } from './+pages/+public/basket/service/basket.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
   router = inject(Router);
   backendService = inject(BackendService);
   accountService = inject(AccountService);
+  basketService = inject(BasketService);
 
   ngOnInit() {
     // this.router.events.subscribe((event) => {
@@ -24,6 +26,8 @@ export class AppComponent implements OnInit {
     //     setTimeout(() => window.HSStaticMethods.autoInit(), 1000);
     //   }
     // });
+
+    this.basketService.updateBasketItems();
 
     this.accountService.setAccount().subscribe(res => {
       if (!res.isSuccess) {

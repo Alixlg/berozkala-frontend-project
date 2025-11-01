@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ProductService } from '../../../../products/service/product.service';
 
 @Component({
   selector: 'app-products-banner',
@@ -10,16 +9,21 @@ import { ProductService } from '../../../../products/service/product.service';
   styleUrl: './products-banner.component.css'
 })
 export class ProductsBannerComponent {
-  productBanners = inject(ProductService);
 
   discountProductPreview() {
-    let p = this.productBanners.getProductsPreview().find(x => x.discountPercent != 0);
+    // let p = this.productBanners.getProductsPreview().find(x => x.discountPercent != 0);
+    let p: any;
     return p;
   }
 
   discountPriceProduct() {
-    let p = this.productBanners.getProductsPreview().find(x => x.discountPercent != 0);
-    let discountPercent = Number(p?.price) - (Number(p?.price) * Number(p?.discountPercent) / 100);
-    return discountPercent;
+    // let p = this.productBanners.getProductsPreview().find(x => x.discountPercent != 0);
+    // let discountPercent = Number(p?.price) - (Number(p?.price) * Number(p?.discountPercent) / 100);
+    return 200;
+  }
+
+  getProductsPreview() {
+    let p: any;
+    return p;
   }
 }

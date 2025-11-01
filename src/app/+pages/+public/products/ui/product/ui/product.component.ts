@@ -6,20 +6,23 @@ import { ProductFilterModel } from '../../../models/productFillter.model';
 import { ProductModel } from '../models/product.model';
 import { HttpParams } from '@angular/common/http';
 import { AlertService } from '../../../../../../+components/alert-system/service/alert.service';
+import { BasketService } from '../../../../basket/service/basket.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
-  imports: [RouterLink, DecimalPipe],
+  imports: [RouterLink, DecimalPipe, FormsModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   backendService = inject(BackendService);
+  basketService = inject(BasketService);
   alertService = inject(AlertService);
   router = inject(Router);
 
-  productCount = 1;
+  selectedGarranty: string | undefined;
 
   product!: ProductModel;
   productFillter: ProductFilterModel = { pageCount: 1, pageId: 1 };
@@ -32,6 +35,11 @@ export class ProductComponent implements OnInit {
       scores.push(index);
     }
     return scores;
+  }
+
+  submit() {
+    this.selectedGarranty = this.selectedGarranty == "null" ? undefined : this.selectedGarranty;
+    this.basketService.addItem(this.product.id, this.selectedGarranty);
   }
 
   ngOnInit() {

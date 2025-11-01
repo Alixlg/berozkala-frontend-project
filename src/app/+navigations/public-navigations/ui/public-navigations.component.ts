@@ -40,7 +40,7 @@ export class PublicNavigationsComponent implements OnInit {
   basketCount() {
     let count = 0;
     this.basketService.getBasketItems().forEach(x => {
-      count += x.count;
+      count += x.productCount;
     });
 
     return count;

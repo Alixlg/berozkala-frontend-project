@@ -16,6 +16,10 @@ export const mainInterceptor: HttpInterceptorFn = (req, next) => {
     `${environment.ServerAddress}api/v1/user/get-info`,
     `${environment.ServerAddress}api/v1/subcategorys/delete`,
     `${environment.ServerAddress}api/v1/productsprevirw/list`,
+    `${environment.ServerAddress}api/v1/basket/get-products`,
+    `${environment.ServerAddress}api/v1/basket/clear-product`,
+    `${environment.ServerAddress}api/v1/basket/remove-product`,
+    `${environment.ServerAddress}api/v1/basket/add-product`,
     `${environment.ServerAddress}api/v1/categorys/delete`
   ];
 

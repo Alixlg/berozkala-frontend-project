@@ -28,35 +28,8 @@ export class ProductsComponent {
   isBusy = false;
   searchQuery = '';
 
-  buy($event: ProductPreviewFrontendModel) {
-    let basket = this.basketService.getBasketItems();
-
-    if (basket.every(p => p.id != $event.id)) {
-      this.basketService.addItem($event);
-
-      this.alertService.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت به سبد اضافه شد`, 2000);
-
-      $event.isAddDisable = true;
-      setTimeout(() => {
-        $event.isAddDisable = false;
-      }, 2000);
-    }
-    else {
-      let product = this.basketService.getBasketItems().find(p => p.id == $event.id);
-      this.basketService.removeItem($event);
-
-      if (product) { // agar undefine nabood
-        product.count += 1;
-        this.basketService.addItem(product);
-
-        this.alertService.newAlert(`محصول ${$event.title} ${$event.brand} با موفقیت به سبد اضافه شد`, 2000);
-
-        $event.isAddDisable = true;
-        setTimeout(() => {
-          $event.isAddDisable = false;
-        }, 2000);
-      }
-    }
+  buy(productId: string) {
+    this.basketService.addItem(productId);
   }
 
   search() {

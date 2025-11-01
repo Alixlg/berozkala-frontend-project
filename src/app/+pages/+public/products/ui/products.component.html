@@ -107,7 +107,7 @@
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
       @for (item of searchedProducts; track $index) {
-      <app-product-preview (onBuy)="buy($event)" [product]="item"
+      <app-product-preview (onBuy)="buy(item.id)" [product]="item"
         [isAddDisable]="item.isAddDisable"></app-product-preview>
       } @empty {
       <div>

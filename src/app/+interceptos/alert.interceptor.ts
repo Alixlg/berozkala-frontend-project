@@ -17,6 +17,7 @@ export const alertInterceptor: HttpInterceptorFn = (req, next) => {
     `${environment.ServerAddress}api/v1/products/list`,
     `${environment.ServerAddress}api/v1/productsprevirw/list`,
     `${environment.ServerAddress}api/v1/category/list`,
+    `${environment.ServerAddress}api/v1/basket/get-products`,
     `${environment.ServerAddress}api/v1/user/get-info`
   ];
 
