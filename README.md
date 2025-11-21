@@ -1,8 +1,8 @@
-# BerozkalaFrontend
+# Berozkala Frontend
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
 
-This frontend project is a shopping site called Beroz Kala.
+This frontend project is a shopping site called Berozkala.
 
 ## Development server
 
