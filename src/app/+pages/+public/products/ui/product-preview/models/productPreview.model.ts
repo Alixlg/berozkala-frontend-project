@@ -15,4 +15,3 @@ export interface ProductPreviewFrontendModel extends ProductPreviewModel {
   isAddDisable: boolean;
   isRemoveDisable: boolean;
 }
-

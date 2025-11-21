@@ -1,13 +1,14 @@
+@if (products && products.length != 0) {
 <section dir="ltr" class="pr-4 pl-4 sm:pr-6 sm:pl-6 lg:pl-8 lg:pr-8 flex flex-row">
   <!-- Slider -->
   <div data-hs-carousel='{
-  "loadingClasses": "opacity-0"
-}' class="relative w-full">
+      "loadingClasses": "opacity-0"
+    }' class="relative w-full">
     <div class="hs-carousel relative overflow-hidden w-full min-h-96 rounded-lg shadow-2xs">
       <div
         class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
 
-        @for (p of getProductsPreview(); track $index) {
+        @for (p of products; track $index) {
         @if ($index < 6) { <div class="hs-carousel-slide">
           <div class="flex justify-center h-full bg-white p-6 dark:bg-neutral-800">
 
@@ -81,9 +82,9 @@
   <div class="pl-8 hidden sm:flex">
     <a dir="rtl"
       class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-lg focus:outline-hidden focus:shadow-lg transition dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
-      routerLink="/pb/product/{{discountProductPreview()?.id}}">
+      routerLink="/pb/product/{{products[0]?.id}}">
       <div class="w-full h-67 flex justify-center items-center">
-        <img class="w-50 h-50 rounded-t-xl rounded-2xl" [src]="discountProductPreview()?.previewImageUrl" alt="Card Image">
+        <img class="w-50 h-50 rounded-t-xl rounded-2xl" [src]="products[0].previewImageUrl" alt="Card Image">
       </div>
       <div class="p-4 md:p-5 md:pl-0">
         <h3 class="text-lg font-bold text-gray-800 dark:text-white pb-3">
@@ -103,13 +104,13 @@
                   <path d="M12 9v4"></path>
                   <path d="M12 17h.01"></path>
                 </svg>
-                {{discountProductPreview()?.price | number}}
+                {{products[0]?.price | number}}
               </span>
             </div>
           </div>
 
           <div class="inline-flex">
-            قیمت برای شما با {{discountProductPreview()?.discountPercent}}% تخفیف :
+            قیمت برای شما با {{products[0].discountPercent}}% تخفیف :
 
             <div class="pr-2">
               <span
@@ -120,7 +121,7 @@
                   <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
                   <path d="m9 12 2 2 4-4"></path>
                 </svg>
-                {{discountPriceProduct() | number}}
+                {{discountPrice | number}}
               </span>
             </div>
 
@@ -132,3 +133,4 @@
   </div>
 
 </section>
+}
