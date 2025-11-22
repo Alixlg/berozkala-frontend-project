@@ -2,7 +2,7 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
 
-This frontend project is a shopping site called Berozkala with [this backend repository](https://github.com/Alixlg/berozkala-backend-project).
+This frontend project is a shopping site called Berozkala with [This backend repository](https://github.com/Alixlg/berozkala-backend-project).
 
 ## Admin Panel Information
 
